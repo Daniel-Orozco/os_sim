@@ -17,10 +17,14 @@ namespace os_sim
         {
             size = -1;
         }
-        public void AddProcess(Process new_process)
+        public void addProcess(Process new_process)
         {
             if (Count < size || size == -1)
                 Enqueue(new_process);
+        }
+        public void resize(int s)
+        {
+            size = s;
         }
     }
 }

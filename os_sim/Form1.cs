@@ -53,7 +53,7 @@ namespace os_sim
             {
                 if(is_idle)
                     generateProcess();
-                
+
             }
         }
         public void initializeStates()
@@ -76,12 +76,15 @@ namespace os_sim
             settings_new.Text = "10";
             settings_ready.Text = "10";
             settings_waiting.Text = "10";
+            quantum_display.Text = "5";
+            average_cpu.Text = ""+average_cycles;
+            clock_display.Text = ""+clock_value;
         }
         public void generateProcess()
         {
             Process n_process = new Process(last_processid + 1, clock_value, average_cycles, rand);
             New.addProcess(n_process);
-
+            settings_new.Text += "\n" + n_process.getData();
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {

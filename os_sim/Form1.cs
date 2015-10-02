@@ -14,11 +14,13 @@ namespace os_sim
     {
         private bool sim_state;
         private bool is_idle;
+        private bool end_loop;
         private Random rand;
 
         private int last_processid;
         private int clock_value;
         private int average_cycles;
+        private int sim_speed;
 
         private int new_size;
         private int ready_size;
@@ -37,11 +39,13 @@ namespace os_sim
 
             sim_state = false;
             is_idle = true;
+            end_loop = false;
             rand = new Random();
 
             last_processid = 0;
             clock_value = 0;
             average_cycles = 10;
+            sim_speed = 2000;
 
             initializeStates();
             initialDisplay();
@@ -49,12 +53,17 @@ namespace os_sim
         }
         public void loop()
         {
-            while(sim_state)
+            while (!sim_state)
             {
-                if(is_idle)
+                Update();
+                if (is_idle)
                     generateProcess();
-
+                wait();
             }
+        }
+        public async void wait()
+        {
+            await Task.Delay(sim_speed);
         }
         public void initializeStates()
         {
@@ -68,7 +77,6 @@ namespace os_sim
             Waiting = new State(waiting_size);
             Using_IO1 = new State(1);
             Finished = new State();
-
 
         }
         public void initialDisplay()
@@ -124,7 +132,7 @@ namespace os_sim
         private void stop_Click(object sender, EventArgs e)
         {
             sim_state = false;
-            //
+            end_loop = true;
         }
 
         private void play_Click(object sender, EventArgs e)

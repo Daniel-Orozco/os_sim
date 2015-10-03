@@ -23,6 +23,7 @@ namespace os_sim
         private int clock_value;
         private int average_cycles;
         private int sim_speed;
+        private int chance;
 
         private int new_size;
         private int ready_size;
@@ -34,13 +35,16 @@ namespace os_sim
         private State Waiting;
         private State Using_IO1;
         private State Finished;
+
+        enum MessageCode { Clean=0, ValidNum}
         public mainView()
         {
             InitializeComponent();
 
             timer = new Timer();
-            timer.Tick += new EventHandler(timer_Tick); 
-            timer.Interval = (1000);
+            timer.Tick += new EventHandler(timer_Tick);
+            sim_speed = 2000;
+            timer.Interval = sim_speed;
   
             Startup();
         }
@@ -53,15 +57,16 @@ namespace os_sim
             end_loop = false;
             rand = new Random();
 
+            initialDisplay();
             last_processid = 0;
             clock_value = 0;
             average_cycles = 10;
-            sim_speed = 2000;                      // Timer will tick evert 10 seconds
-            timer.Enabled = true;                           // Enable the timer
-            timer.Start();                                  // Start the timer
+            chance = 50;
+            
+            timer.Enabled = true;                           
+            timer.Stop();                                  
 
             initializeStates();
-            initialDisplay();
         }
         void timer_Tick(object sender, EventArgs e)
         {
@@ -71,6 +76,7 @@ namespace os_sim
         }
         public void initializeStates()
         {
+            clock_value = 0;
             new_size = 10;
             ready_size = 10;
             waiting_size = 10;
@@ -91,16 +97,20 @@ namespace os_sim
             setttings_chance.Text = "50";
             quantum_display.Text = "5";
             average_cpu.Text = ""+average_cycles;
-            clock_display.Text = ""+clock_value;
+            clock_display.Text = "0";
+            delay_bar.Value = 1;
         }
         public void generateProcess()
         {
-            Process n_process = new Process(last_processid + 1, clock_value, average_cycles, rand);
-            last_processid++;
-            New.addProcess(n_process);
-            pcb_list.AppendText(n_process.getData() + "\r\n");
-            new_list.Text += n_process.getId() + "\r\n";
-
+            Process n_process;
+            if(rand.Next(0,100) <= chance)
+            {
+                n_process = new Process(last_processid + 1, clock_value, average_cycles, rand);
+                last_processid++;
+                New.addProcess(n_process);
+                pcb_list.AppendText(n_process.getData() + "\r\n");
+                new_list.Text += n_process.getId() + "\r\n";
+            }
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -144,75 +154,55 @@ namespace os_sim
 
         private void play_Click(object sender, EventArgs e)
         {
-            sim_state = true;
+            timer.Start();
         }
 
         private void pause_Click(object sender, EventArgs e)
         {
-            sim_state = false;
+            timer.Stop();
         }
 
         private void average_cpu_TextChanged(object sender, EventArgs e)
         {
             if(isValidNumber(average_cpu))
             {
-                resetMessage();
+                messageUpdate((int)MessageCode.Clean);
                 average_cycles = Convert.ToInt32(average_cpu.Text);
             }
             else
             {
                 average_cpu.Text = "" + average_cycles;
-                message_display.Text = "Error: Please insert a valid positive integer.";
-                message_display.ForeColor = System.Drawing.Color.Black;
+                messageUpdate((int)MessageCode.ValidNum);
             }
         }
-        //
-        // Boolean flag used to determine when a character other than a number is entered.
-        private bool nonNumberEntered = false;
-
-        // Handle the KeyDown event to determine the type of character entered into the control.
-        private void settings_chance_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        private void setttings_chance_TextChanged(object sender, EventArgs e)
         {
-            // Initialize the flag to false.
-            nonNumberEntered = false;
-
-            // Determine whether the keystroke is a number from the top of the keyboard.
-            if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
+            if (isValidNumber(setttings_chance))
             {
-                // Determine whether the keystroke is a number from the keypad.
-                if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
-                {
-                    // Determine whether the keystroke is a backspace.
-                    if (e.KeyCode != Keys.Back)
-                    {
-                        // A non-numerical keystroke was pressed.
-                        // Set the flag to true and evaluate in KeyPress event.
-                        nonNumberEntered = true;
-                    }
-                }
+                messageUpdate((int)MessageCode.Clean);
+                chance = Convert.ToInt32(setttings_chance.Text);
             }
-            //If shift key was pressed, it's not a number.
-            if (Control.ModifierKeys == Keys.Shift)
+            else
             {
-                nonNumberEntered = true;
+                setttings_chance.Text = "" + chance;
+                messageUpdate((int)MessageCode.ValidNum);
             }
         }
-
-        // This event occurs after the KeyDown event and can be used to prevent
-        // characters from entering the control.
-        private void textBox1_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        private void messageUpdate(int code)
         {
-            // Check for the flag being set in the KeyDown event.
-            if (nonNumberEntered == true)
+            switch(code)
             {
-                // Stop the character from being entered into the control since it is non-numerical.
-                e.Handled = true;
+                case 0: message_display.Text = "";
+                    message_display.ForeColor = System.Drawing.Color.Black;
+                break;
+                case 1: message_display.Text = "Error: Please insert a valid positive integer.";
+                    message_display.ForeColor = System.Drawing.Color.Black;
+                break;
+                default: message_display.Text = "404 Error Definition not found.";
+                    message_display.ForeColor = System.Drawing.Color.Orange;
+                break;
             }
-        }
-        private void resetMessage()
-        {
-            message_display.Text = "";
-            message_display.ForeColor = System.Drawing.Color.Black;
+           
         }
         private static bool isValidNumber(TextBox t)
         {
@@ -220,6 +210,25 @@ namespace os_sim
             string boxText = t.Text;
             return int.TryParse(boxText, out value);
         }
+
+        private void delay_bar_Scroll(object sender, EventArgs e)
+        {
+            switch(delay_bar.Value)
+            {
+                case 0: sim_speed = 2000;
+                    break;
+                case 1: sim_speed = 1000;
+                    break;
+                case 2: sim_speed = 250;
+                    break;
+                default: sim_speed = 1;
+                    break;
+            }
+            timer.Interval = sim_speed;
+            if(sim_state)
+                timer.Enabled = true;
+        }
+
     }
 }
 public class Utilities

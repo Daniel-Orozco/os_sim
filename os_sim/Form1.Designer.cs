@@ -413,6 +413,7 @@
             this.setttings_chance.Name = "setttings_chance";
             this.setttings_chance.Size = new System.Drawing.Size(36, 20);
             this.setttings_chance.TabIndex = 32;
+            this.setttings_chance.TextChanged += new System.EventHandler(this.setttings_chance_TextChanged);
             // 
             // label7
             // 
@@ -471,6 +472,7 @@
             this.delay_bar.Name = "delay_bar";
             this.delay_bar.Size = new System.Drawing.Size(104, 45);
             this.delay_bar.TabIndex = 0;
+            this.delay_bar.Scroll += new System.EventHandler(this.delay_bar_Scroll);
             // 
             // settings_waiting
             // 

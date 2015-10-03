@@ -29,11 +29,11 @@ namespace os_sim
         }
         public string getData()
         {
-            string data = String.Format("{0}\t,{1}\t,{2}\t,{3}\t,{4}\t,{5}\t,{6}\t,{7}",
-                id,arrival_cycle,total_cycles,current_cycles,total_cpu,current_cpu,total_io1,current_io1);
+            string data = String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}",
+                getId(),arrival_cycle,total_cycles,current_cycles,total_cpu,current_cpu,total_io1,current_io1);
             return data;
         }
         public string getId()
-        { return ""+id; }
+        { return "P"+(id<10?"0":"")+id; }
     }
 }

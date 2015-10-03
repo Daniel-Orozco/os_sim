@@ -12,7 +12,7 @@ namespace os_sim
 {
     public partial class mainView : Form
     {
-        Timer timer = new Timer();
+        private Timer timer;
 
         private bool sim_state;
         private bool is_idle;
@@ -34,11 +34,19 @@ namespace os_sim
         private State Waiting;
         private State Using_IO1;
         private State Finished;
-
         public mainView()
         {
             InitializeComponent();
-            
+
+            timer = new Timer();
+            timer.Tick += new EventHandler(timer_Tick); 
+            timer.Interval = (1000);
+  
+            Startup();
+        }
+        public void Startup()
+        {
+            Utilities.ResetAllControls(this);
 
             sim_state = false;
             is_idle = true;
@@ -48,15 +56,12 @@ namespace os_sim
             last_processid = 0;
             clock_value = 0;
             average_cycles = 10;
-            sim_speed = 2000;
+            sim_speed = 2000;                      // Timer will tick evert 10 seconds
+            timer.Enabled = true;                           // Enable the timer
+            timer.Start();                                  // Start the timer
 
             initializeStates();
             initialDisplay();
-
-            timer.Tick += new EventHandler(timer_Tick); // Everytime timer ticks, timer_Tick will be called
-            timer.Interval = (1000);             // Timer will tick evert 10 seconds
-            timer.Enabled = true;                       // Enable the timer
-            timer.Start();                              // Start the timer
         }
         void timer_Tick(object sender, EventArgs e)
         {
@@ -83,6 +88,7 @@ namespace os_sim
             settings_new.Text = "10";
             settings_ready.Text = "10";
             settings_waiting.Text = "10";
+            setttings_chance.Text = "50";
             quantum_display.Text = "5";
             average_cpu.Text = ""+average_cycles;
             clock_display.Text = ""+clock_value;
@@ -92,7 +98,7 @@ namespace os_sim
             Process n_process = new Process(last_processid + 1, clock_value, average_cycles, rand);
             last_processid++;
             New.addProcess(n_process);
-            pcb_list.Text += n_process.getData() + "\r\n";
+            pcb_list.AppendText(n_process.getData() + "\r\n");
             new_list.Text += n_process.getId() + "\r\n";
 
         }
@@ -133,8 +139,7 @@ namespace os_sim
 
         private void stop_Click(object sender, EventArgs e)
         {
-            sim_state = false;
-            end_loop = true;
+            Startup();
         }
 
         private void play_Click(object sender, EventArgs e)
@@ -161,6 +166,49 @@ namespace os_sim
                 message_display.ForeColor = System.Drawing.Color.Black;
             }
         }
+        //
+        // Boolean flag used to determine when a character other than a number is entered.
+        private bool nonNumberEntered = false;
+
+        // Handle the KeyDown event to determine the type of character entered into the control.
+        private void settings_chance_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            // Initialize the flag to false.
+            nonNumberEntered = false;
+
+            // Determine whether the keystroke is a number from the top of the keyboard.
+            if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
+            {
+                // Determine whether the keystroke is a number from the keypad.
+                if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
+                {
+                    // Determine whether the keystroke is a backspace.
+                    if (e.KeyCode != Keys.Back)
+                    {
+                        // A non-numerical keystroke was pressed.
+                        // Set the flag to true and evaluate in KeyPress event.
+                        nonNumberEntered = true;
+                    }
+                }
+            }
+            //If shift key was pressed, it's not a number.
+            if (Control.ModifierKeys == Keys.Shift)
+            {
+                nonNumberEntered = true;
+            }
+        }
+
+        // This event occurs after the KeyDown event and can be used to prevent
+        // characters from entering the control.
+        private void textBox1_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            // Check for the flag being set in the KeyDown event.
+            if (nonNumberEntered == true)
+            {
+                // Stop the character from being entered into the control since it is non-numerical.
+                e.Handled = true;
+            }
+        }
         private void resetMessage()
         {
             message_display.Text = "";
@@ -171,6 +219,39 @@ namespace os_sim
             int value = -1;
             string boxText = t.Text;
             return int.TryParse(boxText, out value);
+        }
+    }
+}
+public class Utilities
+{
+    public static void ResetAllControls(Control form)
+    {
+        foreach (Control control in form.Controls)
+        {
+            if (control is TextBox)
+            {
+                TextBox textBox = (TextBox)control;
+                textBox.Text = null;
+            }
+
+            if (control is ComboBox)
+            {
+                ComboBox comboBox = (ComboBox)control;
+                if (comboBox.Items.Count > 0)
+                    comboBox.SelectedIndex = 0;
+            }
+
+            if (control is CheckBox)
+            {
+                CheckBox checkBox = (CheckBox)control;
+                checkBox.Checked = false;
+            }
+
+            if (control is ListBox)
+            {
+                ListBox listBox = (ListBox)control;
+                listBox.ClearSelected();
+            }
         }
     }
 }

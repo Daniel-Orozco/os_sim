@@ -281,25 +281,25 @@
             this.pcb_totaltime.BackColor = System.Drawing.SystemColors.Control;
             this.pcb_totaltime.Location = new System.Drawing.Point(132, 303);
             this.pcb_totaltime.Name = "pcb_totaltime";
-            this.pcb_totaltime.Size = new System.Drawing.Size(57, 13);
+            this.pcb_totaltime.Size = new System.Drawing.Size(27, 13);
             this.pcb_totaltime.TabIndex = 19;
-            this.pcb_totaltime.Text = "Total Time";
+            this.pcb_totaltime.Text = "Size";
             // 
             // pcb_timeleft
             // 
             this.pcb_timeleft.AutoSize = true;
             this.pcb_timeleft.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_timeleft.Location = new System.Drawing.Point(195, 303);
+            this.pcb_timeleft.Location = new System.Drawing.Point(165, 303);
             this.pcb_timeleft.Name = "pcb_timeleft";
-            this.pcb_timeleft.Size = new System.Drawing.Size(51, 13);
+            this.pcb_timeleft.Size = new System.Drawing.Size(57, 13);
             this.pcb_timeleft.TabIndex = 20;
-            this.pcb_timeleft.Text = "Time Left";
+            this.pcb_timeleft.Text = "Remaining";
             // 
             // pcb_cpu
             // 
             this.pcb_cpu.AutoSize = true;
             this.pcb_cpu.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_cpu.Location = new System.Drawing.Point(252, 303);
+            this.pcb_cpu.Location = new System.Drawing.Point(228, 303);
             this.pcb_cpu.Name = "pcb_cpu";
             this.pcb_cpu.Size = new System.Drawing.Size(51, 13);
             this.pcb_cpu.TabIndex = 21;
@@ -309,7 +309,7 @@
             // 
             this.pcb_io.AutoSize = true;
             this.pcb_io.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_io.Location = new System.Drawing.Point(365, 303);
+            this.pcb_io.Location = new System.Drawing.Point(341, 303);
             this.pcb_io.Name = "pcb_io";
             this.pcb_io.Size = new System.Drawing.Size(45, 13);
             this.pcb_io.TabIndex = 22;
@@ -319,7 +319,7 @@
             // 
             this.pcb_ioleft.AutoSize = true;
             this.pcb_ioleft.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_ioleft.Location = new System.Drawing.Point(416, 303);
+            this.pcb_ioleft.Location = new System.Drawing.Point(392, 303);
             this.pcb_ioleft.Name = "pcb_ioleft";
             this.pcb_ioleft.Size = new System.Drawing.Size(44, 13);
             this.pcb_ioleft.TabIndex = 23;
@@ -329,7 +329,7 @@
             // 
             this.pcb_cpuleft.AutoSize = true;
             this.pcb_cpuleft.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_cpuleft.Location = new System.Drawing.Point(309, 303);
+            this.pcb_cpuleft.Location = new System.Drawing.Point(285, 303);
             this.pcb_cpuleft.Name = "pcb_cpuleft";
             this.pcb_cpuleft.Size = new System.Drawing.Size(50, 13);
             this.pcb_cpuleft.TabIndex = 24;
@@ -469,7 +469,7 @@
             this.delay_bar.Location = new System.Drawing.Point(279, 23);
             this.delay_bar.Maximum = 2;
             this.delay_bar.Name = "delay_bar";
-            this.delay_bar.Size = new System.Drawing.Size(104, 42);
+            this.delay_bar.Size = new System.Drawing.Size(104, 45);
             this.delay_bar.TabIndex = 0;
             // 
             // settings_waiting

@@ -12,6 +12,8 @@ namespace os_sim
 {
     public partial class mainView : Form
     {
+        Timer timer = new Timer();
+
         private bool sim_state;
         private bool is_idle;
         private bool end_loop;
@@ -36,6 +38,7 @@ namespace os_sim
         public mainView()
         {
             InitializeComponent();
+            
 
             sim_state = false;
             is_idle = true;
@@ -49,21 +52,17 @@ namespace os_sim
 
             initializeStates();
             initialDisplay();
-            loop();
+
+            timer.Tick += new EventHandler(timer_Tick); // Everytime timer ticks, timer_Tick will be called
+            timer.Interval = (1000);             // Timer will tick evert 10 seconds
+            timer.Enabled = true;                       // Enable the timer
+            timer.Start();                              // Start the timer
         }
-        public void loop()
+        void timer_Tick(object sender, EventArgs e)
         {
-            while (!sim_state)
-            {
-                Update();
-                if (is_idle)
-                    generateProcess();
-                wait();
-            }
-        }
-        public async void wait()
-        {
-            await Task.Delay(sim_speed);
+            clock_value += 1;
+            clock_display.Text = ""+clock_value;
+            generateProcess();
         }
         public void initializeStates()
         {
@@ -91,8 +90,11 @@ namespace os_sim
         public void generateProcess()
         {
             Process n_process = new Process(last_processid + 1, clock_value, average_cycles, rand);
+            last_processid++;
             New.addProcess(n_process);
-            settings_new.Text += "\n" + n_process.getData();
+            pcb_list.Text += n_process.getData() + "\r\n";
+            new_list.Text += n_process.getId() + "\r\n";
+
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {

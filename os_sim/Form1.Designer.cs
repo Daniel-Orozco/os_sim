@@ -54,6 +54,7 @@
             this.pcb_ioleft = new System.Windows.Forms.Label();
             this.pcb_cpuleft = new System.Windows.Forms.Label();
             this.settings = new System.Windows.Forms.GroupBox();
+            this.algorithm_list = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.average_cpu = new System.Windows.Forms.TextBox();
             this.pause = new System.Windows.Forms.Button();
@@ -62,7 +63,6 @@
             this.setttings_chance = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.algorithm_list = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.delay_bar = new System.Windows.Forms.TrackBar();
@@ -75,6 +75,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.message_display = new System.Windows.Forms.TextBox();
+            this.cycle_display = new System.Windows.Forms.Label();
+            this.run_cycle = new System.Windows.Forms.Label();
+            this.io1_cycle = new System.Windows.Forms.Label();
+            this.io1_display = new System.Windows.Forms.Label();
             this.settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delay_bar)).BeginInit();
             this.SuspendLayout();
@@ -229,9 +233,9 @@
             this.io1_queue.BackColor = System.Drawing.SystemColors.Control;
             this.io1_queue.Location = new System.Drawing.Point(264, 259);
             this.io1_queue.Name = "io1_queue";
-            this.io1_queue.Size = new System.Drawing.Size(53, 13);
+            this.io1_queue.Size = new System.Drawing.Size(32, 13);
             this.io1_queue.TabIndex = 14;
-            this.io1_queue.Text = "Using I/O";
+            this.io1_queue.Text = "I/O 1";
             // 
             // io1_list
             // 
@@ -337,6 +341,7 @@
             // 
             // settings
             // 
+            this.settings.Controls.Add(this.algorithm_list);
             this.settings.Controls.Add(this.label10);
             this.settings.Controls.Add(this.average_cpu);
             this.settings.Controls.Add(this.pause);
@@ -345,7 +350,6 @@
             this.settings.Controls.Add(this.setttings_chance);
             this.settings.Controls.Add(this.label7);
             this.settings.Controls.Add(this.label6);
-            this.settings.Controls.Add(this.algorithm_list);
             this.settings.Controls.Add(this.label5);
             this.settings.Controls.Add(this.label4);
             this.settings.Controls.Add(this.delay_bar);
@@ -355,6 +359,18 @@
             this.settings.TabIndex = 25;
             this.settings.TabStop = false;
             this.settings.Text = "Settings";
+            // 
+            // algorithm_list
+            // 
+            this.algorithm_list.FormattingEnabled = true;
+            this.algorithm_list.Items.AddRange(new object[] {
+            "Round Robin",
+            "FCFS"});
+            this.algorithm_list.Location = new System.Drawing.Point(171, 16);
+            this.algorithm_list.Name = "algorithm_list";
+            this.algorithm_list.Size = new System.Drawing.Size(93, 21);
+            this.algorithm_list.TabIndex = 35;
+            this.algorithm_list.SelectedIndexChanged += new System.EventHandler(this.algorithm_list_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -368,7 +384,7 @@
             // average_cpu
             // 
             this.average_cpu.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.average_cpu.Location = new System.Drawing.Point(176, 59);
+            this.average_cpu.Location = new System.Drawing.Point(171, 62);
             this.average_cpu.Multiline = true;
             this.average_cpu.Name = "average_cpu";
             this.average_cpu.Size = new System.Drawing.Size(36, 20);
@@ -408,7 +424,7 @@
             // setttings_chance
             // 
             this.setttings_chance.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.setttings_chance.Location = new System.Drawing.Point(176, 36);
+            this.setttings_chance.Location = new System.Drawing.Point(171, 39);
             this.setttings_chance.Multiline = true;
             this.setttings_chance.Name = "setttings_chance";
             this.setttings_chance.Size = new System.Drawing.Size(36, 20);
@@ -432,18 +448,6 @@
             this.label6.Size = new System.Drawing.Size(50, 13);
             this.label6.TabIndex = 32;
             this.label6.Text = "Algorithm";
-            // 
-            // algorithm_list
-            // 
-            this.algorithm_list.FormattingEnabled = true;
-            this.algorithm_list.Items.AddRange(new object[] {
-            "Round Robin",
-            "FCFS"});
-            this.algorithm_list.Location = new System.Drawing.Point(176, 15);
-            this.algorithm_list.Name = "algorithm_list";
-            this.algorithm_list.Size = new System.Drawing.Size(95, 17);
-            this.algorithm_list.TabIndex = 33;
-            this.algorithm_list.SelectedIndexChanged += new System.EventHandler(this.algorithm_list_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -559,11 +563,51 @@
             this.message_display.Size = new System.Drawing.Size(552, 20);
             this.message_display.TabIndex = 34;
             // 
+            // cycle_display
+            // 
+            this.cycle_display.AutoSize = true;
+            this.cycle_display.Location = new System.Drawing.Point(314, 165);
+            this.cycle_display.Name = "cycle_display";
+            this.cycle_display.Size = new System.Drawing.Size(36, 13);
+            this.cycle_display.TabIndex = 36;
+            this.cycle_display.Text = "Cycle:";
+            // 
+            // run_cycle
+            // 
+            this.run_cycle.AutoSize = true;
+            this.run_cycle.Location = new System.Drawing.Point(345, 165);
+            this.run_cycle.Name = "run_cycle";
+            this.run_cycle.Size = new System.Drawing.Size(13, 13);
+            this.run_cycle.TabIndex = 37;
+            this.run_cycle.Text = "0";
+            // 
+            // io1_cycle
+            // 
+            this.io1_cycle.AutoSize = true;
+            this.io1_cycle.Location = new System.Drawing.Point(345, 259);
+            this.io1_cycle.Name = "io1_cycle";
+            this.io1_cycle.Size = new System.Drawing.Size(13, 13);
+            this.io1_cycle.TabIndex = 39;
+            this.io1_cycle.Text = "0";
+            // 
+            // io1_display
+            // 
+            this.io1_display.AutoSize = true;
+            this.io1_display.Location = new System.Drawing.Point(314, 259);
+            this.io1_display.Name = "io1_display";
+            this.io1_display.Size = new System.Drawing.Size(36, 13);
+            this.io1_display.TabIndex = 38;
+            this.io1_display.Text = "Cycle:";
+            // 
             // mainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1272, 693);
+            this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.io1_cycle);
+            this.Controls.Add(this.io1_display);
+            this.Controls.Add(this.run_cycle);
+            this.Controls.Add(this.cycle_display);
             this.Controls.Add(this.message_display);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -600,6 +644,7 @@
             this.Controls.Add(this.quantum);
             this.Controls.Add(this.clock);
             this.Name = "mainView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "os_sim";
             this.Load += new System.EventHandler(this.mainView_Load);
             this.settings.ResumeLayout(false);
@@ -646,7 +691,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TrackBar delay_bar;
-        private System.Windows.Forms.ListBox algorithm_list;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox setttings_chance;
@@ -659,6 +703,11 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox average_cpu;
         private System.Windows.Forms.TextBox message_display;
+        private System.Windows.Forms.ComboBox algorithm_list;
+        private System.Windows.Forms.Label cycle_display;
+        private System.Windows.Forms.Label run_cycle;
+        private System.Windows.Forms.Label io1_cycle;
+        private System.Windows.Forms.Label io1_display;
     }
 }
 

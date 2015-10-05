@@ -8,15 +8,19 @@ namespace os_sim
 {
     class Process
     {
-        private int id;
-        private int arrival_cycle;
-        private int total_cycles;
-        private int current_cycles;
-        private int total_cpu;
-        private int current_cpu;
-        private int total_io1;
-        private int current_io1;
-        public Process(int next_id, int cycle, int avrg, Random rand)
+        private int id;                 //ID
+        public int arrival_cycle;      //Tiempo de llegada
+        public int total_cycles;       //
+        public int current_cycles;     //Tiempo en el sistema
+        public int total_cpu;          //Uso de CPU
+        public int current_cpu;        //Tiempo acum. de uso de CPU
+        public int total_io1;          //Tiempo de uso de I/O
+        public int current_io1;        //Tiempo
+        public int io1_arrival;        //Hora de uso de I/O
+        public int finishing_cycle;    //Tiempo finalizacion
+
+        public int quantum;
+        public Process(int next_id, int cycle, int avrg, Random rand, int q)
         {
             id = next_id;
             arrival_cycle = cycle;
@@ -28,14 +32,16 @@ namespace os_sim
             current_cycles = 0;
             current_cpu = 0;
             current_io1 = 0;
+
+            quantum = q;
         }
         public string getData()
         {
             string data = String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}",
-                getId(),arrival_cycle,total_cycles,current_cycles,total_cpu,current_cpu,total_io1,current_io1);
+                getID(),arrival_cycle,total_cycles,current_cycles,total_cpu,current_cpu,total_io1,current_io1);
             return data;
         }
-        public string getId()
-        { return "P"+(id<10?"0":"")+id; }
+        public string getID()
+        { return "P" + (id < 10 ? "0" : "") + id; }
     }
 }

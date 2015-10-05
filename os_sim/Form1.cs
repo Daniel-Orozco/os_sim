@@ -25,6 +25,7 @@ namespace os_sim
         private int sim_speed;
         private int chance;
         private int tquantum;
+        private int io1_use;
 
         private int new_size;
         private int ready_size;
@@ -36,6 +37,8 @@ namespace os_sim
         private State Waiting;
         private State UsingIO1;
         private State Finished;
+
+        private Queue<string> pcb_data;
 
         enum Message { Clean=0, ValidNum}
         public mainView()
@@ -63,11 +66,14 @@ namespace os_sim
             average_cycles = 10;
             chance = 50;
             tquantum = 5;
+            io1_use = 0;
             
             timer.Enabled = true;                           
             timer.Stop();                                  
 
+            
             initializeStates();
+            pcb_data = new Queue<string>();
         }
         void timer_Tick(object sender, EventArgs e)
         {
@@ -77,6 +83,12 @@ namespace os_sim
             {
                 if (Waiting.Count != 0)
                     updateUsingIO1();
+                if (UsingIO1.Count != 0)
+                {
+                    Process io1 = UsingIO1.Peek();
+                    if (io1.current_io1 == io1.total_io1)
+                        emptyIO1();
+                }
                 if (Ready.Count != 0)
                     updateRunning();
                 if(New.Count != 0)
@@ -105,18 +117,41 @@ namespace os_sim
                 else
                 {
                     current.quantum--;
+                    current.current_cpu++;
                     run_cycle.Text = ""+(tquantum-current.quantum);
                 }
             }
+            if (UsingIO1.Count != 0)
+            {
+                Process io1 = UsingIO1.Peek();
+                io1.current_io1++;
+                io1_use++;
+                io1_cycle.Text = ""+io1_use;
+            }
         }
-        
+        public void updatePCB(string[] lines, string pline)
+        {
+            string nline = pline;
+            int pid = -1;
+            if (pline[1] == 0)
+                pid += pline[2];
+            else
+                pid += stringToInt(pline.Substring(1, 2));
+            lines = pcb_list.Lines;
+            lines[pid] = nline;
+            pcb_list.Lines = lines;
+        }
         public void updateReady()
         {
             Process t_process = New.Dequeue();
+
             Ready.addProcess(t_process);
             ready_list.Text += t_process.getID() + "\r\n";
 
             var lines = new_list.Lines;
+            var pline = lines[0];
+            updatePCB(lines, t_process.getData());
+
             var newLines = lines.Skip(1);
             new_list.Lines = newLines.ToArray();
         }
@@ -141,6 +176,17 @@ namespace os_sim
             var lines = waiting_list.Lines;
             var newLines = lines.Skip(1);
             waiting_list.Lines = newLines.ToArray();
+        }
+        public void emptyIO1()
+        {
+            Process t_process = UsingIO1.Dequeue();
+
+            Ready.addProcess(t_process);
+            ready_list.Text += t_process.getID() + "\r\n";
+
+            io1_list.Text = "";
+            io1_use = 0;
+            io1_cycle.Text = "0";
         }
         public void updateFinished()
         {
@@ -205,9 +251,26 @@ namespace os_sim
                 n_process = new Process(last_processid + 1, clock_value, average_cycles, rand, tquantum);
                 last_processid++;
                 New.addProcess(n_process);
-                pcb_list.AppendText(n_process.getData() + "\r\n");
+
+                pcb_data.Enqueue(n_process.getData());
+                updatePCB();
                 new_list.Text += n_process.getID() + "\r\n";
             }
+        }
+        public void updatePCB()
+        {
+            Queue<string> backup = new Queue<string>();
+            string dq;
+            pcb_list.Text = "";
+            while(pcb_data.Count != 0)
+            {
+                dq = pcb_data.Dequeue();
+                pcb_list.AppendText(dq + "\r\n");
+                backup.Enqueue(dq);
+            }
+            while(backup.Count != 0)
+                pcb_data.Enqueue(backup.Dequeue());
+            
         }
         private void algorithm_list_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -318,7 +381,11 @@ namespace os_sim
             string boxText = t.Text;
             return int.TryParse(boxText, out value);
         }
-
+        private static int stringToInt(string s)
+        {
+            int value = -1;
+            return (int.TryParse(s, out value) ? value : -1);
+        }
         private void delay_bar_Scroll(object sender, EventArgs e)
         {
             switch(delay_bar.Value)

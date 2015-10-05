@@ -40,7 +40,7 @@ namespace os_sim
 
         private Queue<string> pcb_data;
 
-        enum Message { Clean=0, ValidNum}
+        enum Message { Clean=0, ValidNum, OutOfRange}
         public mainView()
         {
             InitializeComponent();
@@ -79,6 +79,14 @@ namespace os_sim
         {
             clock_value += 1;
             clock_display.Text = ""+clock_value;
+
+            Utilities.ResetBox(settings_new, "10");
+            Utilities.ResetBox(settings_ready, "10");
+            Utilities.ResetBox(settings_waiting, "10");
+            Utilities.ResetBox(setttings_chance, "50");
+            Utilities.ResetBox(quantum_display, "5");
+            Utilities.ResetBox(average_cpu, "10");
+
             if(Running.Count == 0)
             {
                 if (Waiting.Count != 0)
@@ -123,10 +131,11 @@ namespace os_sim
             }
             if (UsingIO1.Count != 0)
             {
-                Process io1 = UsingIO1.Peek();
+                Process io1 = UsingIO1.Dequeue();
                 io1.current_io1++;
                 io1_use++;
                 io1_cycle.Text = ""+io1_use;
+                UsingIO1.Enqueue(io1);
             }
         }
         public void updatePCB(string[] lines, string pline)
@@ -169,6 +178,7 @@ namespace os_sim
         public void updateUsingIO1()
         {
             Process t_process = Waiting.Dequeue();
+            t_process.io1_arrival = clock_value;
 
             UsingIO1.addProcess(t_process);
             io1_list.Text += t_process.getID() + "\r\n";
@@ -332,13 +342,33 @@ namespace os_sim
         {
             timer.Stop();
         }
-
         private void average_cpu_TextChanged(object sender, EventArgs e)
         {
-            if(isValidNumber(average_cpu))
+
+            string display = "" + average_cycles;
+            string difference = average_cpu.Text.Replace(display, "");
+
+            int value = -1;
+            if(display.Equals(average_cpu.Text) || (int.TryParse(difference, out value)))
             {
-                messageUpdate((int)Message.Clean);
-                average_cycles = Convert.ToInt32(average_cpu.Text);
+                if(isValidNumber(average_cpu,0,100))
+                {
+                    messageUpdate((int)Message.Clean);
+                    average_cycles = Convert.ToInt32(average_cpu.Text);
+                }
+                else
+                {
+                    average_cpu.Text = "" + average_cycles;
+                    messageUpdate((int)Message.OutOfRange);
+                }
+            }
+            else if(average_cpu.Text == "")
+            {
+                if (!average_cpu.Focused)
+                {
+                    average_cpu.Text = "" + average_cycles;
+                    messageUpdate((int)Message.ValidNum);
+                }
             }
             else
             {
@@ -369,17 +399,20 @@ namespace os_sim
                 case 1: message_display.Text = "Error: Please insert a valid positive integer.";
                     message_display.ForeColor = System.Drawing.Color.Black;
                 break;
+                case 2: message_display.Text = "Error: Number must be within range.";
+                    message_display.ForeColor = System.Drawing.Color.Black;
+                break;
                 default: message_display.Text = "404 Error Definition not found.";
                     message_display.ForeColor = System.Drawing.Color.Orange;
                 break;
             }
            
         }
-        private static bool isValidNumber(TextBox t)
+        private static bool isValidNumber(TextBox t, int min = 0, int max = 100)
         {
             int value = -1;
             string boxText = t.Text;
-            return int.TryParse(boxText, out value);
+            return int.TryParse(boxText, out value) && (value >= min && value <= max);
         }
         private static int stringToInt(string s)
         {
@@ -437,6 +470,13 @@ public class Utilities
                 ListBox listBox = (ListBox)control;
                 listBox.ClearSelected();
             }
+        }
+    }
+    public static void ResetBox(TextBox t, string value)
+    {
+        if(!t.Focused)
+        {
+            t.Text = value;
         }
     }
 }

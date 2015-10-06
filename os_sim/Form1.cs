@@ -26,6 +26,7 @@ namespace os_sim
         private int chance;
         private int tquantum;
         private int io1_use;
+        private int io1_setting;
 
         private int new_size;
         private int ready_size;
@@ -38,6 +39,19 @@ namespace os_sim
         private State UsingIO1;
         private State Finished;
 
+        private ToolTip quantum_tooltip;
+        private ToolTip algorithm_tooltip;
+        private ToolTip chance_tooltip;
+        private ToolTip average_tooltip;
+        private ToolTip io1_tooltip;
+        private ToolTip delay_tooltip;
+        private ToolTip new_tooltip;
+        private ToolTip ready_tooltip;
+        private ToolTip waiting_tooltip;
+        private ToolTip stop_tooltip;
+        private ToolTip play_tooltip;
+        private ToolTip pause_tooltip;
+
         private Queue<string> pcb_data;
 
         enum Message { Clean=0, ValidNum, OutOfRange}
@@ -47,7 +61,7 @@ namespace os_sim
 
             timer = new Timer();
             timer.Tick += new EventHandler(timer_Tick);
-            sim_speed = 2000;
+            sim_speed = 1000;
             timer.Interval = sim_speed;
   
             Startup();
@@ -61,12 +75,15 @@ namespace os_sim
             rand = new Random();
 
             initialDisplay();
+            helpDisplay();
+
             last_processid = 0;
             clock_value = 0;
             average_cycles = 10;
             chance = 50;
             tquantum = 5;
             io1_use = 0;
+            io1_setting = 9;
             
             timer.Enabled = true;                           
             timer.Stop();                                  
@@ -75,17 +92,22 @@ namespace os_sim
             initializeStates();
             pcb_data = new Queue<string>();
         }
-        void timer_Tick(object sender, EventArgs e)
+        
+        public void ResetBoxes()
         {
-            clock_value += 1;
-            clock_display.Text = ""+clock_value;
-
             Utilities.ResetBox(settings_new, "10");
             Utilities.ResetBox(settings_ready, "10");
             Utilities.ResetBox(settings_waiting, "10");
             Utilities.ResetBox(setttings_chance, "50");
             Utilities.ResetBox(quantum_display, "5");
             Utilities.ResetBox(average_cpu, "10");
+        }
+        void timer_Tick(object sender, EventArgs e)
+        {
+            clock_value += 1;
+            clock_display.Text = ""+clock_value;
+
+            ResetBoxes();
 
             if(Running.Count == 0)
             {
@@ -106,7 +128,7 @@ namespace os_sim
             else
             {
                 Process current = Running.Peek();
-                if (current.quantum == 0 || current.current_cpu == current.total_cpu)
+                if ((current.quantum == 0 && isRoundRobin)|| current.current_cpu == current.total_cpu)
                 {
                     current.quantum = tquantum;
                     if (current.current_io1 == current.total_io1)
@@ -202,6 +224,7 @@ namespace os_sim
         {
             Process t_process = Running.Dequeue();
 
+            t_process.finishing_cycle = clock_value;
             Finished.addProcess(t_process);
             finished_list.Text += t_process.getID() + "\r\n";
 
@@ -245,11 +268,14 @@ namespace os_sim
             settings_ready.Text = "10";
             settings_waiting.Text = "10";
             setttings_chance.Text = "50";
+            settings_io1use.Text = "9";
             quantum_display.Text = "5";
             average_cpu.Text = "10";
             clock_display.Text = "0";
             run_cycle.Text = "0";
             io1_cycle.Text = "0";
+            message_display.Text = "For Help, hover the mouse above the control you want to know more about.";
+            message_display.ForeColor = System.Drawing.Color.Blue;
             delay_bar.Value = 1;
             algorithm_list.SelectedIndex = 0;
         }
@@ -258,7 +284,7 @@ namespace os_sim
             Process n_process;
             if(rand.Next(0,100) <= chance)
             {
-                n_process = new Process(last_processid + 1, clock_value, average_cycles, rand, tquantum);
+                n_process = new Process(last_processid + 1, clock_value, average_cycles, rand, tquantum, io1_setting);
                 last_processid++;
                 New.addProcess(n_process);
 
@@ -344,7 +370,6 @@ namespace os_sim
         }
         private void average_cpu_TextChanged(object sender, EventArgs e)
         {
-
             string display = "" + average_cycles;
             string difference = average_cpu.Text.Replace(display, "");
 
@@ -389,18 +414,31 @@ namespace os_sim
                 messageUpdate((int)Message.ValidNum);
             }
         }
+        private void settings_io1use_TextChanged(object sender, EventArgs e)
+        {
+            if (isValidNumber(setttings_chance,0,average_cycles))
+            {
+                messageUpdate((int)Message.Clean);
+                io1_setting = Convert.ToInt32(settings_io1use.Text);
+            }
+            else
+            {
+                settings_io1use.Text = "" + io1_setting;
+                messageUpdate((int)Message.ValidNum);
+            }
+        }
         private void messageUpdate(int code)
         {
             switch(code)
             {
-                case 0: message_display.Text = "";
-                    message_display.ForeColor = System.Drawing.Color.Black;
+                case 0: message_display.Text = "For Help, hover the mouse above the control you want to know more about.";
+                    message_display.ForeColor = System.Drawing.Color.Blue;
                 break;
                 case 1: message_display.Text = "Error: Please insert a valid positive integer.";
-                    message_display.ForeColor = System.Drawing.Color.Black;
+                    message_display.ForeColor = System.Drawing.Color.Red;
                 break;
                 case 2: message_display.Text = "Error: Number must be within range.";
-                    message_display.ForeColor = System.Drawing.Color.Black;
+                    message_display.ForeColor = System.Drawing.Color.OrangeRed;
                 break;
                 default: message_display.Text = "404 Error Definition not found.";
                     message_display.ForeColor = System.Drawing.Color.Orange;
@@ -423,9 +461,9 @@ namespace os_sim
         {
             switch(delay_bar.Value)
             {
-                case 0: sim_speed = 2000;
+                case 0: sim_speed = 1800;
                     break;
-                case 1: sim_speed = 1000;
+                case 1: sim_speed = 900;
                     break;
                 case 2: sim_speed = 250;
                     break;
@@ -435,6 +473,105 @@ namespace os_sim
             timer.Interval = sim_speed;
             if(sim_state)
                 timer.Enabled = true;
+        }
+        public void helpDisplay()
+        {
+            quantum_tooltip = new ToolTip();
+
+            quantum_tooltip.ToolTipIcon = ToolTipIcon.Info;
+            quantum_tooltip.ToolTipTitle = "Quantum";
+            quantum_tooltip.ShowAlways = true;
+            quantum_tooltip.SetToolTip(quantum_display, "With Round Robin enabled, determines how many ticks can a process last in Running state.\r\nMust be an integer between 1 and 999.");
+            quantum_tooltip.AutoPopDelay = 32000;
+
+            algorithm_tooltip = new ToolTip();
+
+            algorithm_tooltip.ToolTipIcon = ToolTipIcon.Info;
+            algorithm_tooltip.ToolTipTitle = "Algorithm Select";
+            algorithm_tooltip.ShowAlways = true;
+            algorithm_tooltip.SetToolTip(algorithm_list, "Select the algorithm that the process manager will use.\r\nRound Robin: Processes are queued in chronological order, but have limited cycles before being queued for CPU use again.\r\nFirst Come First Serve: Processes are queued in chronological order and will use the CPU until they no longer need it.");
+            algorithm_tooltip.AutoPopDelay = 32000;
+
+            chance_tooltip = new ToolTip();
+
+            chance_tooltip.ToolTipIcon = ToolTipIcon.Info;
+            chance_tooltip.ToolTipTitle = "Generation Chance";
+            chance_tooltip.ShowAlways = true;
+            chance_tooltip.SetToolTip(setttings_chance, "Sets the probability in percentage of a process being created each tick if CPU is not being used.\r\nMust be an integer between 0 and 100.");
+            chance_tooltip.AutoPopDelay = 32000;
+
+
+            average_tooltip = new ToolTip();
+
+            average_tooltip.ToolTipIcon = ToolTipIcon.Info;
+            average_tooltip.ToolTipTitle = "Average CPU Use";
+            average_tooltip.ShowAlways = true;
+            average_tooltip.SetToolTip(average_cpu, "Sets the average amount of cycles processes require from the CPU, with a 25% deviation.\r\nMust be an integer between 1 and 999.");
+            average_tooltip.AutoPopDelay = 32000;
+
+            io1_tooltip = new ToolTip();
+
+            io1_tooltip.ToolTipIcon = ToolTipIcon.Info;
+            io1_tooltip.ToolTipTitle = "I/O 1 Use";
+            io1_tooltip.ShowAlways = true;
+            io1_tooltip.SetToolTip(settings_io1use, "Sets the amount of cycles processes require from I/O 1.\r\nMust be a non-negative integer smaller than the average CPU use.");
+            io1_tooltip.AutoPopDelay = 32000;
+
+            delay_tooltip = new ToolTip();
+
+            delay_tooltip.ToolTipIcon = ToolTipIcon.Info;
+            delay_tooltip.ToolTipTitle = "Tick Delay";
+            delay_tooltip.ShowAlways = true;
+            delay_tooltip.SetToolTip(delay_bar, "Controls the time that elapses between ticks.\r\nSlow: 2 seconds per tick.\r\nNormal: 1 second per tick.\r\nFast: 0.5 seconds per tick.");
+            delay_tooltip.AutoPopDelay = 32000;
+
+            new_tooltip = new ToolTip();
+
+            new_tooltip.ToolTipIcon = ToolTipIcon.Info;
+            new_tooltip.ToolTipTitle = "New State Size";
+            new_tooltip.ShowAlways = true;
+            new_tooltip.SetToolTip(settings_new, "Sets the maximum amount of processes the New State can hold.\r\nMust be an integer between 1 and 999.");
+            new_tooltip.AutoPopDelay = 32000;
+
+            ready_tooltip = new ToolTip();
+
+            ready_tooltip.ToolTipIcon = ToolTipIcon.Info;
+            ready_tooltip.ToolTipTitle = "Ready State Size";
+            ready_tooltip.ShowAlways = true;
+            ready_tooltip.SetToolTip(settings_ready, "Sets the maximum amount of processes the Ready State can hold.\r\nMust be an integer between 1 and 999.");
+            ready_tooltip.AutoPopDelay = 32000;
+
+            waiting_tooltip = new ToolTip();
+
+            waiting_tooltip.ToolTipIcon = ToolTipIcon.Info;
+            waiting_tooltip.ToolTipTitle = "Waiting State Size";
+            waiting_tooltip.ShowAlways = true;
+            waiting_tooltip.SetToolTip(settings_waiting, "Sets the maximum amount of processes the Waiting State can hold.\r\nMust be an integer between 1 and 999.");
+            waiting_tooltip.AutoPopDelay = 32000;
+
+            stop_tooltip = new ToolTip();
+
+            stop_tooltip.ToolTipIcon = ToolTipIcon.Info;
+            stop_tooltip.ToolTipTitle = "Stop Simulation";
+            stop_tooltip.ShowAlways = true;
+            stop_tooltip.SetToolTip(stop, "Ends the current simulation, refreshing all controls and clearing all data from the managers.");
+            stop_tooltip.AutoPopDelay = 32000;
+
+            play_tooltip = new ToolTip();
+
+            play_tooltip.ToolTipIcon = ToolTipIcon.Info;
+            play_tooltip.ToolTipTitle = "Play Simulation";
+            play_tooltip.ShowAlways = true;
+            play_tooltip.SetToolTip(play, "Starts or resumes the current simulation, activating the clock and managers.");
+            play_tooltip.AutoPopDelay = 32000;
+
+            pause_tooltip = new ToolTip();
+
+            pause_tooltip.ToolTipIcon = ToolTipIcon.Info;
+            pause_tooltip.ToolTipTitle = "Pause Simulation";
+            pause_tooltip.ShowAlways = true;
+            pause_tooltip.SetToolTip(pause, "Pauses the current simulation, stopping the clock and managers but saving their current states.");
+            pause_tooltip.AutoPopDelay = 32000;
         }
 
 

@@ -20,13 +20,13 @@ namespace os_sim
         public int finishing_cycle;    //Tiempo finalizacion
 
         public int quantum;
-        public Process(int next_id, int cycle, int avrg, Random rand, int q)
+        public Process(int next_id, int cycle, int avrg, Random rand, int q, int io1)
         {
             id = next_id;
             arrival_cycle = cycle;
 
             total_cycles = rand.Next(Convert.ToInt32(avrg*0.75), Convert.ToInt32(avrg*1.25));
-            total_io1 = rand.Next(0, total_cycles);
+            total_io1 = (total_cycles>=io1?io1:io1-total_cycles);
             total_cpu = total_cycles - total_io1;
 
             current_cycles = 0;

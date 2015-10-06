@@ -99,6 +99,7 @@ namespace os_sim
             Utilities.ResetBox(settings_ready, "10");
             Utilities.ResetBox(settings_waiting, "10");
             Utilities.ResetBox(setttings_chance, "50");
+            Utilities.ResetBox(settings_io1use, "9");
             Utilities.ResetBox(quantum_display, "5");
             Utilities.ResetBox(average_cpu, "10");
         }
@@ -109,6 +110,14 @@ namespace os_sim
 
             ResetBoxes();
 
+            if (UsingIO1.Count != 0)
+            {
+                Process io1 = UsingIO1.Dequeue();
+                io1.current_io1++;
+                io1_use++;
+                io1_cycle.Text = "" + io1_use;
+                UsingIO1.Enqueue(io1);
+            }
             if(Running.Count == 0)
             {
                 if (Waiting.Count != 0)
@@ -151,14 +160,7 @@ namespace os_sim
                     run_cycle.Text = ""+(tquantum-current.quantum);
                 }
             }
-            if (UsingIO1.Count != 0)
-            {
-                Process io1 = UsingIO1.Dequeue();
-                io1.current_io1++;
-                io1_use++;
-                io1_cycle.Text = ""+io1_use;
-                UsingIO1.Enqueue(io1);
-            }
+            
         }
         public void updatePCB(string[] lines, string pline)
         {
@@ -416,16 +418,7 @@ namespace os_sim
         }
         private void settings_io1use_TextChanged(object sender, EventArgs e)
         {
-            if (isValidNumber(setttings_chance,0,average_cycles))
-            {
-                messageUpdate((int)Message.Clean);
-                io1_setting = Convert.ToInt32(settings_io1use.Text);
-            }
-            else
-            {
-                settings_io1use.Text = "" + io1_setting;
-                messageUpdate((int)Message.ValidNum);
-            }
+            
         }
         private void messageUpdate(int code)
         {
@@ -522,7 +515,7 @@ namespace os_sim
             delay_tooltip.ToolTipIcon = ToolTipIcon.Info;
             delay_tooltip.ToolTipTitle = "Tick Delay";
             delay_tooltip.ShowAlways = true;
-            delay_tooltip.SetToolTip(delay_bar, "Controls the time that elapses between ticks.\r\nSlow: 2 seconds per tick.\r\nNormal: 1 second per tick.\r\nFast: 0.5 seconds per tick.");
+            delay_tooltip.SetToolTip(delay_bar, "Controls the time that elapses between ticks.\r\nSlow: 2 seconds per tick.\r\nNormal: 1 second per tick.\r\nFast: 0.25 seconds per tick.");
             delay_tooltip.AutoPopDelay = 32000;
 
             new_tooltip = new ToolTip();

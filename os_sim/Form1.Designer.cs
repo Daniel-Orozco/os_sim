@@ -418,32 +418,34 @@
             // 
             // pause
             // 
+            this.pause.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.pause.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pause.BackgroundImage")));
             this.pause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pause.Location = new System.Drawing.Point(75, 29);
             this.pause.Name = "pause";
             this.pause.Size = new System.Drawing.Size(24, 23);
             this.pause.TabIndex = 36;
-            this.pause.UseVisualStyleBackColor = true;
+            this.pause.UseVisualStyleBackColor = false;
             this.pause.Click += new System.EventHandler(this.pause_Click);
             // 
             // play
             // 
+            this.play.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.play.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("play.BackgroundImage")));
             this.play.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.play.Location = new System.Drawing.Point(45, 29);
             this.play.Name = "play";
             this.play.Size = new System.Drawing.Size(24, 23);
             this.play.TabIndex = 35;
-            this.play.UseVisualStyleBackColor = true;
+            this.play.UseVisualStyleBackColor = false;
             this.play.Click += new System.EventHandler(this.play_Click);
             // 
             // stop
             // 
-            this.stop.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.stop.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.stop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("stop.BackgroundImage")));
             this.stop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.stop.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.stop.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.stop.Location = new System.Drawing.Point(15, 29);
             this.stop.Name = "stop";
             this.stop.Size = new System.Drawing.Size(24, 23);
@@ -504,7 +506,7 @@
             this.delay_bar.Location = new System.Drawing.Point(279, 23);
             this.delay_bar.Maximum = 2;
             this.delay_bar.Name = "delay_bar";
-            this.delay_bar.Size = new System.Drawing.Size(104, 45);
+            this.delay_bar.Size = new System.Drawing.Size(104, 42);
             this.delay_bar.TabIndex = 0;
             this.delay_bar.Scroll += new System.EventHandler(this.delay_bar_Scroll);
             // 

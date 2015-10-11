@@ -15,7 +15,6 @@ namespace os_sim
         private Timer timer;
 
         private bool sim_state;
-        private bool is_idle;
         private bool isRoundRobin;
         private Random rand;
 
@@ -71,7 +70,6 @@ namespace os_sim
             Utilities.ResetAllControls(this);
 
             sim_state = false;
-            is_idle = true;
             rand = new Random();
 
             initialDisplay();
@@ -92,16 +90,29 @@ namespace os_sim
             initializeStates();
             pcb_data = new Queue<string>();
         }
-        
+
         public void updateParameters()
         {
-            new_size = Utilities.updateParameter(settings_new, new_size, 0, 100);
-            ready_size = Utilities.updateParameter(settings_ready, ready_size, 0, 100);
-            waiting_size = Utilities.updateParameter(settings_waiting, waiting_size, 0, 100);
-            chance = Utilities.updateParameter(setttings_chance, chance, 0, 100);
-            io1_setting = Utilities.updateParameter(settings_io1use, io1_setting, 0, 100);
-            tquantum = Utilities.updateParameter(quantum_display, tquantum, 0, 100);
-            average_cycles = Utilities.updateParameter(average_cpu, average_cycles, 1, 100);
+            int[] updates = new int[7];
+            updates[0] = Utilities.updateParameter(settings_new, new_size, 0, 100);
+            updates[1] = Utilities.updateParameter(settings_ready, ready_size, 0, 100);
+            updates[2] = Utilities.updateParameter(settings_waiting, waiting_size, 0, 100);
+            updates[3] = Utilities.updateParameter(setttings_chance, chance, 0, 100);
+            updates[4] = Utilities.updateParameter(settings_io1use, io1_setting, 0, 100);
+            updates[5] = Utilities.updateParameter(quantum_display, tquantum, 0, 100);
+            updates[6] = Utilities.updateParameter(average_cpu, average_cycles, 1, 100);
+
+            for(int c = 0; c < updates.Length; c++)
+                if (updates[c] == -1)
+                    messageUpdate((int)Message.ValidNum);
+
+            new_size = updates[0] == -1 ? new_size : updates[0];
+            ready_size = updates[1] == -1 ? ready_size : updates[1];
+            waiting_size = updates[2] == -1 ? waiting_size : updates[2];
+            chance = updates[3] == -1 ? chance : updates[3];
+            io1_setting = updates[4] == -1 ? io1_setting : updates[4];
+            tquantum = updates[5] == -1 ? tquantum : updates[5];
+            average_cycles = updates[6] == -1 ? average_cycles : updates[6];
         }
         void timer_Tick(object sender, EventArgs e)
         {
@@ -112,15 +123,19 @@ namespace os_sim
 
             if (UsingIO1.Count != 0)
             {
-                Process io1 = UsingIO1.Dequeue();
-                io1.current_io1++;
-                io1_use++;
-                io1_cycle.Text = "" + io1_use;
-                UsingIO1.Enqueue(io1);
+                Process io1 = UsingIO1.Peek();
+                if (io1.current_io1 == io1.total_io1)
+                    emptyIO1();
+                else
+                {
+                    io1.current_io1++;
+                    io1_use++;
+                    io1_cycle.Text = "" + io1_use;
+                }
             }
             if(Running.Count == 0)
             {
-                if (Waiting.Count != 0)
+                if (Waiting.Count != 0 && UsingIO1.Count == 0)
                     updateUsingIO1();
                 if (UsingIO1.Count != 0)
                 {
@@ -293,8 +308,7 @@ namespace os_sim
             quantum_display.BackColor = SystemColors.ControlLightLight;
             average_cpu.BackColor = SystemColors.ControlLightLight;
 
-            message_display.Text = "For Help, hover the mouse above the control you want to know more about.";
-            message_display.ForeColor = System.Drawing.Color.Blue;
+            messageUpdate((int)Message.Clean);
             delay_bar.Value = 1;
             algorithm_list.SelectedIndex = 0;
         }
@@ -320,7 +334,7 @@ namespace os_sim
             while(pcb_data.Count != 0)
             {
                 dq = pcb_data.Dequeue();
-                pcb_list.AppendText(dq + "\r\n");
+                pcb_list.Text += (dq + "\r\n");
                 backup.Enqueue(dq);
             }
             while(backup.Count != 0)
@@ -610,7 +624,7 @@ public class Utilities
         if(isValidNumber(t,min,max))
             return Convert.ToInt32(t.Text);
         t.Text = ""+data;
-        return data;
+        return -1;
     }
     public static bool isValidNumber(TextBox t, int min = 0, int max = 100)
     {

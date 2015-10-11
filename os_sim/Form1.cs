@@ -276,6 +276,23 @@ namespace os_sim
             clock_display.Text = "0";
             run_cycle.Text = "0";
             io1_cycle.Text = "0";
+
+            settings_new.ReadOnly = false;
+            settings_ready.ReadOnly = false;
+            settings_waiting.ReadOnly = false;
+            setttings_chance.ReadOnly = false;
+            settings_io1use.ReadOnly = false;
+            quantum_display.ReadOnly = false;
+            average_cpu.ReadOnly = false;
+
+            settings_new.BackColor = SystemColors.ControlLightLight;
+            settings_ready.BackColor = SystemColors.ControlLightLight;
+            settings_waiting.BackColor = SystemColors.ControlLightLight;
+            setttings_chance.BackColor = SystemColors.ControlLightLight;
+            settings_io1use.BackColor = SystemColors.ControlLightLight;
+            quantum_display.BackColor = SystemColors.ControlLightLight;
+            average_cpu.BackColor = SystemColors.ControlLightLight;
+
             message_display.Text = "For Help, hover the mouse above the control you want to know more about.";
             message_display.ForeColor = System.Drawing.Color.Blue;
             delay_bar.Value = 1;
@@ -364,11 +381,41 @@ namespace os_sim
         private void play_Click(object sender, EventArgs e)
         {
             timer.Start();
+            settings_new.ReadOnly = true;
+            settings_ready.ReadOnly = true;
+            settings_waiting.ReadOnly = true;
+            setttings_chance.ReadOnly = true;
+            settings_io1use.ReadOnly = true;
+            quantum_display.ReadOnly = true;
+            average_cpu.ReadOnly = true;
+
+            settings_new.BackColor = SystemColors.Control;
+            settings_ready.BackColor = SystemColors.Control;
+            settings_waiting.BackColor = SystemColors.Control;
+            setttings_chance.BackColor = SystemColors.Control;
+            settings_io1use.BackColor = SystemColors.Control;
+            quantum_display.BackColor = SystemColors.Control;
+            average_cpu.BackColor = SystemColors.Control;
         }
 
         private void pause_Click(object sender, EventArgs e)
         {
             timer.Stop();
+            settings_new.ReadOnly = false;
+            settings_ready.ReadOnly = false;
+            settings_waiting.ReadOnly = false;
+            setttings_chance.ReadOnly = false;
+            settings_io1use.ReadOnly = false;
+            quantum_display.ReadOnly = false;
+            average_cpu.ReadOnly = false;
+
+            settings_new.BackColor = SystemColors.ControlLightLight;
+            settings_ready.BackColor = SystemColors.ControlLightLight;
+            settings_waiting.BackColor = SystemColors.ControlLightLight;
+            setttings_chance.BackColor = SystemColors.ControlLightLight;
+            settings_io1use.BackColor = SystemColors.ControlLightLight;
+            quantum_display.BackColor = SystemColors.ControlLightLight;
+            average_cpu.BackColor = SystemColors.ControlLightLight;
         }
         private void average_cpu_TextChanged(object sender, EventArgs e)
         {

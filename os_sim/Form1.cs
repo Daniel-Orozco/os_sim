@@ -93,22 +93,22 @@ namespace os_sim
             pcb_data = new Queue<string>();
         }
         
-        public void ResetBoxes()
+        public void updateParameters()
         {
-            Utilities.ResetBox(settings_new, "10");
-            Utilities.ResetBox(settings_ready, "10");
-            Utilities.ResetBox(settings_waiting, "10");
-            Utilities.ResetBox(setttings_chance, "50");
-            Utilities.ResetBox(settings_io1use, "9");
-            Utilities.ResetBox(quantum_display, "5");
-            Utilities.ResetBox(average_cpu, "10");
+            new_size = Utilities.updateParameter(settings_new, new_size, 0, 100);
+            ready_size = Utilities.updateParameter(settings_ready, ready_size, 0, 100);
+            waiting_size = Utilities.updateParameter(settings_waiting, waiting_size, 0, 100);
+            chance = Utilities.updateParameter(setttings_chance, chance, 0, 100);
+            io1_setting = Utilities.updateParameter(settings_io1use, io1_setting, 0, 100);
+            tquantum = Utilities.updateParameter(quantum_display, tquantum, 0, 100);
+            average_cycles = Utilities.updateParameter(average_cpu, average_cycles, 1, 100);
         }
         void timer_Tick(object sender, EventArgs e)
         {
             clock_value += 1;
             clock_display.Text = ""+clock_value;
 
-            ResetBoxes();
+            updateParameters();
 
             if (UsingIO1.Count != 0)
             {
@@ -372,49 +372,11 @@ namespace os_sim
         }
         private void average_cpu_TextChanged(object sender, EventArgs e)
         {
-            string display = "" + average_cycles;
-            string difference = average_cpu.Text.Replace(display, "");
-
-            int value = -1;
-            if(display.Equals(average_cpu.Text) || (int.TryParse(difference, out value)))
-            {
-                if(isValidNumber(average_cpu,0,100))
-                {
-                    messageUpdate((int)Message.Clean);
-                    average_cycles = Convert.ToInt32(average_cpu.Text);
-                }
-                else
-                {
-                    average_cpu.Text = "" + average_cycles;
-                    messageUpdate((int)Message.OutOfRange);
-                }
-            }
-            else if(average_cpu.Text == "")
-            {
-                if (!average_cpu.Focused)
-                {
-                    average_cpu.Text = "" + average_cycles;
-                    messageUpdate((int)Message.ValidNum);
-                }
-            }
-            else
-            {
-                average_cpu.Text = "" + average_cycles;
-                messageUpdate((int)Message.ValidNum);
-            }
+            
         }
         private void setttings_chance_TextChanged(object sender, EventArgs e)
         {
-            if (isValidNumber(setttings_chance))
-            {
-                messageUpdate((int)Message.Clean);
-                chance = Convert.ToInt32(setttings_chance.Text);
-            }
-            else
-            {
-                setttings_chance.Text = "" + chance;
-                messageUpdate((int)Message.ValidNum);
-            }
+            
         }
         private void settings_io1use_TextChanged(object sender, EventArgs e)
         {
@@ -438,12 +400,6 @@ namespace os_sim
                 break;
             }
            
-        }
-        private static bool isValidNumber(TextBox t, int min = 0, int max = 100)
-        {
-            int value = -1;
-            string boxText = t.Text;
-            return int.TryParse(boxText, out value) && (value >= min && value <= max);
         }
         private static int stringToInt(string s)
         {
@@ -505,9 +461,9 @@ namespace os_sim
             io1_tooltip = new ToolTip();
 
             io1_tooltip.ToolTipIcon = ToolTipIcon.Info;
-            io1_tooltip.ToolTipTitle = "I/O 1 Use";
+            io1_tooltip.ToolTipTitle = "Printer Use";
             io1_tooltip.ShowAlways = true;
-            io1_tooltip.SetToolTip(settings_io1use, "Sets the amount of cycles processes require from I/O 1.\r\nMust be a non-negative integer smaller than the average CPU use.");
+            io1_tooltip.SetToolTip(settings_io1use, "Sets the amount of cycles processes require from Printer.\r\nMust be a non-negative integer smaller than the average CPU use.");
             io1_tooltip.AutoPopDelay = 32000;
 
             delay_tooltip = new ToolTip();
@@ -521,9 +477,9 @@ namespace os_sim
             new_tooltip = new ToolTip();
 
             new_tooltip.ToolTipIcon = ToolTipIcon.Info;
-            new_tooltip.ToolTipTitle = "New State Size";
+            new_tooltip.ToolTipTitle = "Hold State Size";
             new_tooltip.ShowAlways = true;
-            new_tooltip.SetToolTip(settings_new, "Sets the maximum amount of processes the New State can hold.\r\nMust be an integer between 1 and 999.");
+            new_tooltip.SetToolTip(settings_new, "Sets the maximum amount of processes the Hold State can hold.\r\nMust be an integer between 1 and 999.");
             new_tooltip.AutoPopDelay = 32000;
 
             ready_tooltip = new ToolTip();
@@ -547,7 +503,7 @@ namespace os_sim
             stop_tooltip.ToolTipIcon = ToolTipIcon.Info;
             stop_tooltip.ToolTipTitle = "Stop Simulation";
             stop_tooltip.ShowAlways = true;
-            stop_tooltip.SetToolTip(stop, "Ends the current simulation, refreshing all controls and clearing all data from the managers.");
+            stop_tooltip.SetToolTip(stop, "Ends the current simulation, refreshing all controls to their default values and clearing all data from the managers.");
             stop_tooltip.AutoPopDelay = 32000;
 
             play_tooltip = new ToolTip();
@@ -555,7 +511,7 @@ namespace os_sim
             play_tooltip.ToolTipIcon = ToolTipIcon.Info;
             play_tooltip.ToolTipTitle = "Play Simulation";
             play_tooltip.ShowAlways = true;
-            play_tooltip.SetToolTip(play, "Starts or resumes the current simulation, activating the clock and managers.");
+            play_tooltip.SetToolTip(play, "Starts or resumes the current simulation, activating the clock and managers.\r\nParameters cannot be changed while the simulation is in Play.");
             play_tooltip.AutoPopDelay = 32000;
 
             pause_tooltip = new ToolTip();
@@ -563,7 +519,7 @@ namespace os_sim
             pause_tooltip.ToolTipIcon = ToolTipIcon.Info;
             pause_tooltip.ToolTipTitle = "Pause Simulation";
             pause_tooltip.ShowAlways = true;
-            pause_tooltip.SetToolTip(pause, "Pauses the current simulation, stopping the clock and managers but saving their current states.");
+            pause_tooltip.SetToolTip(pause, "Pauses the current simulation, stopping the clock and managers but saving their current states.\r\nParameters may be changed while the simulation is in Pause.");
             pause_tooltip.AutoPopDelay = 32000;
         }
 
@@ -602,11 +558,17 @@ public class Utilities
             }
         }
     }
-    public static void ResetBox(TextBox t, string value)
+    public static int updateParameter(TextBox t, int data, int min = 0, int max = 100)
     {
-        if(!t.Focused)
-        {
-            t.Text = value;
-        }
+        if(isValidNumber(t,min,max))
+            return Convert.ToInt32(t.Text);
+        t.Text = ""+data;
+        return data;
+    }
+    public static bool isValidNumber(TextBox t, int min = 0, int max = 100)
+    {
+        int value = -1;
+        string boxText = t.Text;
+        return int.TryParse(boxText, out value) && (value >= min && value <= max);
     }
 }

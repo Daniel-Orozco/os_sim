@@ -113,7 +113,7 @@
             this.new_queue.Name = "new_queue";
             this.new_queue.Size = new System.Drawing.Size(29, 13);
             this.new_queue.TabIndex = 2;
-            this.new_queue.Text = "New";
+            this.new_queue.Text = "Hold";
             // 
             // ready_queue
             // 
@@ -237,9 +237,9 @@
             this.io1_queue.BackColor = System.Drawing.SystemColors.Control;
             this.io1_queue.Location = new System.Drawing.Point(264, 288);
             this.io1_queue.Name = "io1_queue";
-            this.io1_queue.Size = new System.Drawing.Size(32, 13);
+            this.io1_queue.Size = new System.Drawing.Size(37, 13);
             this.io1_queue.TabIndex = 14;
-            this.io1_queue.Text = "I/O 1";
+            this.io1_queue.Text = "Printer";
             // 
             // io1_list
             // 
@@ -506,7 +506,7 @@
             this.delay_bar.Location = new System.Drawing.Point(279, 23);
             this.delay_bar.Maximum = 2;
             this.delay_bar.Name = "delay_bar";
-            this.delay_bar.Size = new System.Drawing.Size(104, 42);
+            this.delay_bar.Size = new System.Drawing.Size(104, 45);
             this.delay_bar.TabIndex = 0;
             this.delay_bar.Scroll += new System.EventHandler(this.delay_bar_Scroll);
             // 

@@ -83,6 +83,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.finish_label = new System.Windows.Forms.Label();
             this.status = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delay_bar)).BeginInit();
             this.SuspendLayout();
@@ -259,7 +260,7 @@
             this.pcb_list.Name = "pcb_list";
             this.pcb_list.ReadOnly = true;
             this.pcb_list.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.pcb_list.Size = new System.Drawing.Size(510, 247);
+            this.pcb_list.Size = new System.Drawing.Size(554, 247);
             this.pcb_list.TabIndex = 16;
             // 
             // pcb_id
@@ -277,7 +278,7 @@
             // 
             this.pcb_arrival.AutoSize = true;
             this.pcb_arrival.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_arrival.Location = new System.Drawing.Point(84, 332);
+            this.pcb_arrival.Location = new System.Drawing.Point(83, 332);
             this.pcb_arrival.Name = "pcb_arrival";
             this.pcb_arrival.Size = new System.Drawing.Size(36, 13);
             this.pcb_arrival.TabIndex = 18;
@@ -287,7 +288,7 @@
             // 
             this.pcb_totaltime.AutoSize = true;
             this.pcb_totaltime.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_totaltime.Location = new System.Drawing.Point(128, 319);
+            this.pcb_totaltime.Location = new System.Drawing.Point(125, 319);
             this.pcb_totaltime.Name = "pcb_totaltime";
             this.pcb_totaltime.Size = new System.Drawing.Size(31, 26);
             this.pcb_totaltime.TabIndex = 19;
@@ -297,7 +298,7 @@
             // 
             this.pcb_timeleft.AutoSize = true;
             this.pcb_timeleft.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_timeleft.Location = new System.Drawing.Point(165, 332);
+            this.pcb_timeleft.Location = new System.Drawing.Point(204, 332);
             this.pcb_timeleft.Name = "pcb_timeleft";
             this.pcb_timeleft.Size = new System.Drawing.Size(45, 13);
             this.pcb_timeleft.TabIndex = 20;
@@ -307,7 +308,7 @@
             // 
             this.pcb_cpu.AutoSize = true;
             this.pcb_cpu.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_cpu.Location = new System.Drawing.Point(373, 319);
+            this.pcb_cpu.Location = new System.Drawing.Point(416, 319);
             this.pcb_cpu.Name = "pcb_cpu";
             this.pcb_cpu.Size = new System.Drawing.Size(41, 26);
             this.pcb_cpu.TabIndex = 21;
@@ -317,7 +318,7 @@
             // 
             this.pcb_io.AutoSize = true;
             this.pcb_io.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_io.Location = new System.Drawing.Point(216, 332);
+            this.pcb_io.Location = new System.Drawing.Point(254, 332);
             this.pcb_io.Name = "pcb_io";
             this.pcb_io.Size = new System.Drawing.Size(50, 13);
             this.pcb_io.TabIndex = 22;
@@ -327,7 +328,7 @@
             // 
             this.pcb_ioleft.AutoSize = true;
             this.pcb_ioleft.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_ioleft.Location = new System.Drawing.Point(267, 332);
+            this.pcb_ioleft.Location = new System.Drawing.Point(310, 332);
             this.pcb_ioleft.Name = "pcb_ioleft";
             this.pcb_ioleft.Size = new System.Drawing.Size(51, 13);
             this.pcb_ioleft.TabIndex = 23;
@@ -337,7 +338,7 @@
             // 
             this.pcb_cpuleft.AutoSize = true;
             this.pcb_cpuleft.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_cpuleft.Location = new System.Drawing.Point(420, 332);
+            this.pcb_cpuleft.Location = new System.Drawing.Point(463, 332);
             this.pcb_cpuleft.Name = "pcb_cpuleft";
             this.pcb_cpuleft.Size = new System.Drawing.Size(50, 13);
             this.pcb_cpuleft.TabIndex = 24;
@@ -623,7 +624,7 @@
             // 
             this.finish_label.AutoSize = true;
             this.finish_label.BackColor = System.Drawing.SystemColors.Control;
-            this.finish_label.Location = new System.Drawing.Point(322, 319);
+            this.finish_label.Location = new System.Drawing.Point(365, 319);
             this.finish_label.Name = "finish_label";
             this.finish_label.Size = new System.Drawing.Size(48, 26);
             this.finish_label.TabIndex = 41;
@@ -633,17 +634,28 @@
             // 
             this.status.AutoSize = true;
             this.status.BackColor = System.Drawing.SystemColors.Control;
-            this.status.Location = new System.Drawing.Point(476, 332);
+            this.status.Location = new System.Drawing.Point(519, 332);
             this.status.Name = "status";
             this.status.Size = new System.Drawing.Size(37, 13);
             this.status.TabIndex = 42;
             this.status.Text = "Status";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.SystemColors.Control;
+            this.label12.Location = new System.Drawing.Point(162, 319);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(32, 26);
+            this.label12.TabIndex = 43;
+            this.label12.Text = "CPU\r\nUsed";
             // 
             // mainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(606, 621);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.status);
             this.Controls.Add(this.finish_label);
             this.Controls.Add(this.label11);
@@ -755,6 +767,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label finish_label;
         private System.Windows.Forms.Label status;
+        private System.Windows.Forms.Label label12;
     }
 }
 

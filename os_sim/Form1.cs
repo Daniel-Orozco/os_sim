@@ -88,12 +88,12 @@ namespace os_sim
         public void updateParameters()
         {
             int[] updates = new int[6];
-            updates[0] = Utilities.updateParameter(settings_new, new_size, 0, 100);
-            updates[1] = Utilities.updateParameter(settings_ready, ready_size, 0, 100);
-            updates[2] = Utilities.updateParameter(settings_waiting, waiting_size, 0, 100);
+            updates[0] = Utilities.updateParameter(settings_new, new_size, 0, Int32.MaxValue);
+            updates[1] = Utilities.updateParameter(settings_ready, ready_size, 0, Int32.MaxValue);
+            updates[2] = Utilities.updateParameter(settings_waiting, waiting_size, 0, Int32.MaxValue);
             updates[3] = Utilities.updateParameter(setttings_chance, chance, 0, 100);
-            updates[4] = Utilities.updateParameter(quantum_display, tquantum, 0, 100);
-            updates[5] = Utilities.updateParameter(average_cpu, average_cycles, 1, 100);
+            updates[4] = Utilities.updateParameter(quantum_display, tquantum, 1, Int32.MaxValue);
+            updates[5] = Utilities.updateParameter(average_cpu, average_cycles, 1, Int32.MaxValue);
 
             for(int c = 0; c < updates.Length; c++)
                 if (updates[c] == -1)
@@ -133,8 +133,13 @@ namespace os_sim
                     {
                         if (current.current_io1 == current.total_io1)
                             updateFinished();
-                        else
+                        else if (Waiting.Count < waiting_size)
                             updateWaiting();
+                        else
+                        {
+                            current.status = "Terminated";
+                            updateFinished();
+                        }
                     }
                     else
                     {
@@ -161,6 +166,7 @@ namespace os_sim
                     io1_cycle.Text = "" + io1_use;
                 }
             }
+            displayProcesses();
             
         }
         public void updateReady()
@@ -172,7 +178,6 @@ namespace os_sim
 
             var lines = new_list.Lines;
             var pline = lines[0];
-            updatePCB(t_process, t_process.id - 1);
 
             var newLines = lines.Skip(1);
             new_list.Lines = newLines.ToArray();
@@ -183,8 +188,6 @@ namespace os_sim
 
             Running.addProcess(t_process);
             running_list.Text += t_process.getID() + "\r\n";
-
-            updatePCB(t_process, t_process.id - 1);
 
             var lines = ready_list.Lines;
             var newLines = lines.Skip(1);
@@ -197,7 +200,6 @@ namespace os_sim
 
             UsingIO1.addProcess(t_process);
             io1_list.Text += t_process.getID() + "\r\n";
-            updatePCB(t_process, t_process.id - 1);
 
             var lines = waiting_list.Lines;
             var newLines = lines.Skip(1);
@@ -209,7 +211,6 @@ namespace os_sim
 
             Ready.addProcess(t_process);
             ready_list.Text += t_process.getID() + "\r\n";
-            updatePCB(t_process, t_process.id - 1);
 
             io1_list.Text = "";
             io1_use = 0;
@@ -224,9 +225,9 @@ namespace os_sim
             t_process.idle_time = t_process.time_in_system - t_process.total_io1 - t_process.total_cpu;
             t_process.status = "Finished";
 
+            updatePCB(t_process, t_process.id - 1);
             Finished.addProcess(t_process);
             finished_list.Text += t_process.getID() + "\r\n";
-            updatePCB(t_process, t_process.id - 1);
 
             running_list.Text = "";
         }
@@ -236,7 +237,6 @@ namespace os_sim
 
             Waiting.addProcess(t_process);
             waiting_list.Text += t_process.getID() + "\r\n";
-            updatePCB(t_process, t_process.id - 1);
 
             running_list.Text = "";
         }
@@ -245,7 +245,6 @@ namespace os_sim
             Process t_process = Running.Dequeue();
             Ready.addProcess(t_process);
             ready_list.Text += t_process.getID() + "\r\n";
-            updatePCB(t_process, t_process.id - 1);
 
             running_list.Text = "";
         }
@@ -303,8 +302,43 @@ namespace os_sim
                 last_processid++;
                 New.addProcess(n_process);
 
-                updatePCB(n_process,n_process.id-1);
                 new_list.Text += n_process.getID() + "\r\n";
+            }
+        }
+        public void displayProcesses()
+        {
+            Queue<Process> store = new Queue<Process>();
+            Process helper;
+
+            for (int c = 0; c < New.Count; c++)
+            {
+                helper = New.Dequeue();
+                updatePCB(helper, helper.id - 1);
+                New.Enqueue(helper);
+            }
+            for (int c = 0; c < Ready.Count; c++)
+            {
+                helper = Ready.Dequeue();
+                updatePCB(helper, helper.id - 1);
+                Ready.Enqueue(helper);
+            }
+            for (int c = 0; c < Running.Count; c++)
+            {
+                helper = Running.Dequeue();
+                updatePCB(helper, helper.id - 1);
+                Running.Enqueue(helper);
+            }
+            for (int c = 0; c < Waiting.Count; c++)
+            {
+                helper = Waiting.Dequeue();
+                updatePCB(helper, helper.id - 1);
+                Waiting.Enqueue(helper);
+            }
+            for (int c = 0; c < UsingIO1.Count; c++)
+            {
+                helper = UsingIO1.Dequeue();
+                updatePCB(helper, helper.id - 1);
+                UsingIO1.Enqueue(helper);
             }
         }
         public void updatePCB(Process n_process, int process_line)
@@ -473,7 +507,7 @@ namespace os_sim
             quantum_tooltip.ToolTipIcon = ToolTipIcon.Info;
             quantum_tooltip.ToolTipTitle = "Quantum";
             quantum_tooltip.ShowAlways = true;
-            quantum_tooltip.SetToolTip(quantum_display, "With Round Robin enabled, determines how many ticks can a process last in Running state.\r\nMust be an integer between 1 and 999.");
+            quantum_tooltip.SetToolTip(quantum_display, "With Round Robin enabled, determines how many ticks can a process last in Running state.\r\nMust be a positive integer.");
             quantum_tooltip.AutoPopDelay = 32000;
 
             algorithm_tooltip = new ToolTip();
@@ -498,7 +532,7 @@ namespace os_sim
             average_tooltip.ToolTipIcon = ToolTipIcon.Info;
             average_tooltip.ToolTipTitle = "Average CPU Use";
             average_tooltip.ShowAlways = true;
-            average_tooltip.SetToolTip(average_cpu, "Sets the average amount of cycles processes require from the CPU, with a 25% deviation.\r\nMust be an integer between 1 and 999.");
+            average_tooltip.SetToolTip(average_cpu, "Sets the average amount of cycles processes require from the CPU, with a 25% deviation.\r\nMust be a positive integer.");
             average_tooltip.AutoPopDelay = 32000;
 
             delay_tooltip = new ToolTip();
@@ -506,7 +540,7 @@ namespace os_sim
             delay_tooltip.ToolTipIcon = ToolTipIcon.Info;
             delay_tooltip.ToolTipTitle = "Tick Delay";
             delay_tooltip.ShowAlways = true;
-            delay_tooltip.SetToolTip(delay_bar, "Controls the time that elapses between ticks.\r\nSlow: 2 seconds per tick.\r\nNormal: 1 second per tick.\r\nFast: 0.25 seconds per tick.");
+            delay_tooltip.SetToolTip(delay_bar, "Controls the time that elapses between ticks.\r\nSlow: 2 seconds per tick.\r\nNormal: 1 second per tick.\r\nFast: 0.1 seconds per tick.");
             delay_tooltip.AutoPopDelay = 32000;
 
             new_tooltip = new ToolTip();
@@ -514,7 +548,7 @@ namespace os_sim
             new_tooltip.ToolTipIcon = ToolTipIcon.Info;
             new_tooltip.ToolTipTitle = "Hold State Size";
             new_tooltip.ShowAlways = true;
-            new_tooltip.SetToolTip(settings_new, "Sets the maximum amount of processes the Hold State can hold.\r\nMust be an integer between 1 and 999.");
+            new_tooltip.SetToolTip(settings_new, "Sets the maximum amount of processes the Hold State can hold.\r\nMust be a non-negative integer.");
             new_tooltip.AutoPopDelay = 32000;
 
             ready_tooltip = new ToolTip();
@@ -522,7 +556,7 @@ namespace os_sim
             ready_tooltip.ToolTipIcon = ToolTipIcon.Info;
             ready_tooltip.ToolTipTitle = "Ready State Size";
             ready_tooltip.ShowAlways = true;
-            ready_tooltip.SetToolTip(settings_ready, "Sets the maximum amount of processes the Ready State can hold.\r\nMust be an integer between 1 and 999.");
+            ready_tooltip.SetToolTip(settings_ready, "Sets the maximum amount of processes the Ready State can hold.\r\nMust be a non-negative integer.");
             ready_tooltip.AutoPopDelay = 32000;
 
             waiting_tooltip = new ToolTip();
@@ -530,7 +564,7 @@ namespace os_sim
             waiting_tooltip.ToolTipIcon = ToolTipIcon.Info;
             waiting_tooltip.ToolTipTitle = "Waiting State Size";
             waiting_tooltip.ShowAlways = true;
-            waiting_tooltip.SetToolTip(settings_waiting, "Sets the maximum amount of processes the Waiting State can hold.\r\nMust be an integer between 1 and 999.");
+            waiting_tooltip.SetToolTip(settings_waiting, "Sets the maximum amount of processes the Waiting State can hold.\r\nMust be a non-negative integer.");
             waiting_tooltip.AutoPopDelay = 32000;
 
             stop_tooltip = new ToolTip();

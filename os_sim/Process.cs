@@ -25,6 +25,8 @@ namespace os_sim
         public int idle_time;
 
         public int quantum;
+
+        public string status;
         public Process(int next_id, int cycle, int avrg, Random rand, int q)
         {
             id = next_id;
@@ -39,11 +41,13 @@ namespace os_sim
             current_io1 = 0;
 
             quantum = q;
+
+            status = "In System";
         }
         public string getData(int clock)
         {
-            string data = String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}",
-                getID(), arrival_cycle, total_cpu, clock - arrival_cycle, total_io1, current_io1, finishing_cycle, time_in_system, idle_time);
+            string data = String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t{9}\r\n",
+                getID(), arrival_cycle, total_cpu, clock - arrival_cycle, total_io1, current_io1, finishing_cycle, time_in_system, idle_time,status);
             return data;
         }
         public string getID()

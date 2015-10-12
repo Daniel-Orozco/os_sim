@@ -82,6 +82,7 @@
             this.io1_display = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.finish_label = new System.Windows.Forms.Label();
+            this.status = new System.Windows.Forms.Label();
             this.settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delay_bar)).BeginInit();
             this.SuspendLayout();
@@ -258,7 +259,7 @@
             this.pcb_list.Name = "pcb_list";
             this.pcb_list.ReadOnly = true;
             this.pcb_list.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.pcb_list.Size = new System.Drawing.Size(450, 247);
+            this.pcb_list.Size = new System.Drawing.Size(510, 247);
             this.pcb_list.TabIndex = 16;
             // 
             // pcb_id
@@ -628,11 +629,22 @@
             this.finish_label.TabIndex = 41;
             this.finish_label.Text = "Finishing\r\nCycle";
             // 
+            // status
+            // 
+            this.status.AutoSize = true;
+            this.status.BackColor = System.Drawing.SystemColors.Control;
+            this.status.Location = new System.Drawing.Point(476, 332);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(37, 13);
+            this.status.TabIndex = 42;
+            this.status.Text = "Status";
+            // 
             // mainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(606, 621);
+            this.Controls.Add(this.status);
             this.Controls.Add(this.finish_label);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.io1_cycle);
@@ -742,6 +754,7 @@
         private System.Windows.Forms.Label io1_display;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label finish_label;
+        private System.Windows.Forms.Label status;
     }
 }
 

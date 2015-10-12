@@ -222,6 +222,7 @@ namespace os_sim
             t_process.finishing_cycle = clock_value;
             t_process.time_in_system = t_process.finishing_cycle - t_process.arrival_cycle;
             t_process.idle_time = t_process.time_in_system - t_process.total_io1 - t_process.total_cpu;
+            t_process.status = "Finished";
 
             Finished.addProcess(t_process);
             finished_list.Text += t_process.getID() + "\r\n";

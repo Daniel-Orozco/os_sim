@@ -382,7 +382,7 @@
             // 
             this.cpu_update.AutoSize = true;
             this.cpu_update.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cpu_update.Location = new System.Drawing.Point(9, 48);
+            this.cpu_update.Location = new System.Drawing.Point(12, 50);
             this.cpu_update.Name = "cpu_update";
             this.cpu_update.Size = new System.Drawing.Size(86, 17);
             this.cpu_update.TabIndex = 39;
@@ -442,7 +442,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(304, 7);
+            this.label5.Location = new System.Drawing.Point(306, 9);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(34, 13);
             this.label5.TabIndex = 32;
@@ -451,7 +451,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(271, 62);
+            this.label4.Location = new System.Drawing.Point(271, 65);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(101, 13);
             this.label4.TabIndex = 32;
@@ -461,7 +461,7 @@
             // 
             this.delay_bar.BackColor = System.Drawing.SystemColors.Control;
             this.delay_bar.LargeChange = 1;
-            this.delay_bar.Location = new System.Drawing.Point(271, 23);
+            this.delay_bar.Location = new System.Drawing.Point(272, 25);
             this.delay_bar.Maximum = 2;
             this.delay_bar.Name = "delay_bar";
             this.delay_bar.Size = new System.Drawing.Size(104, 45);
@@ -642,37 +642,37 @@
             // 
             // pause
             // 
-            this.pause.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pause.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pause.BackgroundImage")));
+            this.pause.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.pause.BackgroundImage = global::os_sim.Properties.Resources.storm_pause;
             this.pause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pause.Location = new System.Drawing.Point(66, 19);
+            this.pause.Location = new System.Drawing.Point(72, 19);
             this.pause.Name = "pause";
-            this.pause.Size = new System.Drawing.Size(24, 23);
+            this.pause.Size = new System.Drawing.Size(25, 25);
             this.pause.TabIndex = 36;
             this.pause.UseVisualStyleBackColor = false;
             this.pause.Click += new System.EventHandler(this.pause_Click);
             // 
             // play
             // 
-            this.play.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.play.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("play.BackgroundImage")));
+            this.play.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.play.BackgroundImage = global::os_sim.Properties.Resources.storm_play;
             this.play.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.play.Location = new System.Drawing.Point(36, 19);
+            this.play.Location = new System.Drawing.Point(42, 19);
             this.play.Name = "play";
-            this.play.Size = new System.Drawing.Size(24, 23);
+            this.play.Size = new System.Drawing.Size(25, 25);
             this.play.TabIndex = 35;
             this.play.UseVisualStyleBackColor = false;
             this.play.Click += new System.EventHandler(this.play_Click);
             // 
             // stop
             // 
-            this.stop.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.stop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("stop.BackgroundImage")));
+            this.stop.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.stop.BackgroundImage = global::os_sim.Properties.Resources.storm_stop;
             this.stop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.stop.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.stop.Location = new System.Drawing.Point(6, 19);
+            this.stop.ForeColor = System.Drawing.SystemColors.Control;
+            this.stop.Location = new System.Drawing.Point(12, 19);
             this.stop.Name = "stop";
-            this.stop.Size = new System.Drawing.Size(24, 23);
+            this.stop.Size = new System.Drawing.Size(25, 25);
             this.stop.TabIndex = 34;
             this.stop.UseVisualStyleBackColor = false;
             this.stop.Click += new System.EventHandler(this.stop_Click);

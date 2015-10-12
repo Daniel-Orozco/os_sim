@@ -55,11 +55,10 @@
             this.pcb_ioleft = new System.Windows.Forms.Label();
             this.pcb_cpuleft = new System.Windows.Forms.Label();
             this.settings = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cpu_update = new System.Windows.Forms.CheckBox();
             this.algorithm_list = new System.Windows.Forms.ComboBox();
             this.average_cpu = new System.Windows.Forms.TextBox();
-            this.pause = new System.Windows.Forms.Button();
-            this.play = new System.Windows.Forms.Button();
-            this.stop = new System.Windows.Forms.Button();
             this.setttings_chance = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -83,16 +82,19 @@
             this.finish_label = new System.Windows.Forms.Label();
             this.status = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.cpu_update = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pause = new System.Windows.Forms.Button();
+            this.play = new System.Windows.Forms.Button();
+            this.stop = new System.Windows.Forms.Button();
             this.settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delay_bar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // clock
             // 
             this.clock.AutoSize = true;
-            this.clock.Location = new System.Drawing.Point(41, 12);
+            this.clock.Location = new System.Drawing.Point(33, 12);
             this.clock.Name = "clock";
             this.clock.Size = new System.Drawing.Size(34, 13);
             this.clock.TabIndex = 0;
@@ -101,7 +103,7 @@
             // quantum
             // 
             this.quantum.AutoSize = true;
-            this.quantum.Location = new System.Drawing.Point(41, 58);
+            this.quantum.Location = new System.Drawing.Point(33, 58);
             this.quantum.Name = "quantum";
             this.quantum.Size = new System.Drawing.Size(50, 13);
             this.quantum.TabIndex = 1;
@@ -111,7 +113,7 @@
             // 
             this.new_queue.AutoSize = true;
             this.new_queue.BackColor = System.Drawing.SystemColors.Control;
-            this.new_queue.Location = new System.Drawing.Point(39, 171);
+            this.new_queue.Location = new System.Drawing.Point(31, 171);
             this.new_queue.Name = "new_queue";
             this.new_queue.Size = new System.Drawing.Size(29, 13);
             this.new_queue.TabIndex = 2;
@@ -121,7 +123,7 @@
             // 
             this.ready_queue.AutoSize = true;
             this.ready_queue.BackColor = System.Drawing.SystemColors.Control;
-            this.ready_queue.Location = new System.Drawing.Point(149, 171);
+            this.ready_queue.Location = new System.Drawing.Point(141, 171);
             this.ready_queue.Name = "ready_queue";
             this.ready_queue.Size = new System.Drawing.Size(38, 13);
             this.ready_queue.TabIndex = 3;
@@ -131,7 +133,7 @@
             // 
             this.running_queue.AutoSize = true;
             this.running_queue.BackColor = System.Drawing.SystemColors.Control;
-            this.running_queue.Location = new System.Drawing.Point(261, 175);
+            this.running_queue.Location = new System.Drawing.Point(259, 175);
             this.running_queue.Name = "running_queue";
             this.running_queue.Size = new System.Drawing.Size(47, 13);
             this.running_queue.TabIndex = 4;
@@ -150,7 +152,7 @@
             // new_list
             // 
             this.new_list.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.new_list.Location = new System.Drawing.Point(40, 191);
+            this.new_list.Location = new System.Drawing.Point(32, 191);
             this.new_list.Multiline = true;
             this.new_list.Name = "new_list";
             this.new_list.ReadOnly = true;
@@ -161,7 +163,7 @@
             // ready_list
             // 
             this.ready_list.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ready_list.Location = new System.Drawing.Point(152, 191);
+            this.ready_list.Location = new System.Drawing.Point(144, 191);
             this.ready_list.Multiline = true;
             this.ready_list.Name = "ready_list";
             this.ready_list.ReadOnly = true;
@@ -172,7 +174,7 @@
             // running_list
             // 
             this.running_list.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.running_list.Location = new System.Drawing.Point(264, 191);
+            this.running_list.Location = new System.Drawing.Point(262, 191);
             this.running_list.Multiline = true;
             this.running_list.Name = "running_list";
             this.running_list.ReadOnly = true;
@@ -183,7 +185,7 @@
             // clock_display
             // 
             this.clock_display.BackColor = System.Drawing.SystemColors.Control;
-            this.clock_display.Location = new System.Drawing.Point(44, 28);
+            this.clock_display.Location = new System.Drawing.Point(36, 28);
             this.clock_display.Multiline = true;
             this.clock_display.Name = "clock_display";
             this.clock_display.ReadOnly = true;
@@ -193,7 +195,7 @@
             // quantum_display
             // 
             this.quantum_display.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.quantum_display.Location = new System.Drawing.Point(44, 74);
+            this.quantum_display.Location = new System.Drawing.Point(36, 74);
             this.quantum_display.Multiline = true;
             this.quantum_display.Name = "quantum_display";
             this.quantum_display.Size = new System.Drawing.Size(60, 20);
@@ -237,7 +239,7 @@
             // 
             this.io1_queue.AutoSize = true;
             this.io1_queue.BackColor = System.Drawing.SystemColors.Control;
-            this.io1_queue.Location = new System.Drawing.Point(264, 269);
+            this.io1_queue.Location = new System.Drawing.Point(259, 269);
             this.io1_queue.Name = "io1_queue";
             this.io1_queue.Size = new System.Drawing.Size(37, 13);
             this.io1_queue.TabIndex = 14;
@@ -246,7 +248,7 @@
             // io1_list
             // 
             this.io1_list.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.io1_list.Location = new System.Drawing.Point(264, 285);
+            this.io1_list.Location = new System.Drawing.Point(262, 285);
             this.io1_list.Multiline = true;
             this.io1_list.Name = "io1_list";
             this.io1_list.ReadOnly = true;
@@ -256,19 +258,19 @@
             // pcb_list
             // 
             this.pcb_list.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pcb_list.Location = new System.Drawing.Point(40, 348);
+            this.pcb_list.Location = new System.Drawing.Point(32, 348);
             this.pcb_list.Multiline = true;
             this.pcb_list.Name = "pcb_list";
             this.pcb_list.ReadOnly = true;
             this.pcb_list.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.pcb_list.Size = new System.Drawing.Size(554, 247);
+            this.pcb_list.Size = new System.Drawing.Size(562, 247);
             this.pcb_list.TabIndex = 16;
             // 
             // pcb_id
             // 
             this.pcb_id.AutoSize = true;
             this.pcb_id.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_id.Location = new System.Drawing.Point(39, 332);
+            this.pcb_id.Location = new System.Drawing.Point(31, 332);
             this.pcb_id.Name = "pcb_id";
             this.pcb_id.Size = new System.Drawing.Size(18, 13);
             this.pcb_id.TabIndex = 17;
@@ -279,7 +281,7 @@
             // 
             this.pcb_arrival.AutoSize = true;
             this.pcb_arrival.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_arrival.Location = new System.Drawing.Point(83, 332);
+            this.pcb_arrival.Location = new System.Drawing.Point(75, 332);
             this.pcb_arrival.Name = "pcb_arrival";
             this.pcb_arrival.Size = new System.Drawing.Size(36, 13);
             this.pcb_arrival.TabIndex = 18;
@@ -289,7 +291,7 @@
             // 
             this.pcb_totaltime.AutoSize = true;
             this.pcb_totaltime.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_totaltime.Location = new System.Drawing.Point(125, 319);
+            this.pcb_totaltime.Location = new System.Drawing.Point(117, 319);
             this.pcb_totaltime.Name = "pcb_totaltime";
             this.pcb_totaltime.Size = new System.Drawing.Size(31, 26);
             this.pcb_totaltime.TabIndex = 19;
@@ -299,7 +301,7 @@
             // 
             this.pcb_timeleft.AutoSize = true;
             this.pcb_timeleft.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_timeleft.Location = new System.Drawing.Point(204, 332);
+            this.pcb_timeleft.Location = new System.Drawing.Point(196, 332);
             this.pcb_timeleft.Name = "pcb_timeleft";
             this.pcb_timeleft.Size = new System.Drawing.Size(45, 13);
             this.pcb_timeleft.TabIndex = 20;
@@ -309,7 +311,7 @@
             // 
             this.pcb_cpu.AutoSize = true;
             this.pcb_cpu.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_cpu.Location = new System.Drawing.Point(416, 319);
+            this.pcb_cpu.Location = new System.Drawing.Point(408, 319);
             this.pcb_cpu.Name = "pcb_cpu";
             this.pcb_cpu.Size = new System.Drawing.Size(41, 26);
             this.pcb_cpu.TabIndex = 21;
@@ -319,7 +321,7 @@
             // 
             this.pcb_io.AutoSize = true;
             this.pcb_io.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_io.Location = new System.Drawing.Point(254, 332);
+            this.pcb_io.Location = new System.Drawing.Point(246, 332);
             this.pcb_io.Name = "pcb_io";
             this.pcb_io.Size = new System.Drawing.Size(50, 13);
             this.pcb_io.TabIndex = 22;
@@ -329,7 +331,7 @@
             // 
             this.pcb_ioleft.AutoSize = true;
             this.pcb_ioleft.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_ioleft.Location = new System.Drawing.Point(310, 332);
+            this.pcb_ioleft.Location = new System.Drawing.Point(302, 332);
             this.pcb_ioleft.Name = "pcb_ioleft";
             this.pcb_ioleft.Size = new System.Drawing.Size(51, 13);
             this.pcb_ioleft.TabIndex = 23;
@@ -339,7 +341,7 @@
             // 
             this.pcb_cpuleft.AutoSize = true;
             this.pcb_cpuleft.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_cpuleft.Location = new System.Drawing.Point(463, 332);
+            this.pcb_cpuleft.Location = new System.Drawing.Point(455, 332);
             this.pcb_cpuleft.Name = "pcb_cpuleft";
             this.pcb_cpuleft.Size = new System.Drawing.Size(50, 13);
             this.pcb_cpuleft.TabIndex = 24;
@@ -360,12 +362,32 @@
             this.settings.Controls.Add(this.label5);
             this.settings.Controls.Add(this.label4);
             this.settings.Controls.Add(this.delay_bar);
-            this.settings.Location = new System.Drawing.Point(110, 12);
+            this.settings.Location = new System.Drawing.Point(102, 12);
             this.settings.Name = "settings";
             this.settings.Size = new System.Drawing.Size(382, 89);
             this.settings.TabIndex = 25;
             this.settings.TabStop = false;
             this.settings.Text = "Settings";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(101, 65);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(72, 13);
+            this.label10.TabIndex = 40;
+            this.label10.Text = "Average CPU";
+            // 
+            // cpu_update
+            // 
+            this.cpu_update.AutoSize = true;
+            this.cpu_update.Cursor = System.Windows.Forms.Cursors.Default;
+            this.cpu_update.Location = new System.Drawing.Point(9, 48);
+            this.cpu_update.Name = "cpu_update";
+            this.cpu_update.Size = new System.Drawing.Size(86, 17);
+            this.cpu_update.TabIndex = 39;
+            this.cpu_update.Text = "CPU Update";
+            this.cpu_update.UseVisualStyleBackColor = true;
             // 
             // algorithm_list
             // 
@@ -388,43 +410,6 @@
             this.average_cpu.Size = new System.Drawing.Size(36, 20);
             this.average_cpu.TabIndex = 37;
             this.average_cpu.TextChanged += new System.EventHandler(this.average_cpu_TextChanged);
-            // 
-            // pause
-            // 
-            this.pause.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pause.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pause.BackgroundImage")));
-            this.pause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pause.Location = new System.Drawing.Point(66, 19);
-            this.pause.Name = "pause";
-            this.pause.Size = new System.Drawing.Size(24, 23);
-            this.pause.TabIndex = 36;
-            this.pause.UseVisualStyleBackColor = false;
-            this.pause.Click += new System.EventHandler(this.pause_Click);
-            // 
-            // play
-            // 
-            this.play.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.play.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("play.BackgroundImage")));
-            this.play.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.play.Location = new System.Drawing.Point(36, 19);
-            this.play.Name = "play";
-            this.play.Size = new System.Drawing.Size(24, 23);
-            this.play.TabIndex = 35;
-            this.play.UseVisualStyleBackColor = false;
-            this.play.Click += new System.EventHandler(this.play_Click);
-            // 
-            // stop
-            // 
-            this.stop.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.stop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("stop.BackgroundImage")));
-            this.stop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.stop.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.stop.Location = new System.Drawing.Point(6, 19);
-            this.stop.Name = "stop";
-            this.stop.Size = new System.Drawing.Size(24, 23);
-            this.stop.TabIndex = 34;
-            this.stop.UseVisualStyleBackColor = false;
-            this.stop.Click += new System.EventHandler(this.stop_Click);
             // 
             // setttings_chance
             // 
@@ -495,7 +480,7 @@
             // settings_ready
             // 
             this.settings_ready.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.settings_ready.Location = new System.Drawing.Point(222, 168);
+            this.settings_ready.Location = new System.Drawing.Point(214, 168);
             this.settings_ready.Multiline = true;
             this.settings_ready.Name = "settings_ready";
             this.settings_ready.Size = new System.Drawing.Size(36, 20);
@@ -504,7 +489,7 @@
             // settings_new
             // 
             this.settings_new.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.settings_new.Location = new System.Drawing.Point(110, 168);
+            this.settings_new.Location = new System.Drawing.Point(102, 168);
             this.settings_new.Multiline = true;
             this.settings_new.Name = "settings_new";
             this.settings_new.Size = new System.Drawing.Size(36, 20);
@@ -513,7 +498,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(107, 153);
+            this.label1.Location = new System.Drawing.Point(99, 153);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 29;
@@ -523,7 +508,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(219, 152);
+            this.label2.Location = new System.Drawing.Point(211, 152);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(27, 13);
             this.label2.TabIndex = 30;
@@ -542,7 +527,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(11, 204);
+            this.label8.Location = new System.Drawing.Point(12, 204);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(14, 78);
             this.label8.TabIndex = 32;
@@ -552,7 +537,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.SystemColors.Control;
-            this.label9.Location = new System.Drawing.Point(11, 348);
+            this.label9.Location = new System.Drawing.Point(12, 348);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(14, 39);
             this.label9.TabIndex = 33;
@@ -561,17 +546,17 @@
             // message_display
             // 
             this.message_display.BackColor = System.Drawing.SystemColors.Control;
-            this.message_display.Location = new System.Drawing.Point(40, 118);
+            this.message_display.Location = new System.Drawing.Point(32, 118);
             this.message_display.Multiline = true;
             this.message_display.Name = "message_display";
             this.message_display.ReadOnly = true;
-            this.message_display.Size = new System.Drawing.Size(554, 20);
+            this.message_display.Size = new System.Drawing.Size(562, 20);
             this.message_display.TabIndex = 34;
             // 
             // cycle_display
             // 
             this.cycle_display.AutoSize = true;
-            this.cycle_display.Location = new System.Drawing.Point(314, 175);
+            this.cycle_display.Location = new System.Drawing.Point(317, 175);
             this.cycle_display.Name = "cycle_display";
             this.cycle_display.Size = new System.Drawing.Size(36, 13);
             this.cycle_display.TabIndex = 36;
@@ -580,7 +565,7 @@
             // run_cycle
             // 
             this.run_cycle.AutoSize = true;
-            this.run_cycle.Location = new System.Drawing.Point(345, 175);
+            this.run_cycle.Location = new System.Drawing.Point(348, 175);
             this.run_cycle.Name = "run_cycle";
             this.run_cycle.Size = new System.Drawing.Size(13, 13);
             this.run_cycle.TabIndex = 37;
@@ -589,7 +574,7 @@
             // io1_cycle
             // 
             this.io1_cycle.AutoSize = true;
-            this.io1_cycle.Location = new System.Drawing.Point(345, 269);
+            this.io1_cycle.Location = new System.Drawing.Point(348, 269);
             this.io1_cycle.Name = "io1_cycle";
             this.io1_cycle.Size = new System.Drawing.Size(13, 13);
             this.io1_cycle.TabIndex = 39;
@@ -598,7 +583,7 @@
             // io1_display
             // 
             this.io1_display.AutoSize = true;
-            this.io1_display.Location = new System.Drawing.Point(314, 269);
+            this.io1_display.Location = new System.Drawing.Point(317, 269);
             this.io1_display.Name = "io1_display";
             this.io1_display.Size = new System.Drawing.Size(36, 13);
             this.io1_display.TabIndex = 38;
@@ -617,7 +602,7 @@
             // 
             this.finish_label.AutoSize = true;
             this.finish_label.BackColor = System.Drawing.SystemColors.Control;
-            this.finish_label.Location = new System.Drawing.Point(365, 319);
+            this.finish_label.Location = new System.Drawing.Point(357, 319);
             this.finish_label.Name = "finish_label";
             this.finish_label.Size = new System.Drawing.Size(48, 26);
             this.finish_label.TabIndex = 41;
@@ -627,7 +612,7 @@
             // 
             this.status.AutoSize = true;
             this.status.BackColor = System.Drawing.SystemColors.Control;
-            this.status.Location = new System.Drawing.Point(519, 332);
+            this.status.Location = new System.Drawing.Point(511, 332);
             this.status.Name = "status";
             this.status.Size = new System.Drawing.Size(37, 13);
             this.status.TabIndex = 42;
@@ -637,36 +622,67 @@
             // 
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.SystemColors.Control;
-            this.label12.Location = new System.Drawing.Point(162, 319);
+            this.label12.Location = new System.Drawing.Point(154, 319);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(32, 26);
             this.label12.TabIndex = 43;
             this.label12.Text = "CPU\r\nUsed";
             // 
-            // cpu_update
+            // pictureBox1
             // 
-            this.cpu_update.AutoSize = true;
-            this.cpu_update.Location = new System.Drawing.Point(9, 48);
-            this.cpu_update.Name = "cpu_update";
-            this.cpu_update.Size = new System.Drawing.Size(86, 17);
-            this.cpu_update.TabIndex = 39;
-            this.cpu_update.Text = "CPU Update";
-            this.cpu_update.UseVisualStyleBackColor = true;
+            this.pictureBox1.Image = global::os_sim.Properties.Resources.storm_logo;
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(494, 16);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 85);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 44;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // label10
+            // pause
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(101, 65);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 13);
-            this.label10.TabIndex = 40;
-            this.label10.Text = "Average CPU";
+            this.pause.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pause.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pause.BackgroundImage")));
+            this.pause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pause.Location = new System.Drawing.Point(66, 19);
+            this.pause.Name = "pause";
+            this.pause.Size = new System.Drawing.Size(24, 23);
+            this.pause.TabIndex = 36;
+            this.pause.UseVisualStyleBackColor = false;
+            this.pause.Click += new System.EventHandler(this.pause_Click);
+            // 
+            // play
+            // 
+            this.play.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.play.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("play.BackgroundImage")));
+            this.play.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.play.Location = new System.Drawing.Point(36, 19);
+            this.play.Name = "play";
+            this.play.Size = new System.Drawing.Size(24, 23);
+            this.play.TabIndex = 35;
+            this.play.UseVisualStyleBackColor = false;
+            this.play.Click += new System.EventHandler(this.play_Click);
+            // 
+            // stop
+            // 
+            this.stop.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.stop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("stop.BackgroundImage")));
+            this.stop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.stop.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.stop.Location = new System.Drawing.Point(6, 19);
+            this.stop.Name = "stop";
+            this.stop.Size = new System.Drawing.Size(24, 23);
+            this.stop.TabIndex = 34;
+            this.stop.UseVisualStyleBackColor = false;
+            this.stop.Click += new System.EventHandler(this.stop_Click);
             // 
             // mainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(606, 621);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.status);
             this.Controls.Add(this.finish_label);
@@ -718,6 +734,7 @@
             this.settings.ResumeLayout(false);
             this.settings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delay_bar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -781,6 +798,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox cpu_update;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

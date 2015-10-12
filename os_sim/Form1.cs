@@ -124,9 +124,21 @@ namespace os_sim
                     updateUsingIO1();
                 if (Ready.Count != 0)
                     updateRunning();
-                if(New.Count != 0)
-                    updateReady();
-                generateProcess();
+                if(New.Count != 0 )
+                    if(((UsingIO1.Count != 0 && Ready.Count < ready_size-2) || (UsingIO1.Count == 0 && Ready.Count < ready_size)))
+                        updateReady();
+                    else
+                    {
+                        Process t_process;
+                        t_process = New.Dequeue();
+                        terminateProcess(t_process);
+                        var lines = new_list.Lines;
+                        var pline = lines[0];
+                        var newLines = lines.Skip(1);
+                        new_list.Lines = newLines.ToArray();
+                    }
+                if(New.Count < new_size)
+                    generateProcess();
             }
             else
             {
@@ -142,8 +154,9 @@ namespace os_sim
                             updateWaiting();
                         else
                         {
-                            current.status = "Terminated";
-                            updateFinished();
+                            current = Running.Dequeue();
+                            terminateProcess(current);
+                            running_list.Text = "";
                         }
                     }
                     else
@@ -238,6 +251,20 @@ namespace os_sim
             finished_list.Text += t_process.getID() + "\r\n";
 
             running_list.Text = "";
+        }
+        public void terminateProcess(Process t_process)
+        {
+            t_process.finishing_cycle = clock_value;
+            t_process.time_in_system = t_process.finishing_cycle - t_process.arrival_cycle;
+            t_process.idle_time = t_process.time_in_system - t_process.total_io1 - t_process.total_cpu;
+            t_process.status = "Terminated";
+
+            updatePCB(t_process, t_process.id - 1);
+
+            last_finished = t_process.id;
+
+            Finished.addProcess(t_process);
+            finished_list.Text += t_process.getID() + "\r\n";
         }
         public void updateWaiting()
         {
@@ -504,7 +531,7 @@ namespace os_sim
         {
             switch(code)
             {
-                case 0: message_display.Text = "For Help, hover the mouse above the control you want to know more about.";
+                case 0: message_display.Text = "For Help, hover the cursor above the control you want to know more about.";
                     message_display.ForeColor = System.Drawing.Color.Blue;
                 break;
                 case 1: message_display.Text = "Error: Please insert a valid positive integer.";
@@ -532,7 +559,7 @@ namespace os_sim
                     break;
                 case 1: sim_speed = 900;
                     break;
-                case 2: sim_speed = 1;
+                case 2: sim_speed = 100;
                     break;
                 default: sim_speed = 1;
                     break;
@@ -639,6 +666,11 @@ namespace os_sim
             update_tooltip.ShowAlways = true;
             update_tooltip.SetToolTip(cpu_update, "Determines if the PCB is updated with the CPU.\r\nIf checked, PCB will refresh if the Running state is empty.\r\nIf unchecked, PCB will update every tick.");
             update_tooltip.AutoPopDelay = 32000;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
 
 

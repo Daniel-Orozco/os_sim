@@ -55,8 +55,6 @@
             this.pcb_ioleft = new System.Windows.Forms.Label();
             this.pcb_cpuleft = new System.Windows.Forms.Label();
             this.settings = new System.Windows.Forms.GroupBox();
-            this.io1use_display = new System.Windows.Forms.Label();
-            this.settings_io1use = new System.Windows.Forms.TextBox();
             this.algorithm_list = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.average_cpu = new System.Windows.Forms.TextBox();
@@ -83,6 +81,7 @@
             this.io1_cycle = new System.Windows.Forms.Label();
             this.io1_display = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.finish_label = new System.Windows.Forms.Label();
             this.settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delay_bar)).BeginInit();
             this.SuspendLayout();
@@ -90,7 +89,7 @@
             // clock
             // 
             this.clock.AutoSize = true;
-            this.clock.Location = new System.Drawing.Point(37, 22);
+            this.clock.Location = new System.Drawing.Point(41, 12);
             this.clock.Name = "clock";
             this.clock.Size = new System.Drawing.Size(34, 13);
             this.clock.TabIndex = 0;
@@ -99,7 +98,7 @@
             // quantum
             // 
             this.quantum.AutoSize = true;
-            this.quantum.Location = new System.Drawing.Point(115, 22);
+            this.quantum.Location = new System.Drawing.Point(41, 58);
             this.quantum.Name = "quantum";
             this.quantum.Size = new System.Drawing.Size(50, 13);
             this.quantum.TabIndex = 1;
@@ -109,7 +108,7 @@
             // 
             this.new_queue.AutoSize = true;
             this.new_queue.BackColor = System.Drawing.SystemColors.Control;
-            this.new_queue.Location = new System.Drawing.Point(39, 190);
+            this.new_queue.Location = new System.Drawing.Point(39, 171);
             this.new_queue.Name = "new_queue";
             this.new_queue.Size = new System.Drawing.Size(29, 13);
             this.new_queue.TabIndex = 2;
@@ -119,7 +118,7 @@
             // 
             this.ready_queue.AutoSize = true;
             this.ready_queue.BackColor = System.Drawing.SystemColors.Control;
-            this.ready_queue.Location = new System.Drawing.Point(149, 190);
+            this.ready_queue.Location = new System.Drawing.Point(149, 171);
             this.ready_queue.Name = "ready_queue";
             this.ready_queue.Size = new System.Drawing.Size(38, 13);
             this.ready_queue.TabIndex = 3;
@@ -129,7 +128,7 @@
             // 
             this.running_queue.AutoSize = true;
             this.running_queue.BackColor = System.Drawing.SystemColors.Control;
-            this.running_queue.Location = new System.Drawing.Point(261, 194);
+            this.running_queue.Location = new System.Drawing.Point(261, 175);
             this.running_queue.Name = "running_queue";
             this.running_queue.Size = new System.Drawing.Size(47, 13);
             this.running_queue.TabIndex = 4;
@@ -139,7 +138,7 @@
             // 
             this.finished_queue.AutoSize = true;
             this.finished_queue.BackColor = System.Drawing.SystemColors.Control;
-            this.finished_queue.Location = new System.Drawing.Point(485, 194);
+            this.finished_queue.Location = new System.Drawing.Point(485, 175);
             this.finished_queue.Name = "finished_queue";
             this.finished_queue.Size = new System.Drawing.Size(46, 13);
             this.finished_queue.TabIndex = 5;
@@ -148,7 +147,7 @@
             // new_list
             // 
             this.new_list.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.new_list.Location = new System.Drawing.Point(40, 210);
+            this.new_list.Location = new System.Drawing.Point(40, 191);
             this.new_list.Multiline = true;
             this.new_list.Name = "new_list";
             this.new_list.ReadOnly = true;
@@ -159,7 +158,7 @@
             // ready_list
             // 
             this.ready_list.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ready_list.Location = new System.Drawing.Point(152, 210);
+            this.ready_list.Location = new System.Drawing.Point(152, 191);
             this.ready_list.Multiline = true;
             this.ready_list.Name = "ready_list";
             this.ready_list.ReadOnly = true;
@@ -170,7 +169,7 @@
             // running_list
             // 
             this.running_list.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.running_list.Location = new System.Drawing.Point(264, 210);
+            this.running_list.Location = new System.Drawing.Point(264, 191);
             this.running_list.Multiline = true;
             this.running_list.Name = "running_list";
             this.running_list.ReadOnly = true;
@@ -181,7 +180,7 @@
             // clock_display
             // 
             this.clock_display.BackColor = System.Drawing.SystemColors.Control;
-            this.clock_display.Location = new System.Drawing.Point(40, 38);
+            this.clock_display.Location = new System.Drawing.Point(44, 28);
             this.clock_display.Multiline = true;
             this.clock_display.Name = "clock_display";
             this.clock_display.ReadOnly = true;
@@ -191,7 +190,7 @@
             // quantum_display
             // 
             this.quantum_display.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.quantum_display.Location = new System.Drawing.Point(118, 38);
+            this.quantum_display.Location = new System.Drawing.Point(44, 74);
             this.quantum_display.Multiline = true;
             this.quantum_display.Name = "quantum_display";
             this.quantum_display.Size = new System.Drawing.Size(60, 20);
@@ -200,7 +199,7 @@
             // finished_list
             // 
             this.finished_list.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.finished_list.Location = new System.Drawing.Point(488, 210);
+            this.finished_list.Location = new System.Drawing.Point(488, 191);
             this.finished_list.Multiline = true;
             this.finished_list.Name = "finished_list";
             this.finished_list.ReadOnly = true;
@@ -211,7 +210,7 @@
             // waiting_list
             // 
             this.waiting_list.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.waiting_list.Location = new System.Drawing.Point(376, 210);
+            this.waiting_list.Location = new System.Drawing.Point(376, 191);
             this.waiting_list.Multiline = true;
             this.waiting_list.Name = "waiting_list";
             this.waiting_list.ReadOnly = true;
@@ -224,7 +223,7 @@
             // 
             this.waiting_queue.AutoSize = true;
             this.waiting_queue.BackColor = System.Drawing.SystemColors.Control;
-            this.waiting_queue.Location = new System.Drawing.Point(373, 190);
+            this.waiting_queue.Location = new System.Drawing.Point(373, 171);
             this.waiting_queue.Name = "waiting_queue";
             this.waiting_queue.Size = new System.Drawing.Size(43, 13);
             this.waiting_queue.TabIndex = 13;
@@ -235,7 +234,7 @@
             // 
             this.io1_queue.AutoSize = true;
             this.io1_queue.BackColor = System.Drawing.SystemColors.Control;
-            this.io1_queue.Location = new System.Drawing.Point(264, 288);
+            this.io1_queue.Location = new System.Drawing.Point(264, 269);
             this.io1_queue.Name = "io1_queue";
             this.io1_queue.Size = new System.Drawing.Size(37, 13);
             this.io1_queue.TabIndex = 14;
@@ -244,7 +243,7 @@
             // io1_list
             // 
             this.io1_list.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.io1_list.Location = new System.Drawing.Point(264, 304);
+            this.io1_list.Location = new System.Drawing.Point(264, 285);
             this.io1_list.Multiline = true;
             this.io1_list.Name = "io1_list";
             this.io1_list.ReadOnly = true;
@@ -259,7 +258,7 @@
             this.pcb_list.Name = "pcb_list";
             this.pcb_list.ReadOnly = true;
             this.pcb_list.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.pcb_list.Size = new System.Drawing.Size(554, 247);
+            this.pcb_list.Size = new System.Drawing.Size(450, 247);
             this.pcb_list.TabIndex = 16;
             // 
             // pcb_id
@@ -287,11 +286,11 @@
             // 
             this.pcb_totaltime.AutoSize = true;
             this.pcb_totaltime.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_totaltime.Location = new System.Drawing.Point(132, 332);
+            this.pcb_totaltime.Location = new System.Drawing.Point(128, 319);
             this.pcb_totaltime.Name = "pcb_totaltime";
-            this.pcb_totaltime.Size = new System.Drawing.Size(27, 13);
+            this.pcb_totaltime.Size = new System.Drawing.Size(31, 26);
             this.pcb_totaltime.TabIndex = 19;
-            this.pcb_totaltime.Text = "Size";
+            this.pcb_totaltime.Text = "Total\r\nCPU";
             // 
             // pcb_timeleft
             // 
@@ -299,54 +298,52 @@
             this.pcb_timeleft.BackColor = System.Drawing.SystemColors.Control;
             this.pcb_timeleft.Location = new System.Drawing.Point(165, 332);
             this.pcb_timeleft.Name = "pcb_timeleft";
-            this.pcb_timeleft.Size = new System.Drawing.Size(57, 13);
+            this.pcb_timeleft.Size = new System.Drawing.Size(45, 13);
             this.pcb_timeleft.TabIndex = 20;
-            this.pcb_timeleft.Text = "Remaining";
+            this.pcb_timeleft.Text = "Elapsed";
             // 
             // pcb_cpu
             // 
             this.pcb_cpu.AutoSize = true;
             this.pcb_cpu.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_cpu.Location = new System.Drawing.Point(228, 332);
+            this.pcb_cpu.Location = new System.Drawing.Point(373, 319);
             this.pcb_cpu.Name = "pcb_cpu";
-            this.pcb_cpu.Size = new System.Drawing.Size(51, 13);
+            this.pcb_cpu.Size = new System.Drawing.Size(41, 26);
             this.pcb_cpu.TabIndex = 21;
-            this.pcb_cpu.Text = "CPU Use";
+            this.pcb_cpu.Text = "Time in\r\nSystem";
             // 
             // pcb_io
             // 
             this.pcb_io.AutoSize = true;
             this.pcb_io.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_io.Location = new System.Drawing.Point(341, 332);
+            this.pcb_io.Location = new System.Drawing.Point(216, 332);
             this.pcb_io.Name = "pcb_io";
-            this.pcb_io.Size = new System.Drawing.Size(45, 13);
+            this.pcb_io.Size = new System.Drawing.Size(50, 13);
             this.pcb_io.TabIndex = 22;
-            this.pcb_io.Text = "I/O Use";
+            this.pcb_io.Text = "Total I/O";
             // 
             // pcb_ioleft
             // 
             this.pcb_ioleft.AutoSize = true;
             this.pcb_ioleft.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_ioleft.Location = new System.Drawing.Point(392, 332);
+            this.pcb_ioleft.Location = new System.Drawing.Point(267, 332);
             this.pcb_ioleft.Name = "pcb_ioleft";
-            this.pcb_ioleft.Size = new System.Drawing.Size(44, 13);
+            this.pcb_ioleft.Size = new System.Drawing.Size(51, 13);
             this.pcb_ioleft.TabIndex = 23;
-            this.pcb_ioleft.Text = "I/O Left";
+            this.pcb_ioleft.Text = "I/O Used";
             // 
             // pcb_cpuleft
             // 
             this.pcb_cpuleft.AutoSize = true;
             this.pcb_cpuleft.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_cpuleft.Location = new System.Drawing.Point(285, 332);
+            this.pcb_cpuleft.Location = new System.Drawing.Point(420, 332);
             this.pcb_cpuleft.Name = "pcb_cpuleft";
             this.pcb_cpuleft.Size = new System.Drawing.Size(50, 13);
             this.pcb_cpuleft.TabIndex = 24;
-            this.pcb_cpuleft.Text = "CPU Left";
+            this.pcb_cpuleft.Text = "Idle Time";
             // 
             // settings
             // 
-            this.settings.Controls.Add(this.io1use_display);
-            this.settings.Controls.Add(this.settings_io1use);
             this.settings.Controls.Add(this.algorithm_list);
             this.settings.Controls.Add(this.label10);
             this.settings.Controls.Add(this.average_cpu);
@@ -359,31 +356,12 @@
             this.settings.Controls.Add(this.label5);
             this.settings.Controls.Add(this.label4);
             this.settings.Controls.Add(this.delay_bar);
-            this.settings.Location = new System.Drawing.Point(205, 12);
+            this.settings.Location = new System.Drawing.Point(110, 12);
             this.settings.Name = "settings";
-            this.settings.Size = new System.Drawing.Size(389, 116);
+            this.settings.Size = new System.Drawing.Size(389, 89);
             this.settings.TabIndex = 25;
             this.settings.TabStop = false;
             this.settings.Text = "Settings";
-            // 
-            // io1use_display
-            // 
-            this.io1use_display.AutoSize = true;
-            this.io1use_display.Location = new System.Drawing.Point(120, 88);
-            this.io1use_display.Name = "io1use_display";
-            this.io1use_display.Size = new System.Drawing.Size(45, 13);
-            this.io1use_display.TabIndex = 40;
-            this.io1use_display.Text = "I/O Use";
-            // 
-            // settings_io1use
-            // 
-            this.settings_io1use.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.settings_io1use.Location = new System.Drawing.Point(171, 85);
-            this.settings_io1use.Multiline = true;
-            this.settings_io1use.Name = "settings_io1use";
-            this.settings_io1use.Size = new System.Drawing.Size(36, 20);
-            this.settings_io1use.TabIndex = 39;
-            this.settings_io1use.TextChanged += new System.EventHandler(this.settings_io1use_TextChanged);
             // 
             // algorithm_list
             // 
@@ -513,7 +491,7 @@
             // settings_waiting
             // 
             this.settings_waiting.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.settings_waiting.Location = new System.Drawing.Point(446, 187);
+            this.settings_waiting.Location = new System.Drawing.Point(446, 168);
             this.settings_waiting.Multiline = true;
             this.settings_waiting.Name = "settings_waiting";
             this.settings_waiting.Size = new System.Drawing.Size(36, 20);
@@ -522,7 +500,7 @@
             // settings_ready
             // 
             this.settings_ready.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.settings_ready.Location = new System.Drawing.Point(222, 187);
+            this.settings_ready.Location = new System.Drawing.Point(222, 168);
             this.settings_ready.Multiline = true;
             this.settings_ready.Name = "settings_ready";
             this.settings_ready.Size = new System.Drawing.Size(36, 20);
@@ -531,7 +509,7 @@
             // settings_new
             // 
             this.settings_new.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.settings_new.Location = new System.Drawing.Point(110, 187);
+            this.settings_new.Location = new System.Drawing.Point(110, 168);
             this.settings_new.Multiline = true;
             this.settings_new.Name = "settings_new";
             this.settings_new.Size = new System.Drawing.Size(36, 20);
@@ -540,7 +518,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(107, 172);
+            this.label1.Location = new System.Drawing.Point(107, 153);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 29;
@@ -550,7 +528,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(219, 171);
+            this.label2.Location = new System.Drawing.Point(219, 152);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(27, 13);
             this.label2.TabIndex = 30;
@@ -559,7 +537,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(443, 172);
+            this.label3.Location = new System.Drawing.Point(443, 153);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(27, 13);
             this.label3.TabIndex = 31;
@@ -569,7 +547,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(11, 223);
+            this.label8.Location = new System.Drawing.Point(11, 204);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(14, 78);
             this.label8.TabIndex = 32;
@@ -588,7 +566,7 @@
             // message_display
             // 
             this.message_display.BackColor = System.Drawing.SystemColors.Control;
-            this.message_display.Location = new System.Drawing.Point(40, 134);
+            this.message_display.Location = new System.Drawing.Point(40, 118);
             this.message_display.Multiline = true;
             this.message_display.Name = "message_display";
             this.message_display.ReadOnly = true;
@@ -598,7 +576,7 @@
             // cycle_display
             // 
             this.cycle_display.AutoSize = true;
-            this.cycle_display.Location = new System.Drawing.Point(314, 194);
+            this.cycle_display.Location = new System.Drawing.Point(314, 175);
             this.cycle_display.Name = "cycle_display";
             this.cycle_display.Size = new System.Drawing.Size(36, 13);
             this.cycle_display.TabIndex = 36;
@@ -607,7 +585,7 @@
             // run_cycle
             // 
             this.run_cycle.AutoSize = true;
-            this.run_cycle.Location = new System.Drawing.Point(345, 194);
+            this.run_cycle.Location = new System.Drawing.Point(345, 175);
             this.run_cycle.Name = "run_cycle";
             this.run_cycle.Size = new System.Drawing.Size(13, 13);
             this.run_cycle.TabIndex = 37;
@@ -616,7 +594,7 @@
             // io1_cycle
             // 
             this.io1_cycle.AutoSize = true;
-            this.io1_cycle.Location = new System.Drawing.Point(345, 288);
+            this.io1_cycle.Location = new System.Drawing.Point(345, 269);
             this.io1_cycle.Name = "io1_cycle";
             this.io1_cycle.Size = new System.Drawing.Size(13, 13);
             this.io1_cycle.TabIndex = 39;
@@ -625,7 +603,7 @@
             // io1_display
             // 
             this.io1_display.AutoSize = true;
-            this.io1_display.Location = new System.Drawing.Point(314, 288);
+            this.io1_display.Location = new System.Drawing.Point(314, 269);
             this.io1_display.Name = "io1_display";
             this.io1_display.Size = new System.Drawing.Size(36, 13);
             this.io1_display.TabIndex = 38;
@@ -640,11 +618,22 @@
             this.label11.TabIndex = 40;
             this.label11.Text = "Storm OS by Luis Orozco. ";
             // 
+            // finish_label
+            // 
+            this.finish_label.AutoSize = true;
+            this.finish_label.BackColor = System.Drawing.SystemColors.Control;
+            this.finish_label.Location = new System.Drawing.Point(322, 319);
+            this.finish_label.Name = "finish_label";
+            this.finish_label.Size = new System.Drawing.Size(48, 26);
+            this.finish_label.TabIndex = 41;
+            this.finish_label.Text = "Finishing\r\nCycle";
+            // 
             // mainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(606, 621);
+            this.Controls.Add(this.finish_label);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.io1_cycle);
             this.Controls.Add(this.io1_display);
@@ -751,9 +740,8 @@
         private System.Windows.Forms.Label run_cycle;
         private System.Windows.Forms.Label io1_cycle;
         private System.Windows.Forms.Label io1_display;
-        private System.Windows.Forms.Label io1use_display;
-        private System.Windows.Forms.TextBox settings_io1use;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label finish_label;
     }
 }
 

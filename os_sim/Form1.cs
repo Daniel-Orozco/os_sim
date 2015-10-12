@@ -25,7 +25,6 @@ namespace os_sim
         private int chance;
         private int tquantum;
         private int io1_use;
-        private int io1_setting;
 
         private int new_size;
         private int ready_size;
@@ -42,7 +41,6 @@ namespace os_sim
         private ToolTip algorithm_tooltip;
         private ToolTip chance_tooltip;
         private ToolTip average_tooltip;
-        private ToolTip io1_tooltip;
         private ToolTip delay_tooltip;
         private ToolTip new_tooltip;
         private ToolTip ready_tooltip;
@@ -50,8 +48,6 @@ namespace os_sim
         private ToolTip stop_tooltip;
         private ToolTip play_tooltip;
         private ToolTip pause_tooltip;
-
-        private Queue<string> pcb_data;
 
         enum Message { Clean=0, ValidNum, OutOfRange}
         public mainView()
@@ -81,26 +77,23 @@ namespace os_sim
             chance = 50;
             tquantum = 5;
             io1_use = 0;
-            io1_setting = 9;
             
             timer.Enabled = true;                           
             timer.Stop();                                  
 
             
             initializeStates();
-            pcb_data = new Queue<string>();
         }
 
         public void updateParameters()
         {
-            int[] updates = new int[7];
+            int[] updates = new int[6];
             updates[0] = Utilities.updateParameter(settings_new, new_size, 0, 100);
             updates[1] = Utilities.updateParameter(settings_ready, ready_size, 0, 100);
             updates[2] = Utilities.updateParameter(settings_waiting, waiting_size, 0, 100);
             updates[3] = Utilities.updateParameter(setttings_chance, chance, 0, 100);
-            updates[4] = Utilities.updateParameter(settings_io1use, io1_setting, 0, 100);
-            updates[5] = Utilities.updateParameter(quantum_display, tquantum, 0, 100);
-            updates[6] = Utilities.updateParameter(average_cpu, average_cycles, 1, 100);
+            updates[4] = Utilities.updateParameter(quantum_display, tquantum, 0, 100);
+            updates[5] = Utilities.updateParameter(average_cpu, average_cycles, 1, 100);
 
             for(int c = 0; c < updates.Length; c++)
                 if (updates[c] == -1)
@@ -110,9 +103,8 @@ namespace os_sim
             ready_size = updates[1] == -1 ? ready_size : updates[1];
             waiting_size = updates[2] == -1 ? waiting_size : updates[2];
             chance = updates[3] == -1 ? chance : updates[3];
-            io1_setting = updates[4] == -1 ? io1_setting : updates[4];
-            tquantum = updates[5] == -1 ? tquantum : updates[5];
-            average_cycles = updates[6] == -1 ? average_cycles : updates[6];
+            tquantum = updates[4] == -1 ? tquantum : updates[4];
+            average_cycles = updates[5] == -1 ? average_cycles : updates[5];
         }
         void timer_Tick(object sender, EventArgs e)
         {
@@ -121,28 +113,10 @@ namespace os_sim
 
             updateParameters();
 
-            if (UsingIO1.Count != 0)
-            {
-                Process io1 = UsingIO1.Peek();
-                if (io1.current_io1 == io1.total_io1)
-                    emptyIO1();
-                else
-                {
-                    io1.current_io1++;
-                    io1_use++;
-                    io1_cycle.Text = "" + io1_use;
-                }
-            }
             if(Running.Count == 0)
             {
                 if (Waiting.Count != 0 && UsingIO1.Count == 0)
                     updateUsingIO1();
-                if (UsingIO1.Count != 0)
-                {
-                    Process io1 = UsingIO1.Peek();
-                    if (io1.current_io1 == io1.total_io1)
-                        emptyIO1();
-                }
                 if (Ready.Count != 0)
                     updateRunning();
                 if(New.Count != 0)
@@ -155,16 +129,16 @@ namespace os_sim
                 if ((current.quantum == 0 && isRoundRobin)|| current.current_cpu == current.total_cpu)
                 {
                     current.quantum = tquantum;
-                    if (current.current_io1 == current.total_io1)
+                    if (current.current_cpu == current.total_cpu)
                     {
-                        if (current.current_cpu == current.total_cpu)
+                        if (current.current_io1 == current.total_io1)
                             updateFinished();
                         else
-                            returnToReady();
+                            updateWaiting();
                     }
                     else
                     {
-                        updateWaiting();
+                        returnToReady();
                     }
                     run_cycle.Text = "0";
                 }
@@ -175,19 +149,19 @@ namespace os_sim
                     run_cycle.Text = ""+(tquantum-current.quantum);
                 }
             }
+            if (UsingIO1.Count != 0)
+            {
+                Process io1 = UsingIO1.Peek();
+                if (io1.current_io1 == io1.total_io1)
+                    emptyIO1();
+                else
+                {
+                    io1.current_io1++;
+                    io1_use++;
+                    io1_cycle.Text = "" + io1_use;
+                }
+            }
             
-        }
-        public void updatePCB(string[] lines, string pline)
-        {
-            string nline = pline;
-            int pid = -1;
-            if (pline[1] == 0)
-                pid += pline[2];
-            else
-                pid += stringToInt(pline.Substring(1, 2));
-            lines = pcb_list.Lines;
-            lines[pid] = nline;
-            pcb_list.Lines = lines;
         }
         public void updateReady()
         {
@@ -198,7 +172,7 @@ namespace os_sim
 
             var lines = new_list.Lines;
             var pline = lines[0];
-            updatePCB(lines, t_process.getData());
+            updatePCB(t_process, t_process.id - 1);
 
             var newLines = lines.Skip(1);
             new_list.Lines = newLines.ToArray();
@@ -209,6 +183,8 @@ namespace os_sim
 
             Running.addProcess(t_process);
             running_list.Text += t_process.getID() + "\r\n";
+
+            updatePCB(t_process, t_process.id - 1);
 
             var lines = ready_list.Lines;
             var newLines = lines.Skip(1);
@@ -221,6 +197,7 @@ namespace os_sim
 
             UsingIO1.addProcess(t_process);
             io1_list.Text += t_process.getID() + "\r\n";
+            updatePCB(t_process, t_process.id - 1);
 
             var lines = waiting_list.Lines;
             var newLines = lines.Skip(1);
@@ -232,6 +209,7 @@ namespace os_sim
 
             Ready.addProcess(t_process);
             ready_list.Text += t_process.getID() + "\r\n";
+            updatePCB(t_process, t_process.id - 1);
 
             io1_list.Text = "";
             io1_use = 0;
@@ -242,8 +220,12 @@ namespace os_sim
             Process t_process = Running.Dequeue();
 
             t_process.finishing_cycle = clock_value;
+            t_process.time_in_system = t_process.finishing_cycle - t_process.arrival_cycle;
+            t_process.idle_time = t_process.time_in_system - t_process.total_io1 - t_process.total_cpu;
+
             Finished.addProcess(t_process);
             finished_list.Text += t_process.getID() + "\r\n";
+            updatePCB(t_process, t_process.id - 1);
 
             running_list.Text = "";
         }
@@ -253,6 +235,7 @@ namespace os_sim
 
             Waiting.addProcess(t_process);
             waiting_list.Text += t_process.getID() + "\r\n";
+            updatePCB(t_process, t_process.id - 1);
 
             running_list.Text = "";
         }
@@ -261,6 +244,7 @@ namespace os_sim
             Process t_process = Running.Dequeue();
             Ready.addProcess(t_process);
             ready_list.Text += t_process.getID() + "\r\n";
+            updatePCB(t_process, t_process.id - 1);
 
             running_list.Text = "";
         }
@@ -285,7 +269,6 @@ namespace os_sim
             settings_ready.Text = "10";
             settings_waiting.Text = "10";
             setttings_chance.Text = "50";
-            settings_io1use.Text = "9";
             quantum_display.Text = "5";
             average_cpu.Text = "10";
             clock_display.Text = "0";
@@ -296,7 +279,6 @@ namespace os_sim
             settings_ready.ReadOnly = false;
             settings_waiting.ReadOnly = false;
             setttings_chance.ReadOnly = false;
-            settings_io1use.ReadOnly = false;
             quantum_display.ReadOnly = false;
             average_cpu.ReadOnly = false;
 
@@ -304,7 +286,6 @@ namespace os_sim
             settings_ready.BackColor = SystemColors.ControlLightLight;
             settings_waiting.BackColor = SystemColors.ControlLightLight;
             setttings_chance.BackColor = SystemColors.ControlLightLight;
-            settings_io1use.BackColor = SystemColors.ControlLightLight;
             quantum_display.BackColor = SystemColors.ControlLightLight;
             average_cpu.BackColor = SystemColors.ControlLightLight;
 
@@ -317,28 +298,32 @@ namespace os_sim
             Process n_process;
             if(rand.Next(0,100) <= chance)
             {
-                n_process = new Process(last_processid + 1, clock_value, average_cycles, rand, tquantum, io1_setting);
+                n_process = new Process(last_processid + 1, clock_value, average_cycles, rand, tquantum);
                 last_processid++;
                 New.addProcess(n_process);
 
-                pcb_data.Enqueue(n_process.getData());
-                updatePCB();
+                updatePCB(n_process,n_process.id-1);
                 new_list.Text += n_process.getID() + "\r\n";
             }
         }
-        public void updatePCB()
+        public void updatePCB(Process n_process, int process_line)
         {
-            Queue<string> backup = new Queue<string>();
-            string dq;
-            pcb_list.Text = "";
-            while(pcb_data.Count != 0)
+            string[] lines = pcb_list.Text.Split('\n');
+
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < lines.Length; i++)
             {
-                dq = pcb_data.Dequeue();
-                pcb_list.Text += (dq + "\r\n");
-                backup.Enqueue(dq);
+                if (i == process_line)
+                {
+                    builder.Append(n_process.getData(clock_value));
+                }
+                else
+                {
+                    builder.Append(lines[i]+"\r\n");
+                }
             }
-            while(backup.Count != 0)
-                pcb_data.Enqueue(backup.Dequeue());
+            pcb_list.Text = builder.ToString();
+
             
         }
         private void algorithm_list_SelectedIndexChanged(object sender, EventArgs e)
@@ -399,7 +384,6 @@ namespace os_sim
             settings_ready.ReadOnly = true;
             settings_waiting.ReadOnly = true;
             setttings_chance.ReadOnly = true;
-            settings_io1use.ReadOnly = true;
             quantum_display.ReadOnly = true;
             average_cpu.ReadOnly = true;
 
@@ -407,7 +391,6 @@ namespace os_sim
             settings_ready.BackColor = SystemColors.Control;
             settings_waiting.BackColor = SystemColors.Control;
             setttings_chance.BackColor = SystemColors.Control;
-            settings_io1use.BackColor = SystemColors.Control;
             quantum_display.BackColor = SystemColors.Control;
             average_cpu.BackColor = SystemColors.Control;
         }
@@ -419,7 +402,6 @@ namespace os_sim
             settings_ready.ReadOnly = false;
             settings_waiting.ReadOnly = false;
             setttings_chance.ReadOnly = false;
-            settings_io1use.ReadOnly = false;
             quantum_display.ReadOnly = false;
             average_cpu.ReadOnly = false;
 
@@ -427,7 +409,6 @@ namespace os_sim
             settings_ready.BackColor = SystemColors.ControlLightLight;
             settings_waiting.BackColor = SystemColors.ControlLightLight;
             setttings_chance.BackColor = SystemColors.ControlLightLight;
-            settings_io1use.BackColor = SystemColors.ControlLightLight;
             quantum_display.BackColor = SystemColors.ControlLightLight;
             average_cpu.BackColor = SystemColors.ControlLightLight;
         }
@@ -518,14 +499,6 @@ namespace os_sim
             average_tooltip.ShowAlways = true;
             average_tooltip.SetToolTip(average_cpu, "Sets the average amount of cycles processes require from the CPU, with a 25% deviation.\r\nMust be an integer between 1 and 999.");
             average_tooltip.AutoPopDelay = 32000;
-
-            io1_tooltip = new ToolTip();
-
-            io1_tooltip.ToolTipIcon = ToolTipIcon.Info;
-            io1_tooltip.ToolTipTitle = "Printer Use";
-            io1_tooltip.ShowAlways = true;
-            io1_tooltip.SetToolTip(settings_io1use, "Sets the amount of cycles processes require from Printer.\r\nMust be a non-negative integer smaller than the average CPU use.");
-            io1_tooltip.AutoPopDelay = 32000;
 
             delay_tooltip = new ToolTip();
 

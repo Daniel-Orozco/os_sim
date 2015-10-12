@@ -6,27 +6,32 @@ using System.Threading.Tasks;
 
 namespace os_sim
 {
-    class Process
+    public class Process
     {
-        private int id;                 //ID
+        public int id;                 //ID
         public int arrival_cycle;      //Tiempo de llegada
-        public int total_cycles;       //
-        public int current_cycles;     //Tiempo en el sistema
         public int total_cpu;          //Uso de CPU
         public int current_cpu;        //Tiempo acum. de uso de CPU
+
+        public int total_cycles;       //
+
+        public int current_cycles;     //Tiempo en el sistema
         public int total_io1;          //Tiempo de uso de I/O
         public int current_io1;        //Tiempo
         public int io1_arrival;        //Hora de uso de I/O
         public int finishing_cycle;    //Tiempo finalizacion
 
+        public int time_in_system;
+        public int idle_time;
+
         public int quantum;
-        public Process(int next_id, int cycle, int avrg, Random rand, int q, int io1)
+        public Process(int next_id, int cycle, int avrg, Random rand, int q)
         {
             id = next_id;
             arrival_cycle = cycle;
 
             total_cycles = rand.Next(Convert.ToInt32(avrg*0.75), Convert.ToInt32(avrg*1.25));
-            total_io1 = (total_cycles>=io1?io1:io1-total_cycles);
+            total_io1 = rand.Next(0, total_cycles);
             total_cpu = total_cycles - total_io1;
 
             current_cycles = 0;
@@ -35,10 +40,10 @@ namespace os_sim
 
             quantum = q;
         }
-        public string getData()
+        public string getData(int clock)
         {
-            string data = String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}",
-                getID(),arrival_cycle,total_cycles,current_cycles,total_cpu,current_cpu,total_io1,current_io1);
+            string data = String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}",
+                getID(), arrival_cycle, total_cpu, clock - arrival_cycle, total_io1, current_io1, finishing_cycle, time_in_system, idle_time);
             return data;
         }
         public string getID()

@@ -30,6 +30,8 @@ namespace os_sim
         private int ready_size;
         private int waiting_size;
 
+        private int last_finished;
+
         private State New;
         private State Ready;
         private State Running;
@@ -48,6 +50,7 @@ namespace os_sim
         private ToolTip stop_tooltip;
         private ToolTip play_tooltip;
         private ToolTip pause_tooltip;
+        private ToolTip update_tooltip;
 
         enum Message { Clean=0, ValidNum, OutOfRange}
         public mainView()
@@ -77,10 +80,12 @@ namespace os_sim
             chance = 50;
             tquantum = 5;
             io1_use = 0;
+            last_finished = 0;
             
             timer.Enabled = true;                           
-            timer.Stop();                                  
+            timer.Stop();
 
+            cpu_update.Checked = true;
             
             initializeStates();
         }
@@ -226,6 +231,9 @@ namespace os_sim
             t_process.status = "Finished";
 
             updatePCB(t_process, t_process.id - 1);
+
+            last_finished = t_process.id;
+
             Finished.addProcess(t_process);
             finished_list.Text += t_process.getID() + "\r\n";
 
@@ -309,37 +317,70 @@ namespace os_sim
         {
             Queue<Process> store = new Queue<Process>();
             Process helper;
-
-            for (int c = 0; c < New.Count; c++)
+            if(cpu_update.Checked == true)
             {
-                helper = New.Dequeue();
-                updatePCB(helper, helper.id - 1);
-                New.Enqueue(helper);
+                if(Running.Count == 0)
+                {
+                    for (int c = 0; c < New.Count; c++)
+                    {
+                        helper = New.Dequeue();
+                        updatePCB(helper, helper.id - 1);
+                        New.Enqueue(helper);
+                    }
+                    for (int c = 0; c < Ready.Count; c++)
+                    {
+                        helper = Ready.Dequeue();
+                        updatePCB(helper, helper.id - 1);
+                        Ready.Enqueue(helper);
+                    }
+                    for (int c = 0; c < Waiting.Count; c++)
+                    {
+                        helper = Waiting.Dequeue();
+                        updatePCB(helper, helper.id - 1);
+                        Waiting.Enqueue(helper);
+                    }
+                    for (int c = 0; c < UsingIO1.Count; c++)
+                    {
+                        helper = UsingIO1.Dequeue();
+                        updatePCB(helper, helper.id - 1);
+                        UsingIO1.Enqueue(helper);
+                    }
+                }
             }
-            for (int c = 0; c < Ready.Count; c++)
+            else
             {
-                helper = Ready.Dequeue();
-                updatePCB(helper, helper.id - 1);
-                Ready.Enqueue(helper);
+                for (int c = 0; c < New.Count; c++)
+                {
+                    helper = New.Dequeue();
+                    updatePCB(helper, helper.id - 1);
+                    New.Enqueue(helper);
+                }
+                for (int c = 0; c < Ready.Count; c++)
+                {
+                    helper = Ready.Dequeue();
+                    updatePCB(helper, helper.id - 1);
+                    Ready.Enqueue(helper);
+                }
+                for (int c = 0; c < Running.Count; c++)
+                {
+                    helper = Running.Dequeue();
+                    updatePCB(helper, helper.id - 1);
+                    Running.Enqueue(helper);
+                }
+                for (int c = 0; c < Waiting.Count; c++)
+                {
+                    helper = Waiting.Dequeue();
+                    updatePCB(helper, helper.id - 1);
+                    Waiting.Enqueue(helper);
+                }
+                for (int c = 0; c < UsingIO1.Count; c++)
+                {
+                    helper = UsingIO1.Dequeue();
+                    updatePCB(helper, helper.id - 1);
+                    UsingIO1.Enqueue(helper);
+                }
             }
-            for (int c = 0; c < Running.Count; c++)
-            {
-                helper = Running.Dequeue();
-                updatePCB(helper, helper.id - 1);
-                Running.Enqueue(helper);
-            }
-            for (int c = 0; c < Waiting.Count; c++)
-            {
-                helper = Waiting.Dequeue();
-                updatePCB(helper, helper.id - 1);
-                Waiting.Enqueue(helper);
-            }
-            for (int c = 0; c < UsingIO1.Count; c++)
-            {
-                helper = UsingIO1.Dequeue();
-                updatePCB(helper, helper.id - 1);
-                UsingIO1.Enqueue(helper);
-            }
+            
         }
         public void updatePCB(Process n_process, int process_line)
         {
@@ -491,7 +532,7 @@ namespace os_sim
                     break;
                 case 1: sim_speed = 900;
                     break;
-                case 2: sim_speed = 250;
+                case 2: sim_speed = 1;
                     break;
                 default: sim_speed = 1;
                     break;
@@ -590,6 +631,14 @@ namespace os_sim
             pause_tooltip.ShowAlways = true;
             pause_tooltip.SetToolTip(pause, "Pauses the current simulation, stopping the clock and managers but saving their current states.\r\nParameters may be changed while the simulation is in Pause.");
             pause_tooltip.AutoPopDelay = 32000;
+
+            update_tooltip = new ToolTip();
+
+            update_tooltip.ToolTipIcon = ToolTipIcon.Info;
+            update_tooltip.ToolTipTitle = "CPU Update";
+            update_tooltip.ShowAlways = true;
+            update_tooltip.SetToolTip(cpu_update, "Determines if the PCB is updated with the CPU.\r\nIf checked, PCB will refresh if the Running state is empty.\r\nIf unchecked, PCB will update every tick.");
+            update_tooltip.AutoPopDelay = 32000;
         }
 
 

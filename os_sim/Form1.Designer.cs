@@ -56,7 +56,6 @@
             this.pcb_cpuleft = new System.Windows.Forms.Label();
             this.settings = new System.Windows.Forms.GroupBox();
             this.algorithm_list = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.average_cpu = new System.Windows.Forms.TextBox();
             this.pause = new System.Windows.Forms.Button();
             this.play = new System.Windows.Forms.Button();
@@ -84,6 +83,8 @@
             this.finish_label = new System.Windows.Forms.Label();
             this.status = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.cpu_update = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delay_bar)).BeginInit();
             this.SuspendLayout();
@@ -346,8 +347,9 @@
             // 
             // settings
             // 
-            this.settings.Controls.Add(this.algorithm_list);
             this.settings.Controls.Add(this.label10);
+            this.settings.Controls.Add(this.cpu_update);
+            this.settings.Controls.Add(this.algorithm_list);
             this.settings.Controls.Add(this.average_cpu);
             this.settings.Controls.Add(this.pause);
             this.settings.Controls.Add(this.play);
@@ -360,7 +362,7 @@
             this.settings.Controls.Add(this.delay_bar);
             this.settings.Location = new System.Drawing.Point(110, 12);
             this.settings.Name = "settings";
-            this.settings.Size = new System.Drawing.Size(389, 89);
+            this.settings.Size = new System.Drawing.Size(382, 89);
             this.settings.TabIndex = 25;
             this.settings.TabStop = false;
             this.settings.Text = "Settings";
@@ -371,25 +373,16 @@
             this.algorithm_list.Items.AddRange(new object[] {
             "Round Robin",
             "FCFS"});
-            this.algorithm_list.Location = new System.Drawing.Point(171, 16);
+            this.algorithm_list.Location = new System.Drawing.Point(178, 16);
             this.algorithm_list.Name = "algorithm_list";
             this.algorithm_list.Size = new System.Drawing.Size(93, 21);
             this.algorithm_list.TabIndex = 35;
             this.algorithm_list.SelectedIndexChanged += new System.EventHandler(this.algorithm_list_SelectedIndexChanged);
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(94, 65);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 13);
-            this.label10.TabIndex = 38;
-            this.label10.Text = "Average CPU";
-            // 
             // average_cpu
             // 
             this.average_cpu.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.average_cpu.Location = new System.Drawing.Point(171, 62);
+            this.average_cpu.Location = new System.Drawing.Point(178, 62);
             this.average_cpu.Multiline = true;
             this.average_cpu.Name = "average_cpu";
             this.average_cpu.Size = new System.Drawing.Size(36, 20);
@@ -401,7 +394,7 @@
             this.pause.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.pause.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pause.BackgroundImage")));
             this.pause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pause.Location = new System.Drawing.Point(75, 29);
+            this.pause.Location = new System.Drawing.Point(66, 19);
             this.pause.Name = "pause";
             this.pause.Size = new System.Drawing.Size(24, 23);
             this.pause.TabIndex = 36;
@@ -413,7 +406,7 @@
             this.play.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.play.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("play.BackgroundImage")));
             this.play.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.play.Location = new System.Drawing.Point(45, 29);
+            this.play.Location = new System.Drawing.Point(36, 19);
             this.play.Name = "play";
             this.play.Size = new System.Drawing.Size(24, 23);
             this.play.TabIndex = 35;
@@ -426,7 +419,7 @@
             this.stop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("stop.BackgroundImage")));
             this.stop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.stop.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.stop.Location = new System.Drawing.Point(15, 29);
+            this.stop.Location = new System.Drawing.Point(6, 19);
             this.stop.Name = "stop";
             this.stop.Size = new System.Drawing.Size(24, 23);
             this.stop.TabIndex = 34;
@@ -436,7 +429,7 @@
             // setttings_chance
             // 
             this.setttings_chance.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.setttings_chance.Location = new System.Drawing.Point(171, 40);
+            this.setttings_chance.Location = new System.Drawing.Point(178, 40);
             this.setttings_chance.Multiline = true;
             this.setttings_chance.Name = "setttings_chance";
             this.setttings_chance.Size = new System.Drawing.Size(36, 20);
@@ -446,7 +439,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(121, 42);
+            this.label7.Location = new System.Drawing.Point(128, 42);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(44, 13);
             this.label7.TabIndex = 33;
@@ -455,7 +448,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(116, 19);
+            this.label6.Location = new System.Drawing.Point(123, 19);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 13);
             this.label6.TabIndex = 32;
@@ -464,7 +457,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(312, 7);
+            this.label5.Location = new System.Drawing.Point(304, 7);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(34, 13);
             this.label5.TabIndex = 32;
@@ -473,7 +466,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(279, 62);
+            this.label4.Location = new System.Drawing.Point(271, 62);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(101, 13);
             this.label4.TabIndex = 32;
@@ -483,7 +476,7 @@
             // 
             this.delay_bar.BackColor = System.Drawing.SystemColors.Control;
             this.delay_bar.LargeChange = 1;
-            this.delay_bar.Location = new System.Drawing.Point(279, 23);
+            this.delay_bar.Location = new System.Drawing.Point(271, 23);
             this.delay_bar.Maximum = 2;
             this.delay_bar.Name = "delay_bar";
             this.delay_bar.Size = new System.Drawing.Size(104, 45);
@@ -650,6 +643,25 @@
             this.label12.TabIndex = 43;
             this.label12.Text = "CPU\r\nUsed";
             // 
+            // cpu_update
+            // 
+            this.cpu_update.AutoSize = true;
+            this.cpu_update.Location = new System.Drawing.Point(9, 48);
+            this.cpu_update.Name = "cpu_update";
+            this.cpu_update.Size = new System.Drawing.Size(86, 17);
+            this.cpu_update.TabIndex = 39;
+            this.cpu_update.Text = "CPU Update";
+            this.cpu_update.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(101, 65);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(72, 13);
+            this.label10.TabIndex = 40;
+            this.label10.Text = "Average CPU";
+            // 
             // mainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -756,7 +768,6 @@
         private System.Windows.Forms.Button stop;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox average_cpu;
         private System.Windows.Forms.TextBox message_display;
         private System.Windows.Forms.ComboBox algorithm_list;
@@ -768,6 +779,8 @@
         private System.Windows.Forms.Label finish_label;
         private System.Windows.Forms.Label status;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox cpu_update;
     }
 }
 

@@ -48,7 +48,7 @@ namespace os_sim
         public string getData(int clock)
         {
             string data = String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t{9}\t{10}\r\n",
-                getID(), arrival_cycle, total_cpu, current_cpu, clock - arrival_cycle, total_io1, current_io1, (status!="In System"?""+finishing_cycle:"-"), (status!="In System"?""+time_in_system:"-"), (status!="In System"?""+idle_time:"-"),status);
+                getID(), arrival_cycle, total_cpu, current_cpu, clock - arrival_cycle, total_io1, current_io1, (status!="In System"?""+finishing_cycle:"-"), (status!="In System"?""+time_in_system:"-"), (status!="In System"?(idle_time<0?"-":(""+idle_time)):"-"),status);
             return data;
         }
         public string getID()

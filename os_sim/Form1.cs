@@ -52,6 +52,18 @@ namespace os_sim
         private ToolTip pause_tooltip;
         private ToolTip update_tooltip;
 
+        private ToolTip id_tooltip;
+        private ToolTip arrival_tooltip;
+        private ToolTip totalcpu_tooltip;
+        private ToolTip usedcpu_tooltip;
+        private ToolTip elapsed_tooltip;
+        private ToolTip totalio_tooltip;
+        private ToolTip usedio_tooltip;
+        private ToolTip finishing_tooltip;
+        private ToolTip systemtime_tooltip;
+        private ToolTip idle_tooltip;
+        private ToolTip status_tooltip;
+
         enum Message { Clean=0, ValidNum, OutOfRange}
         public mainView()
         {
@@ -666,6 +678,84 @@ namespace os_sim
             update_tooltip.ShowAlways = true;
             update_tooltip.SetToolTip(cpu_update, "Determines if the PCB is updated with the CPU.\r\nIf checked, PCB will refresh if the Running state is empty.\r\nIf unchecked, PCB will update every tick.");
             update_tooltip.AutoPopDelay = 32000;
+
+            id_tooltip = new ToolTip();
+
+            id_tooltip.ToolTipTitle = "ID";
+            id_tooltip.ShowAlways = true;
+            id_tooltip.SetToolTip(pcb_id, "The process identifier.");
+            id_tooltip.AutoPopDelay = 32000;
+
+            arrival_tooltip = new ToolTip();
+
+            arrival_tooltip.ToolTipTitle = "Arrival";
+            arrival_tooltip.ShowAlways = true;
+            arrival_tooltip.SetToolTip(pcb_arrival, "The cycle when the process was created.");
+            arrival_tooltip.AutoPopDelay = 32000;
+
+            totalcpu_tooltip = new ToolTip();
+
+            totalcpu_tooltip.ToolTipTitle = "Total CPU";
+            totalcpu_tooltip.ShowAlways = true;
+            totalcpu_tooltip.SetToolTip(total_cpu, "The amount of CPU cycles the process requires.");
+            totalcpu_tooltip.AutoPopDelay = 32000;
+
+            usedcpu_tooltip = new ToolTip();
+
+            usedcpu_tooltip.ToolTipTitle = "CPU Used";
+            usedcpu_tooltip.ShowAlways = true;
+            usedcpu_tooltip.SetToolTip(cpu_used, "CPU cycles the process has used.\r\nIf CPU Update is enabled, this will refresh if the CPU is available.");
+            usedcpu_tooltip.AutoPopDelay = 32000;
+
+            elapsed_tooltip = new ToolTip();
+
+            elapsed_tooltip.ToolTipTitle = "Elapsed";
+            elapsed_tooltip.ShowAlways = true;
+            elapsed_tooltip.SetToolTip(pcb_elapsed, "Amount of cycles the process has been in system.\r\nIf CPU Update is enabled, this will refresh if the CPU is available.");
+            elapsed_tooltip.AutoPopDelay = 32000;
+
+            totalio_tooltip = new ToolTip();
+
+            totalio_tooltip.ToolTipTitle = "Total I/O";
+            totalio_tooltip.ShowAlways = true;
+            totalio_tooltip.SetToolTip(total_io, "The amount of I/O cycles the process requires.");
+            totalio_tooltip.AutoPopDelay = 32000;
+
+            usedio_tooltip = new ToolTip();
+
+            usedio_tooltip.ToolTipTitle = "I/O Used";
+            usedio_tooltip.ShowAlways = true;
+            usedio_tooltip.SetToolTip(io_used, "I/O cycles the process has used.\r\nIf CPU Update is enabled, this will refresh if the CPU is available.");
+            usedio_tooltip.AutoPopDelay = 32000;
+
+            finishing_tooltip = new ToolTip();
+
+            finishing_tooltip.ToolTipTitle = "Finishing Cycle";
+            finishing_tooltip.ShowAlways = true;
+            finishing_tooltip.SetToolTip(finishing_cycle, "Cycle in which the process left the system.\r\nWill be displayed once the process leaves the system.");
+            finishing_tooltip.AutoPopDelay = 32000;
+
+            systemtime_tooltip = new ToolTip();
+
+            systemtime_tooltip.ToolTipTitle = "Time in System";
+            systemtime_tooltip.ShowAlways = true;
+            systemtime_tooltip.SetToolTip(time_in_system, "Total amount of cycles the process remained in system.\r\nWill be displayed once the process leaves the system.");
+            systemtime_tooltip.AutoPopDelay = 32000;
+
+            idle_tooltip = new ToolTip();
+
+            idle_tooltip.ToolTipTitle = "Idle Time";
+            idle_tooltip.ShowAlways = true;
+            idle_tooltip.SetToolTip(idle_time, "Amount of cycles the process remained in system without using CPU or I/O.\r\nWill be displayed if the process leaves the system succesfully.\r\n");
+            idle_tooltip.AutoPopDelay = 32000;
+
+            status_tooltip = new ToolTip();
+
+            status_tooltip.ToolTipTitle = "Status";
+            status_tooltip.ShowAlways = true;
+            status_tooltip.SetToolTip(status, "Current status of the process.\r\nIn System: Process is in system.\r\nFinished: Process completed its cycles and left the system.\r\nTerminated: Process was forcefully ejected from system without finishing its cycles.");
+            status_tooltip.AutoPopDelay = 32000;
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

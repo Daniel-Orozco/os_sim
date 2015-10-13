@@ -48,12 +48,12 @@
             this.pcb_list = new System.Windows.Forms.TextBox();
             this.pcb_id = new System.Windows.Forms.Label();
             this.pcb_arrival = new System.Windows.Forms.Label();
-            this.pcb_totaltime = new System.Windows.Forms.Label();
-            this.pcb_timeleft = new System.Windows.Forms.Label();
-            this.pcb_cpu = new System.Windows.Forms.Label();
-            this.pcb_io = new System.Windows.Forms.Label();
-            this.pcb_ioleft = new System.Windows.Forms.Label();
-            this.pcb_cpuleft = new System.Windows.Forms.Label();
+            this.total_cpu = new System.Windows.Forms.Label();
+            this.pcb_elapsed = new System.Windows.Forms.Label();
+            this.time_in_system = new System.Windows.Forms.Label();
+            this.total_io = new System.Windows.Forms.Label();
+            this.io_used = new System.Windows.Forms.Label();
+            this.idle_time = new System.Windows.Forms.Label();
             this.settings = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cpu_update = new System.Windows.Forms.CheckBox();
@@ -79,9 +79,9 @@
             this.io1_cycle = new System.Windows.Forms.Label();
             this.io1_display = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.finish_label = new System.Windows.Forms.Label();
+            this.finishing_cycle = new System.Windows.Forms.Label();
             this.status = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.cpu_used = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pause = new System.Windows.Forms.Button();
             this.play = new System.Windows.Forms.Button();
@@ -287,65 +287,65 @@
             this.pcb_arrival.TabIndex = 18;
             this.pcb_arrival.Text = "Arrival";
             // 
-            // pcb_totaltime
+            // total_cpu
             // 
-            this.pcb_totaltime.AutoSize = true;
-            this.pcb_totaltime.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_totaltime.Location = new System.Drawing.Point(117, 319);
-            this.pcb_totaltime.Name = "pcb_totaltime";
-            this.pcb_totaltime.Size = new System.Drawing.Size(31, 26);
-            this.pcb_totaltime.TabIndex = 19;
-            this.pcb_totaltime.Text = "Total\r\nCPU";
+            this.total_cpu.AutoSize = true;
+            this.total_cpu.BackColor = System.Drawing.SystemColors.Control;
+            this.total_cpu.Location = new System.Drawing.Point(117, 319);
+            this.total_cpu.Name = "total_cpu";
+            this.total_cpu.Size = new System.Drawing.Size(31, 26);
+            this.total_cpu.TabIndex = 19;
+            this.total_cpu.Text = "Total\r\nCPU";
             // 
-            // pcb_timeleft
+            // pcb_elapsed
             // 
-            this.pcb_timeleft.AutoSize = true;
-            this.pcb_timeleft.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_timeleft.Location = new System.Drawing.Point(196, 332);
-            this.pcb_timeleft.Name = "pcb_timeleft";
-            this.pcb_timeleft.Size = new System.Drawing.Size(45, 13);
-            this.pcb_timeleft.TabIndex = 20;
-            this.pcb_timeleft.Text = "Elapsed";
+            this.pcb_elapsed.AutoSize = true;
+            this.pcb_elapsed.BackColor = System.Drawing.SystemColors.Control;
+            this.pcb_elapsed.Location = new System.Drawing.Point(196, 332);
+            this.pcb_elapsed.Name = "pcb_elapsed";
+            this.pcb_elapsed.Size = new System.Drawing.Size(45, 13);
+            this.pcb_elapsed.TabIndex = 20;
+            this.pcb_elapsed.Text = "Elapsed";
             // 
-            // pcb_cpu
+            // time_in_system
             // 
-            this.pcb_cpu.AutoSize = true;
-            this.pcb_cpu.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_cpu.Location = new System.Drawing.Point(408, 319);
-            this.pcb_cpu.Name = "pcb_cpu";
-            this.pcb_cpu.Size = new System.Drawing.Size(41, 26);
-            this.pcb_cpu.TabIndex = 21;
-            this.pcb_cpu.Text = "Time in\r\nSystem";
+            this.time_in_system.AutoSize = true;
+            this.time_in_system.BackColor = System.Drawing.SystemColors.Control;
+            this.time_in_system.Location = new System.Drawing.Point(408, 319);
+            this.time_in_system.Name = "time_in_system";
+            this.time_in_system.Size = new System.Drawing.Size(41, 26);
+            this.time_in_system.TabIndex = 21;
+            this.time_in_system.Text = "Time in\r\nSystem";
             // 
-            // pcb_io
+            // total_io
             // 
-            this.pcb_io.AutoSize = true;
-            this.pcb_io.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_io.Location = new System.Drawing.Point(246, 332);
-            this.pcb_io.Name = "pcb_io";
-            this.pcb_io.Size = new System.Drawing.Size(50, 13);
-            this.pcb_io.TabIndex = 22;
-            this.pcb_io.Text = "Total I/O";
+            this.total_io.AutoSize = true;
+            this.total_io.BackColor = System.Drawing.SystemColors.Control;
+            this.total_io.Location = new System.Drawing.Point(246, 332);
+            this.total_io.Name = "total_io";
+            this.total_io.Size = new System.Drawing.Size(50, 13);
+            this.total_io.TabIndex = 22;
+            this.total_io.Text = "Total I/O";
             // 
-            // pcb_ioleft
+            // io_used
             // 
-            this.pcb_ioleft.AutoSize = true;
-            this.pcb_ioleft.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_ioleft.Location = new System.Drawing.Point(302, 332);
-            this.pcb_ioleft.Name = "pcb_ioleft";
-            this.pcb_ioleft.Size = new System.Drawing.Size(51, 13);
-            this.pcb_ioleft.TabIndex = 23;
-            this.pcb_ioleft.Text = "I/O Used";
+            this.io_used.AutoSize = true;
+            this.io_used.BackColor = System.Drawing.SystemColors.Control;
+            this.io_used.Location = new System.Drawing.Point(302, 332);
+            this.io_used.Name = "io_used";
+            this.io_used.Size = new System.Drawing.Size(51, 13);
+            this.io_used.TabIndex = 23;
+            this.io_used.Text = "I/O Used";
             // 
-            // pcb_cpuleft
+            // idle_time
             // 
-            this.pcb_cpuleft.AutoSize = true;
-            this.pcb_cpuleft.BackColor = System.Drawing.SystemColors.Control;
-            this.pcb_cpuleft.Location = new System.Drawing.Point(455, 332);
-            this.pcb_cpuleft.Name = "pcb_cpuleft";
-            this.pcb_cpuleft.Size = new System.Drawing.Size(50, 13);
-            this.pcb_cpuleft.TabIndex = 24;
-            this.pcb_cpuleft.Text = "Idle Time";
+            this.idle_time.AutoSize = true;
+            this.idle_time.BackColor = System.Drawing.SystemColors.Control;
+            this.idle_time.Location = new System.Drawing.Point(455, 332);
+            this.idle_time.Name = "idle_time";
+            this.idle_time.Size = new System.Drawing.Size(50, 13);
+            this.idle_time.TabIndex = 24;
+            this.idle_time.Text = "Idle Time";
             // 
             // settings
             // 
@@ -598,15 +598,15 @@
             this.label11.TabIndex = 40;
             this.label11.Text = "Storm OS by Luis Orozco. ";
             // 
-            // finish_label
+            // finishing_cycle
             // 
-            this.finish_label.AutoSize = true;
-            this.finish_label.BackColor = System.Drawing.SystemColors.Control;
-            this.finish_label.Location = new System.Drawing.Point(357, 319);
-            this.finish_label.Name = "finish_label";
-            this.finish_label.Size = new System.Drawing.Size(48, 26);
-            this.finish_label.TabIndex = 41;
-            this.finish_label.Text = "Finishing\r\nCycle";
+            this.finishing_cycle.AutoSize = true;
+            this.finishing_cycle.BackColor = System.Drawing.SystemColors.Control;
+            this.finishing_cycle.Location = new System.Drawing.Point(357, 319);
+            this.finishing_cycle.Name = "finishing_cycle";
+            this.finishing_cycle.Size = new System.Drawing.Size(48, 26);
+            this.finishing_cycle.TabIndex = 41;
+            this.finishing_cycle.Text = "Finishing\r\nCycle";
             // 
             // status
             // 
@@ -618,15 +618,15 @@
             this.status.TabIndex = 42;
             this.status.Text = "Status";
             // 
-            // label12
+            // cpu_used
             // 
-            this.label12.AutoSize = true;
-            this.label12.BackColor = System.Drawing.SystemColors.Control;
-            this.label12.Location = new System.Drawing.Point(154, 319);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(32, 26);
-            this.label12.TabIndex = 43;
-            this.label12.Text = "CPU\r\nUsed";
+            this.cpu_used.AutoSize = true;
+            this.cpu_used.BackColor = System.Drawing.SystemColors.Control;
+            this.cpu_used.Location = new System.Drawing.Point(154, 319);
+            this.cpu_used.Name = "cpu_used";
+            this.cpu_used.Size = new System.Drawing.Size(32, 26);
+            this.cpu_used.TabIndex = 43;
+            this.cpu_used.Text = "CPU\r\nUsed";
             // 
             // pictureBox1
             // 
@@ -683,9 +683,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(606, 621);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label12);
+            this.Controls.Add(this.cpu_used);
             this.Controls.Add(this.status);
-            this.Controls.Add(this.finish_label);
+            this.Controls.Add(this.finishing_cycle);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.io1_cycle);
             this.Controls.Add(this.io1_display);
@@ -701,13 +701,13 @@
             this.Controls.Add(this.settings_ready);
             this.Controls.Add(this.settings_new);
             this.Controls.Add(this.settings);
-            this.Controls.Add(this.pcb_cpuleft);
-            this.Controls.Add(this.pcb_ioleft);
-            this.Controls.Add(this.pcb_io);
+            this.Controls.Add(this.idle_time);
+            this.Controls.Add(this.io_used);
+            this.Controls.Add(this.total_io);
             this.Controls.Add(this.pcb_list);
-            this.Controls.Add(this.pcb_cpu);
-            this.Controls.Add(this.pcb_timeleft);
-            this.Controls.Add(this.pcb_totaltime);
+            this.Controls.Add(this.time_in_system);
+            this.Controls.Add(this.pcb_elapsed);
+            this.Controls.Add(this.total_cpu);
             this.Controls.Add(this.pcb_arrival);
             this.Controls.Add(this.pcb_id);
             this.Controls.Add(this.io1_list);
@@ -761,12 +761,12 @@
         private System.Windows.Forms.TextBox pcb_list;
         private System.Windows.Forms.Label pcb_id;
         private System.Windows.Forms.Label pcb_arrival;
-        private System.Windows.Forms.Label pcb_totaltime;
-        private System.Windows.Forms.Label pcb_timeleft;
-        private System.Windows.Forms.Label pcb_cpu;
-        private System.Windows.Forms.Label pcb_io;
-        private System.Windows.Forms.Label pcb_ioleft;
-        private System.Windows.Forms.Label pcb_cpuleft;
+        private System.Windows.Forms.Label total_cpu;
+        private System.Windows.Forms.Label pcb_elapsed;
+        private System.Windows.Forms.Label time_in_system;
+        private System.Windows.Forms.Label total_io;
+        private System.Windows.Forms.Label io_used;
+        private System.Windows.Forms.Label idle_time;
         private System.Windows.Forms.GroupBox settings;
         private System.Windows.Forms.TextBox settings_waiting;
         private System.Windows.Forms.TextBox settings_ready;
@@ -793,9 +793,9 @@
         private System.Windows.Forms.Label io1_cycle;
         private System.Windows.Forms.Label io1_display;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label finish_label;
+        private System.Windows.Forms.Label finishing_cycle;
         private System.Windows.Forms.Label status;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label cpu_used;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox cpu_update;
         private System.Windows.Forms.PictureBox pictureBox1;

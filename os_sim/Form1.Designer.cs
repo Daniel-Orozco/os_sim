@@ -59,6 +59,9 @@
             this.cpu_update = new System.Windows.Forms.CheckBox();
             this.algorithm_list = new System.Windows.Forms.ComboBox();
             this.average_cpu = new System.Windows.Forms.TextBox();
+            this.pause = new System.Windows.Forms.Button();
+            this.play = new System.Windows.Forms.Button();
+            this.stop = new System.Windows.Forms.Button();
             this.setttings_chance = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -67,8 +70,6 @@
             this.delay_bar = new System.Windows.Forms.TrackBar();
             this.settings_waiting = new System.Windows.Forms.TextBox();
             this.settings_ready = new System.Windows.Forms.TextBox();
-            this.settings_new = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -83,9 +84,8 @@
             this.status = new System.Windows.Forms.Label();
             this.cpu_used = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pause = new System.Windows.Forms.Button();
-            this.play = new System.Windows.Forms.Button();
-            this.stop = new System.Windows.Forms.Button();
+            this.settings_new = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delay_bar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -411,6 +411,43 @@
             this.average_cpu.TabIndex = 37;
             this.average_cpu.TextChanged += new System.EventHandler(this.average_cpu_TextChanged);
             // 
+            // pause
+            // 
+            this.pause.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.pause.BackgroundImage = global::os_sim.Properties.Resources.storm_pause;
+            this.pause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pause.Location = new System.Drawing.Point(72, 19);
+            this.pause.Name = "pause";
+            this.pause.Size = new System.Drawing.Size(25, 25);
+            this.pause.TabIndex = 36;
+            this.pause.UseVisualStyleBackColor = false;
+            this.pause.Click += new System.EventHandler(this.pause_Click);
+            // 
+            // play
+            // 
+            this.play.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.play.BackgroundImage = global::os_sim.Properties.Resources.storm_play;
+            this.play.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.play.Location = new System.Drawing.Point(42, 19);
+            this.play.Name = "play";
+            this.play.Size = new System.Drawing.Size(25, 25);
+            this.play.TabIndex = 35;
+            this.play.UseVisualStyleBackColor = false;
+            this.play.Click += new System.EventHandler(this.play_Click);
+            // 
+            // stop
+            // 
+            this.stop.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.stop.BackgroundImage = global::os_sim.Properties.Resources.storm_stop;
+            this.stop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.stop.ForeColor = System.Drawing.SystemColors.Control;
+            this.stop.Location = new System.Drawing.Point(12, 19);
+            this.stop.Name = "stop";
+            this.stop.Size = new System.Drawing.Size(25, 25);
+            this.stop.TabIndex = 34;
+            this.stop.UseVisualStyleBackColor = false;
+            this.stop.Click += new System.EventHandler(this.stop_Click);
+            // 
             // setttings_chance
             // 
             this.setttings_chance.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -485,25 +522,6 @@
             this.settings_ready.Name = "settings_ready";
             this.settings_ready.Size = new System.Drawing.Size(36, 20);
             this.settings_ready.TabIndex = 27;
-            // 
-            // settings_new
-            // 
-            this.settings_new.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.settings_new.Location = new System.Drawing.Point(102, 168);
-            this.settings_new.Multiline = true;
-            this.settings_new.Name = "settings_new";
-            this.settings_new.Size = new System.Drawing.Size(36, 20);
-            this.settings_new.TabIndex = 28;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(99, 153);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 13);
-            this.label1.TabIndex = 29;
-            this.label1.Text = "Size";
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // label2
             // 
@@ -640,42 +658,24 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // pause
+            // settings_new
             // 
-            this.pause.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pause.BackgroundImage = global::os_sim.Properties.Resources.storm_pause;
-            this.pause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pause.Location = new System.Drawing.Point(72, 19);
-            this.pause.Name = "pause";
-            this.pause.Size = new System.Drawing.Size(25, 25);
-            this.pause.TabIndex = 36;
-            this.pause.UseVisualStyleBackColor = false;
-            this.pause.Click += new System.EventHandler(this.pause_Click);
+            this.settings_new.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.settings_new.Location = new System.Drawing.Point(102, 168);
+            this.settings_new.Multiline = true;
+            this.settings_new.Name = "settings_new";
+            this.settings_new.Size = new System.Drawing.Size(36, 20);
+            this.settings_new.TabIndex = 28;
             // 
-            // play
+            // label1
             // 
-            this.play.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.play.BackgroundImage = global::os_sim.Properties.Resources.storm_play;
-            this.play.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.play.Location = new System.Drawing.Point(42, 19);
-            this.play.Name = "play";
-            this.play.Size = new System.Drawing.Size(25, 25);
-            this.play.TabIndex = 35;
-            this.play.UseVisualStyleBackColor = false;
-            this.play.Click += new System.EventHandler(this.play_Click);
-            // 
-            // stop
-            // 
-            this.stop.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.stop.BackgroundImage = global::os_sim.Properties.Resources.storm_stop;
-            this.stop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.stop.ForeColor = System.Drawing.SystemColors.Control;
-            this.stop.Location = new System.Drawing.Point(12, 19);
-            this.stop.Name = "stop";
-            this.stop.Size = new System.Drawing.Size(25, 25);
-            this.stop.TabIndex = 34;
-            this.stop.UseVisualStyleBackColor = false;
-            this.stop.Click += new System.EventHandler(this.stop_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(99, 153);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(27, 13);
+            this.label1.TabIndex = 29;
+            this.label1.Text = "Size";
+            this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // mainView
             // 
@@ -770,8 +770,6 @@
         private System.Windows.Forms.GroupBox settings;
         private System.Windows.Forms.TextBox settings_waiting;
         private System.Windows.Forms.TextBox settings_ready;
-        private System.Windows.Forms.TextBox settings_new;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -799,6 +797,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox cpu_update;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TextBox settings_new;
+        private System.Windows.Forms.Label label1;
     }
 }
 

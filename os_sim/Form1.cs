@@ -343,7 +343,7 @@ namespace os_sim
         public void generateProcess()
         {
             Process n_process;
-            if(rand.Next(0,100) <= chance)
+            if(rand.Next(0,100) < chance)
             {
                 n_process = new Process(last_processid + 1, clock_value, average_cycles, rand, tquantum);
                 last_processid++;

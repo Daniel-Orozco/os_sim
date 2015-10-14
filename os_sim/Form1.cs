@@ -489,7 +489,11 @@ namespace os_sim
 
         private void stop_Click(object sender, EventArgs e)
         {
-            Startup();
+            var result = MessageBox.Show("This will erase the current simulation data. Are you sure you want to stop?", "Stop Simulation",
+                                 MessageBoxButtons.YesNo,
+                                 MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+                Startup();
         }
 
         private void play_Click(object sender, EventArgs e)
@@ -513,6 +517,7 @@ namespace os_sim
         private void pause_Click(object sender, EventArgs e)
         {
             timer.Stop();
+            messageUpdate((int)Message.Clean);
             settings_new.ReadOnly = false;
             settings_ready.ReadOnly = false;
             settings_waiting.ReadOnly = false;
@@ -543,10 +548,10 @@ namespace os_sim
         {
             switch(code)
             {
-                case 0: message_display.Text = "For Help, hover the cursor above the control you want to know more about.";
+                case 0: message_display.Text = "For Help, hover the cursor above the control or PCB label you want to know more about.";
                     message_display.ForeColor = System.Drawing.Color.Blue;
                 break;
-                case 1: message_display.Text = "Error: Please insert a valid positive integer.";
+                case 1: message_display.Text = "Error: Please insert a valid integer. Invalid fields were reset to their previous value.";
                     message_display.ForeColor = System.Drawing.Color.Red;
                 break;
                 case 2: message_display.Text = "Error: Number must be within range.";
@@ -759,6 +764,11 @@ namespace os_sim
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
         {
 
         }

@@ -13,6 +13,7 @@ namespace os_sim
     public partial class mainView : Form
     {
         private Timer timer;
+        private helpForm help1;
 
         private bool sim_state;
         private bool isRoundRobin;
@@ -116,19 +117,24 @@ namespace os_sim
                 if (updates[c] == -1)
                     messageUpdate((int)Message.ValidNum);
 
-            new_size = updates[0] == -1 ? new_size : updates[0];
-            ready_size = updates[1] == -1 ? ready_size : updates[1];
-            waiting_size = updates[2] == -1 ? waiting_size : updates[2];
+            new_size = updates[0] == -1 ? new_size : resizeState(New, updates[0]);
+            ready_size = updates[1] == -1 ? ready_size : resizeState(Ready, updates[1]);
+            waiting_size = updates[2] == -1 ? waiting_size : resizeState(Waiting, updates[2]);
             chance = updates[3] == -1 ? chance : updates[3];
             tquantum = updates[4] == -1 ? tquantum : updates[4];
             average_cycles = updates[5] == -1 ? average_cycles : updates[5];
+        }
+        int resizeState(State st, int n_size)
+        {
+            st.resize(n_size);
+            return n_size;
         }
         void timer_Tick(object sender, EventArgs e)
         {
             clock_value += 1;
             clock_display.Text = ""+clock_value;
 
-            updateParameters();
+            //updateParameters();
 
             if(Running.Count == 0)
             {
@@ -137,7 +143,7 @@ namespace os_sim
                 if (Ready.Count != 0)
                     updateRunning();
                 if(New.Count != 0 )
-                    if(((UsingIO1.Count != 0 && Ready.Count < ready_size-2) || (UsingIO1.Count == 0 && Ready.Count < ready_size)))
+                    if(((UsingIO1.Count != 0 && Ready.Count < ready_size-2) || (UsingIO1.Count == 0 && Ready.Count < ready_size-1)))
                         updateReady();
                     else
                     {
@@ -149,8 +155,6 @@ namespace os_sim
                         var newLines = lines.Skip(1);
                         new_list.Lines = newLines.ToArray();
                     }
-                if(New.Count < new_size)
-                    generateProcess();
             }
             else
             {
@@ -184,6 +188,8 @@ namespace os_sim
                     run_cycle.Text = ""+(tquantum-current.quantum);
                 }
             }
+            if (New.Count < new_size)
+                generateProcess();
             if (UsingIO1.Count != 0)
             {
                 Process io1 = UsingIO1.Peek();
@@ -252,7 +258,7 @@ namespace os_sim
 
             t_process.finishing_cycle = clock_value;
             t_process.time_in_system = t_process.finishing_cycle - t_process.arrival_cycle;
-            t_process.idle_time = t_process.time_in_system - t_process.total_io1 - t_process.total_cpu;
+            t_process.idle_time = (clock_value - t_process.arrival_cycle) - t_process.total_io1 - t_process.total_cpu;
             t_process.status = "Finished";
 
             updatePCB(t_process, t_process.id - 1);
@@ -269,7 +275,7 @@ namespace os_sim
             t_process.finishing_cycle = clock_value;
             t_process.time_in_system = t_process.finishing_cycle - t_process.arrival_cycle;
             t_process.idle_time = t_process.time_in_system - t_process.total_io1 - t_process.total_cpu;
-            t_process.status = "Terminated";
+            t_process.status = "Killed";
 
             updatePCB(t_process, t_process.id - 1);
 
@@ -321,6 +327,8 @@ namespace os_sim
             clock_display.Text = "0";
             run_cycle.Text = "0";
             io1_cycle.Text = "0";
+            update_warning.Text = "";
+            update_warning.ForeColor = System.Drawing.Color.Blue;
 
             settings_new.ReadOnly = false;
             settings_ready.ReadOnly = false;
@@ -349,7 +357,8 @@ namespace os_sim
                 last_processid++;
                 New.addProcess(n_process);
 
-                new_list.Text += n_process.getID() + "\r\n";
+                new_list.AppendText(n_process.getID() + "\r\n");
+                updatePCB(n_process, n_process.id - 1);
             }
         }
         public void displayProcesses()
@@ -363,25 +372,29 @@ namespace os_sim
                     for (int c = 0; c < New.Count; c++)
                     {
                         helper = New.Dequeue();
-                        updatePCB(helper, helper.id - 1);
+                        if(helper.status == "In System")
+                            updatePCB(helper, helper.id - 1);
                         New.Enqueue(helper);
                     }
                     for (int c = 0; c < Ready.Count; c++)
                     {
                         helper = Ready.Dequeue();
-                        updatePCB(helper, helper.id - 1);
+                        if (helper.status == "In System")
+                            updatePCB(helper, helper.id - 1);
                         Ready.Enqueue(helper);
                     }
                     for (int c = 0; c < Waiting.Count; c++)
                     {
                         helper = Waiting.Dequeue();
-                        updatePCB(helper, helper.id - 1);
+                        if (helper.status == "In System")
+                            updatePCB(helper, helper.id - 1);
                         Waiting.Enqueue(helper);
                     }
                     for (int c = 0; c < UsingIO1.Count; c++)
                     {
                         helper = UsingIO1.Dequeue();
-                        updatePCB(helper, helper.id - 1);
+                        if (helper.status == "In System")
+                            updatePCB(helper, helper.id - 1);
                         UsingIO1.Enqueue(helper);
                     }
                 }
@@ -391,31 +404,36 @@ namespace os_sim
                 for (int c = 0; c < New.Count; c++)
                 {
                     helper = New.Dequeue();
-                    updatePCB(helper, helper.id - 1);
+                    if (helper.status == "In System")
+                        updatePCB(helper, helper.id - 1);
                     New.Enqueue(helper);
                 }
                 for (int c = 0; c < Ready.Count; c++)
                 {
                     helper = Ready.Dequeue();
-                    updatePCB(helper, helper.id - 1);
+                    if (helper.status == "In System")
+                        updatePCB(helper, helper.id - 1);
                     Ready.Enqueue(helper);
                 }
                 for (int c = 0; c < Running.Count; c++)
                 {
                     helper = Running.Dequeue();
-                    updatePCB(helper, helper.id - 1);
+                    if (helper.status == "In System")
+                        updatePCB(helper, helper.id - 1);
                     Running.Enqueue(helper);
                 }
                 for (int c = 0; c < Waiting.Count; c++)
                 {
                     helper = Waiting.Dequeue();
-                    updatePCB(helper, helper.id - 1);
+                    if (helper.status == "In System")
+                        updatePCB(helper, helper.id - 1);
                     Waiting.Enqueue(helper);
                 }
                 for (int c = 0; c < UsingIO1.Count; c++)
                 {
                     helper = UsingIO1.Dequeue();
-                    updatePCB(helper, helper.id - 1);
+                    if (helper.status == "In System")
+                        updatePCB(helper, helper.id - 1);
                     UsingIO1.Enqueue(helper);
                 }
             }
@@ -498,7 +516,21 @@ namespace os_sim
 
         private void play_Click(object sender, EventArgs e)
         {
+            updateParameters();
+            switch (delay_bar.Value)
+            {
+                case 0: sim_speed = 1800;
+                    break;
+                case 1: sim_speed = 900;
+                    break;
+                case 2: sim_speed = 100;
+                    break;
+                default: sim_speed = 1;
+                    break;
+            }
+            timer.Interval = sim_speed;
             timer.Start();
+
             settings_new.ReadOnly = true;
             settings_ready.ReadOnly = true;
             settings_waiting.ReadOnly = true;
@@ -548,7 +580,7 @@ namespace os_sim
         {
             switch(code)
             {
-                case 0: message_display.Text = "For Help, hover the cursor above the control or PCB label you want to know more about.";
+                case 0: message_display.Text = "Click the ? button for Help, or hover the cursor above the control in white or PCB label for tooltips.";
                     message_display.ForeColor = System.Drawing.Color.Blue;
                 break;
                 case 1: message_display.Text = "Error: Please insert a valid integer. Invalid fields were reset to their previous value.";
@@ -758,7 +790,7 @@ namespace os_sim
 
             status_tooltip.ToolTipTitle = "Status";
             status_tooltip.ShowAlways = true;
-            status_tooltip.SetToolTip(status, "Current status of the process.\r\nIn System: Process is in system.\r\nFinished: Process completed its cycles and left the system.\r\nTerminated: Process was forcefully ejected from system without finishing its cycles.");
+            status_tooltip.SetToolTip(status, "Current status of the process.\r\nIn System: Process is in system.\r\nFinished: Process completed its cycles and left the system.\r\nKilled: Process was forcefully ejected from system without finishing its cycles.");
             status_tooltip.AutoPopDelay = 32000;
 
         }
@@ -773,7 +805,19 @@ namespace os_sim
 
         }
 
+        private void help_button_Click(object sender, EventArgs e)
+        {
+            help1 = new helpForm();
+            help1.Show();
+        }
 
+        private void cpu_update_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cpu_update.Checked)
+                update_warning.Text = "Note: CPU Update is checked, PCB will be updated by the CPU if it is idle.";
+            else
+                update_warning.Text = "";
+        }
     }
 }
 public class Utilities

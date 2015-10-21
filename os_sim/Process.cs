@@ -32,9 +32,9 @@ namespace os_sim
             id = next_id;
             arrival_cycle = cycle;
 
-            total_cycles = rand.Next(Convert.ToInt32(avrg*0.75), Convert.ToInt32(avrg*1.25));
-            total_io1 = rand.Next(0, total_cycles);
-            total_cpu = total_cycles - total_io1;
+            //total_cycles = rand.Next(Convert.ToInt32(avrg*0.75), Convert.ToInt32(avrg*1.25));
+            total_io1 = rand.Next(0, 20);
+            total_cpu = rand.Next(Convert.ToInt32(avrg * 0.75), Convert.ToInt32(avrg * 1.25));
 
             current_cycles = 0;
             current_cpu = 0;

@@ -86,6 +86,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.settings_new = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.help_button = new System.Windows.Forms.Button();
+            this.update_warning = new System.Windows.Forms.Label();
             this.settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delay_bar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -388,6 +390,7 @@
             this.cpu_update.TabIndex = 39;
             this.cpu_update.Text = "CPU Update";
             this.cpu_update.UseVisualStyleBackColor = true;
+            this.cpu_update.CheckedChanged += new System.EventHandler(this.cpu_update_CheckedChanged);
             // 
             // algorithm_list
             // 
@@ -564,11 +567,11 @@
             // message_display
             // 
             this.message_display.BackColor = System.Drawing.SystemColors.Control;
-            this.message_display.Location = new System.Drawing.Point(32, 107);
+            this.message_display.Location = new System.Drawing.Point(57, 107);
             this.message_display.Multiline = true;
             this.message_display.Name = "message_display";
             this.message_display.ReadOnly = true;
-            this.message_display.Size = new System.Drawing.Size(562, 20);
+            this.message_display.Size = new System.Drawing.Size(537, 20);
             this.message_display.TabIndex = 34;
             // 
             // cycle_display
@@ -678,11 +681,33 @@
             this.label1.Text = "Size";
             this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
+            // help_button
+            // 
+            this.help_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.help_button.Cursor = System.Windows.Forms.Cursors.Help;
+            this.help_button.Image = global::os_sim.Properties.Resources.storm_help;
+            this.help_button.Location = new System.Drawing.Point(32, 107);
+            this.help_button.Name = "help_button";
+            this.help_button.Size = new System.Drawing.Size(19, 20);
+            this.help_button.TabIndex = 45;
+            this.help_button.UseVisualStyleBackColor = true;
+            this.help_button.Click += new System.EventHandler(this.help_button_Click);
+            // 
+            // update_warning
+            // 
+            this.update_warning.AutoSize = true;
+            this.update_warning.Location = new System.Drawing.Point(31, 577);
+            this.update_warning.Name = "update_warning";
+            this.update_warning.Size = new System.Drawing.Size(0, 13);
+            this.update_warning.TabIndex = 46;
+            // 
             // mainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(614, 595);
+            this.Controls.Add(this.update_warning);
+            this.Controls.Add(this.help_button);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.cpu_used);
             this.Controls.Add(this.status);
@@ -801,6 +826,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox settings_new;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button help_button;
+        private System.Windows.Forms.Label update_warning;
     }
 }
 

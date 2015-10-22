@@ -32,6 +32,7 @@ namespace os_sim
         private int waiting_size;
 
         private int last_finished;
+        private int running_cycle;
 
         private State New;
         private State Ready;
@@ -94,6 +95,7 @@ namespace os_sim
             tquantum = 5;
             io1_use = 0;
             last_finished = 0;
+            running_cycle = 0;
             
             timer.Enabled = true;                           
             timer.Stop();
@@ -179,13 +181,15 @@ namespace os_sim
                     {
                         returnToReady();
                     }
-                    run_cycle.Text = "0";
+                    running_cycle = 0;
+                    run_cycle.Text = ""+running_cycle;
                 }
                 else
                 {
                     current.quantum--;
                     current.current_cpu++;
-                    run_cycle.Text = ""+(tquantum-current.quantum);
+                    running_cycle++;
+                    run_cycle.Text = "" + running_cycle;
                 }
             }
             if (New.Count < new_size)
@@ -222,6 +226,7 @@ namespace os_sim
         {
             Process t_process = Ready.Dequeue();
 
+            t_process.quantum = tquantum;
             Running.addProcess(t_process);
             running_list.Text += t_process.getID() + "\r\n";
 

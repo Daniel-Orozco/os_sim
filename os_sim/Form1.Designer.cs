@@ -88,9 +88,77 @@
             this.label1 = new System.Windows.Forms.Label();
             this.help_button = new System.Windows.Forms.Button();
             this.update_warning = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.m00 = new System.Windows.Forms.TextBox();
+            this.m01 = new System.Windows.Forms.TextBox();
+            this.m02 = new System.Windows.Forms.TextBox();
+            this.m03 = new System.Windows.Forms.TextBox();
+            this.m04 = new System.Windows.Forms.TextBox();
+            this.m05 = new System.Windows.Forms.TextBox();
+            this.m06 = new System.Windows.Forms.TextBox();
+            this.m07 = new System.Windows.Forms.TextBox();
+            this.m10 = new System.Windows.Forms.TextBox();
+            this.m11 = new System.Windows.Forms.TextBox();
+            this.m12 = new System.Windows.Forms.TextBox();
+            this.m13 = new System.Windows.Forms.TextBox();
+            this.m14 = new System.Windows.Forms.TextBox();
+            this.m15 = new System.Windows.Forms.TextBox();
+            this.m16 = new System.Windows.Forms.TextBox();
+            this.m17 = new System.Windows.Forms.TextBox();
+            this.m20 = new System.Windows.Forms.TextBox();
+            this.m21 = new System.Windows.Forms.TextBox();
+            this.m22 = new System.Windows.Forms.TextBox();
+            this.m23 = new System.Windows.Forms.TextBox();
+            this.m24 = new System.Windows.Forms.TextBox();
+            this.m25 = new System.Windows.Forms.TextBox();
+            this.m26 = new System.Windows.Forms.TextBox();
+            this.m27 = new System.Windows.Forms.TextBox();
+            this.m30 = new System.Windows.Forms.TextBox();
+            this.m31 = new System.Windows.Forms.TextBox();
+            this.m32 = new System.Windows.Forms.TextBox();
+            this.m33 = new System.Windows.Forms.TextBox();
+            this.m34 = new System.Windows.Forms.TextBox();
+            this.m35 = new System.Windows.Forms.TextBox();
+            this.m36 = new System.Windows.Forms.TextBox();
+            this.m37 = new System.Windows.Forms.TextBox();
+            this.m40 = new System.Windows.Forms.TextBox();
+            this.m41 = new System.Windows.Forms.TextBox();
+            this.m42 = new System.Windows.Forms.TextBox();
+            this.m43 = new System.Windows.Forms.TextBox();
+            this.m44 = new System.Windows.Forms.TextBox();
+            this.m45 = new System.Windows.Forms.TextBox();
+            this.m46 = new System.Windows.Forms.TextBox();
+            this.m47 = new System.Windows.Forms.TextBox();
+            this.m50 = new System.Windows.Forms.TextBox();
+            this.m51 = new System.Windows.Forms.TextBox();
+            this.m52 = new System.Windows.Forms.TextBox();
+            this.m53 = new System.Windows.Forms.TextBox();
+            this.m54 = new System.Windows.Forms.TextBox();
+            this.m55 = new System.Windows.Forms.TextBox();
+            this.m56 = new System.Windows.Forms.TextBox();
+            this.m57 = new System.Windows.Forms.TextBox();
+            this.m60 = new System.Windows.Forms.TextBox();
+            this.m61 = new System.Windows.Forms.TextBox();
+            this.m62 = new System.Windows.Forms.TextBox();
+            this.m63 = new System.Windows.Forms.TextBox();
+            this.m64 = new System.Windows.Forms.TextBox();
+            this.m65 = new System.Windows.Forms.TextBox();
+            this.m66 = new System.Windows.Forms.TextBox();
+            this.m67 = new System.Windows.Forms.TextBox();
+            this.m70 = new System.Windows.Forms.TextBox();
+            this.m71 = new System.Windows.Forms.TextBox();
+            this.m72 = new System.Windows.Forms.TextBox();
+            this.m73 = new System.Windows.Forms.TextBox();
+            this.m74 = new System.Windows.Forms.TextBox();
+            this.m75 = new System.Windows.Forms.TextBox();
+            this.m76 = new System.Windows.Forms.TextBox();
+            this.m77 = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delay_bar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // clock
@@ -613,7 +681,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(463, 577);
+            this.label11.Location = new System.Drawing.Point(1091, 577);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(131, 13);
             this.label11.TabIndex = 40;
@@ -701,11 +769,633 @@
             this.update_warning.Size = new System.Drawing.Size(0, 13);
             this.update_warning.TabIndex = 46;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 8;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.Controls.Add(this.m70, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.m71, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.m72, 2, 7);
+            this.tableLayoutPanel1.Controls.Add(this.m73, 3, 7);
+            this.tableLayoutPanel1.Controls.Add(this.m74, 4, 7);
+            this.tableLayoutPanel1.Controls.Add(this.m75, 5, 7);
+            this.tableLayoutPanel1.Controls.Add(this.m76, 6, 7);
+            this.tableLayoutPanel1.Controls.Add(this.m77, 7, 7);
+            this.tableLayoutPanel1.Controls.Add(this.m60, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.m61, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.m62, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.m63, 3, 6);
+            this.tableLayoutPanel1.Controls.Add(this.m64, 4, 6);
+            this.tableLayoutPanel1.Controls.Add(this.m65, 5, 6);
+            this.tableLayoutPanel1.Controls.Add(this.m66, 6, 6);
+            this.tableLayoutPanel1.Controls.Add(this.m67, 7, 6);
+            this.tableLayoutPanel1.Controls.Add(this.m50, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.m51, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.m52, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.m53, 3, 5);
+            this.tableLayoutPanel1.Controls.Add(this.m54, 4, 5);
+            this.tableLayoutPanel1.Controls.Add(this.m55, 5, 5);
+            this.tableLayoutPanel1.Controls.Add(this.m56, 6, 5);
+            this.tableLayoutPanel1.Controls.Add(this.m57, 7, 5);
+            this.tableLayoutPanel1.Controls.Add(this.m40, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.m41, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.m42, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.m43, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.m44, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.m45, 5, 4);
+            this.tableLayoutPanel1.Controls.Add(this.m46, 6, 4);
+            this.tableLayoutPanel1.Controls.Add(this.m47, 7, 4);
+            this.tableLayoutPanel1.Controls.Add(this.m30, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.m31, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.m32, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.m33, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.m34, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.m35, 5, 3);
+            this.tableLayoutPanel1.Controls.Add(this.m36, 6, 3);
+            this.tableLayoutPanel1.Controls.Add(this.m37, 7, 3);
+            this.tableLayoutPanel1.Controls.Add(this.m20, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.m21, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.m22, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.m23, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.m24, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.m25, 5, 2);
+            this.tableLayoutPanel1.Controls.Add(this.m26, 6, 2);
+            this.tableLayoutPanel1.Controls.Add(this.m27, 7, 2);
+            this.tableLayoutPanel1.Controls.Add(this.m10, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.m11, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.m12, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.m13, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.m14, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.m15, 5, 1);
+            this.tableLayoutPanel1.Controls.Add(this.m16, 6, 1);
+            this.tableLayoutPanel1.Controls.Add(this.m17, 7, 1);
+            this.tableLayoutPanel1.Controls.Add(this.m07, 7, 0);
+            this.tableLayoutPanel1.Controls.Add(this.m06, 6, 0);
+            this.tableLayoutPanel1.Controls.Add(this.m05, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.m04, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.m03, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.m02, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.m01, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.m00, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(637, 170);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 8;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(320, 320);
+            this.tableLayoutPanel1.TabIndex = 47;
+            // 
+            // m00
+            // 
+            this.m00.Location = new System.Drawing.Point(3, 3);
+            this.m00.Multiline = true;
+            this.m00.Name = "m00";
+            this.m00.Size = new System.Drawing.Size(34, 34);
+            this.m00.TabIndex = 48;
+            // 
+            // m01
+            // 
+            this.m01.Location = new System.Drawing.Point(43, 3);
+            this.m01.Multiline = true;
+            this.m01.Name = "m01";
+            this.m01.Size = new System.Drawing.Size(34, 34);
+            this.m01.TabIndex = 49;
+            // 
+            // m02
+            // 
+            this.m02.Location = new System.Drawing.Point(83, 3);
+            this.m02.Multiline = true;
+            this.m02.Name = "m02";
+            this.m02.Size = new System.Drawing.Size(34, 34);
+            this.m02.TabIndex = 50;
+            // 
+            // m03
+            // 
+            this.m03.Location = new System.Drawing.Point(123, 3);
+            this.m03.Multiline = true;
+            this.m03.Name = "m03";
+            this.m03.Size = new System.Drawing.Size(34, 34);
+            this.m03.TabIndex = 51;
+            // 
+            // m04
+            // 
+            this.m04.Location = new System.Drawing.Point(163, 3);
+            this.m04.Multiline = true;
+            this.m04.Name = "m04";
+            this.m04.Size = new System.Drawing.Size(34, 34);
+            this.m04.TabIndex = 52;
+            // 
+            // m05
+            // 
+            this.m05.Location = new System.Drawing.Point(203, 3);
+            this.m05.Multiline = true;
+            this.m05.Name = "m05";
+            this.m05.Size = new System.Drawing.Size(34, 34);
+            this.m05.TabIndex = 53;
+            // 
+            // m06
+            // 
+            this.m06.Location = new System.Drawing.Point(243, 3);
+            this.m06.Multiline = true;
+            this.m06.Name = "m06";
+            this.m06.Size = new System.Drawing.Size(34, 34);
+            this.m06.TabIndex = 54;
+            // 
+            // m07
+            // 
+            this.m07.Location = new System.Drawing.Point(283, 3);
+            this.m07.Multiline = true;
+            this.m07.Name = "m07";
+            this.m07.Size = new System.Drawing.Size(34, 34);
+            this.m07.TabIndex = 55;
+            // 
+            // m10
+            // 
+            this.m10.Location = new System.Drawing.Point(3, 43);
+            this.m10.Multiline = true;
+            this.m10.Name = "m10";
+            this.m10.Size = new System.Drawing.Size(34, 34);
+            this.m10.TabIndex = 63;
+            // 
+            // m11
+            // 
+            this.m11.Location = new System.Drawing.Point(43, 43);
+            this.m11.Multiline = true;
+            this.m11.Name = "m11";
+            this.m11.Size = new System.Drawing.Size(34, 34);
+            this.m11.TabIndex = 62;
+            // 
+            // m12
+            // 
+            this.m12.Location = new System.Drawing.Point(83, 43);
+            this.m12.Multiline = true;
+            this.m12.Name = "m12";
+            this.m12.Size = new System.Drawing.Size(34, 34);
+            this.m12.TabIndex = 61;
+            // 
+            // m13
+            // 
+            this.m13.Location = new System.Drawing.Point(123, 43);
+            this.m13.Multiline = true;
+            this.m13.Name = "m13";
+            this.m13.Size = new System.Drawing.Size(34, 34);
+            this.m13.TabIndex = 60;
+            // 
+            // m14
+            // 
+            this.m14.Location = new System.Drawing.Point(163, 43);
+            this.m14.Multiline = true;
+            this.m14.Name = "m14";
+            this.m14.Size = new System.Drawing.Size(34, 34);
+            this.m14.TabIndex = 59;
+            // 
+            // m15
+            // 
+            this.m15.Location = new System.Drawing.Point(203, 43);
+            this.m15.Multiline = true;
+            this.m15.Name = "m15";
+            this.m15.Size = new System.Drawing.Size(34, 34);
+            this.m15.TabIndex = 58;
+            // 
+            // m16
+            // 
+            this.m16.Location = new System.Drawing.Point(243, 43);
+            this.m16.Multiline = true;
+            this.m16.Name = "m16";
+            this.m16.Size = new System.Drawing.Size(34, 34);
+            this.m16.TabIndex = 57;
+            // 
+            // m17
+            // 
+            this.m17.Location = new System.Drawing.Point(283, 43);
+            this.m17.Multiline = true;
+            this.m17.Name = "m17";
+            this.m17.Size = new System.Drawing.Size(34, 34);
+            this.m17.TabIndex = 56;
+            // 
+            // m20
+            // 
+            this.m20.Location = new System.Drawing.Point(3, 83);
+            this.m20.Multiline = true;
+            this.m20.Name = "m20";
+            this.m20.Size = new System.Drawing.Size(34, 34);
+            this.m20.TabIndex = 71;
+            // 
+            // m21
+            // 
+            this.m21.Location = new System.Drawing.Point(43, 83);
+            this.m21.Multiline = true;
+            this.m21.Name = "m21";
+            this.m21.Size = new System.Drawing.Size(34, 34);
+            this.m21.TabIndex = 70;
+            // 
+            // m22
+            // 
+            this.m22.Location = new System.Drawing.Point(83, 83);
+            this.m22.Multiline = true;
+            this.m22.Name = "m22";
+            this.m22.Size = new System.Drawing.Size(34, 34);
+            this.m22.TabIndex = 69;
+            // 
+            // m23
+            // 
+            this.m23.Location = new System.Drawing.Point(123, 83);
+            this.m23.Multiline = true;
+            this.m23.Name = "m23";
+            this.m23.Size = new System.Drawing.Size(34, 34);
+            this.m23.TabIndex = 68;
+            // 
+            // m24
+            // 
+            this.m24.Location = new System.Drawing.Point(163, 83);
+            this.m24.Multiline = true;
+            this.m24.Name = "m24";
+            this.m24.Size = new System.Drawing.Size(34, 34);
+            this.m24.TabIndex = 67;
+            // 
+            // m25
+            // 
+            this.m25.Location = new System.Drawing.Point(203, 83);
+            this.m25.Multiline = true;
+            this.m25.Name = "m25";
+            this.m25.Size = new System.Drawing.Size(34, 34);
+            this.m25.TabIndex = 66;
+            // 
+            // m26
+            // 
+            this.m26.Location = new System.Drawing.Point(243, 83);
+            this.m26.Multiline = true;
+            this.m26.Name = "m26";
+            this.m26.Size = new System.Drawing.Size(34, 34);
+            this.m26.TabIndex = 65;
+            // 
+            // m27
+            // 
+            this.m27.Location = new System.Drawing.Point(283, 83);
+            this.m27.Multiline = true;
+            this.m27.Name = "m27";
+            this.m27.Size = new System.Drawing.Size(34, 34);
+            this.m27.TabIndex = 64;
+            // 
+            // m30
+            // 
+            this.m30.Location = new System.Drawing.Point(3, 123);
+            this.m30.Multiline = true;
+            this.m30.Name = "m30";
+            this.m30.Size = new System.Drawing.Size(34, 34);
+            this.m30.TabIndex = 79;
+            // 
+            // m31
+            // 
+            this.m31.Location = new System.Drawing.Point(43, 123);
+            this.m31.Multiline = true;
+            this.m31.Name = "m31";
+            this.m31.Size = new System.Drawing.Size(34, 34);
+            this.m31.TabIndex = 78;
+            // 
+            // m32
+            // 
+            this.m32.Location = new System.Drawing.Point(83, 123);
+            this.m32.Multiline = true;
+            this.m32.Name = "m32";
+            this.m32.Size = new System.Drawing.Size(34, 34);
+            this.m32.TabIndex = 77;
+            // 
+            // m33
+            // 
+            this.m33.Location = new System.Drawing.Point(123, 123);
+            this.m33.Multiline = true;
+            this.m33.Name = "m33";
+            this.m33.Size = new System.Drawing.Size(34, 34);
+            this.m33.TabIndex = 76;
+            // 
+            // m34
+            // 
+            this.m34.Location = new System.Drawing.Point(163, 123);
+            this.m34.Multiline = true;
+            this.m34.Name = "m34";
+            this.m34.Size = new System.Drawing.Size(34, 34);
+            this.m34.TabIndex = 75;
+            // 
+            // m35
+            // 
+            this.m35.Location = new System.Drawing.Point(203, 123);
+            this.m35.Multiline = true;
+            this.m35.Name = "m35";
+            this.m35.Size = new System.Drawing.Size(34, 34);
+            this.m35.TabIndex = 74;
+            // 
+            // m36
+            // 
+            this.m36.Location = new System.Drawing.Point(243, 123);
+            this.m36.Multiline = true;
+            this.m36.Name = "m36";
+            this.m36.Size = new System.Drawing.Size(34, 34);
+            this.m36.TabIndex = 73;
+            // 
+            // m37
+            // 
+            this.m37.Location = new System.Drawing.Point(283, 123);
+            this.m37.Multiline = true;
+            this.m37.Name = "m37";
+            this.m37.Size = new System.Drawing.Size(34, 34);
+            this.m37.TabIndex = 72;
+            // 
+            // m40
+            // 
+            this.m40.Location = new System.Drawing.Point(3, 163);
+            this.m40.Multiline = true;
+            this.m40.Name = "m40";
+            this.m40.Size = new System.Drawing.Size(34, 34);
+            this.m40.TabIndex = 87;
+            // 
+            // m41
+            // 
+            this.m41.Location = new System.Drawing.Point(43, 163);
+            this.m41.Multiline = true;
+            this.m41.Name = "m41";
+            this.m41.Size = new System.Drawing.Size(34, 34);
+            this.m41.TabIndex = 86;
+            // 
+            // m42
+            // 
+            this.m42.Location = new System.Drawing.Point(83, 163);
+            this.m42.Multiline = true;
+            this.m42.Name = "m42";
+            this.m42.Size = new System.Drawing.Size(34, 34);
+            this.m42.TabIndex = 85;
+            // 
+            // m43
+            // 
+            this.m43.Location = new System.Drawing.Point(123, 163);
+            this.m43.Multiline = true;
+            this.m43.Name = "m43";
+            this.m43.Size = new System.Drawing.Size(34, 34);
+            this.m43.TabIndex = 84;
+            // 
+            // m44
+            // 
+            this.m44.Location = new System.Drawing.Point(163, 163);
+            this.m44.Multiline = true;
+            this.m44.Name = "m44";
+            this.m44.Size = new System.Drawing.Size(34, 34);
+            this.m44.TabIndex = 83;
+            // 
+            // m45
+            // 
+            this.m45.Location = new System.Drawing.Point(203, 163);
+            this.m45.Multiline = true;
+            this.m45.Name = "m45";
+            this.m45.Size = new System.Drawing.Size(34, 34);
+            this.m45.TabIndex = 82;
+            // 
+            // m46
+            // 
+            this.m46.Location = new System.Drawing.Point(243, 163);
+            this.m46.Multiline = true;
+            this.m46.Name = "m46";
+            this.m46.Size = new System.Drawing.Size(34, 34);
+            this.m46.TabIndex = 81;
+            // 
+            // m47
+            // 
+            this.m47.Location = new System.Drawing.Point(283, 163);
+            this.m47.Multiline = true;
+            this.m47.Name = "m47";
+            this.m47.Size = new System.Drawing.Size(34, 34);
+            this.m47.TabIndex = 80;
+            // 
+            // m50
+            // 
+            this.m50.Location = new System.Drawing.Point(3, 203);
+            this.m50.Multiline = true;
+            this.m50.Name = "m50";
+            this.m50.Size = new System.Drawing.Size(34, 34);
+            this.m50.TabIndex = 95;
+            // 
+            // m51
+            // 
+            this.m51.Location = new System.Drawing.Point(43, 203);
+            this.m51.Multiline = true;
+            this.m51.Name = "m51";
+            this.m51.Size = new System.Drawing.Size(34, 34);
+            this.m51.TabIndex = 94;
+            // 
+            // m52
+            // 
+            this.m52.Location = new System.Drawing.Point(83, 203);
+            this.m52.Multiline = true;
+            this.m52.Name = "m52";
+            this.m52.Size = new System.Drawing.Size(34, 34);
+            this.m52.TabIndex = 93;
+            // 
+            // m53
+            // 
+            this.m53.Location = new System.Drawing.Point(123, 203);
+            this.m53.Multiline = true;
+            this.m53.Name = "m53";
+            this.m53.Size = new System.Drawing.Size(34, 34);
+            this.m53.TabIndex = 92;
+            // 
+            // m54
+            // 
+            this.m54.Location = new System.Drawing.Point(163, 203);
+            this.m54.Multiline = true;
+            this.m54.Name = "m54";
+            this.m54.Size = new System.Drawing.Size(34, 34);
+            this.m54.TabIndex = 91;
+            // 
+            // m55
+            // 
+            this.m55.Location = new System.Drawing.Point(203, 203);
+            this.m55.Multiline = true;
+            this.m55.Name = "m55";
+            this.m55.Size = new System.Drawing.Size(34, 34);
+            this.m55.TabIndex = 90;
+            // 
+            // m56
+            // 
+            this.m56.Location = new System.Drawing.Point(243, 203);
+            this.m56.Multiline = true;
+            this.m56.Name = "m56";
+            this.m56.Size = new System.Drawing.Size(34, 34);
+            this.m56.TabIndex = 89;
+            // 
+            // m57
+            // 
+            this.m57.Location = new System.Drawing.Point(283, 203);
+            this.m57.Multiline = true;
+            this.m57.Name = "m57";
+            this.m57.Size = new System.Drawing.Size(34, 34);
+            this.m57.TabIndex = 88;
+            // 
+            // m60
+            // 
+            this.m60.Location = new System.Drawing.Point(3, 243);
+            this.m60.Multiline = true;
+            this.m60.Name = "m60";
+            this.m60.Size = new System.Drawing.Size(34, 34);
+            this.m60.TabIndex = 103;
+            // 
+            // m61
+            // 
+            this.m61.Location = new System.Drawing.Point(43, 243);
+            this.m61.Multiline = true;
+            this.m61.Name = "m61";
+            this.m61.Size = new System.Drawing.Size(34, 34);
+            this.m61.TabIndex = 102;
+            // 
+            // m62
+            // 
+            this.m62.Location = new System.Drawing.Point(83, 243);
+            this.m62.Multiline = true;
+            this.m62.Name = "m62";
+            this.m62.Size = new System.Drawing.Size(34, 34);
+            this.m62.TabIndex = 101;
+            // 
+            // m63
+            // 
+            this.m63.Location = new System.Drawing.Point(123, 243);
+            this.m63.Multiline = true;
+            this.m63.Name = "m63";
+            this.m63.Size = new System.Drawing.Size(34, 34);
+            this.m63.TabIndex = 100;
+            // 
+            // m64
+            // 
+            this.m64.Location = new System.Drawing.Point(163, 243);
+            this.m64.Multiline = true;
+            this.m64.Name = "m64";
+            this.m64.Size = new System.Drawing.Size(34, 34);
+            this.m64.TabIndex = 99;
+            // 
+            // m65
+            // 
+            this.m65.Location = new System.Drawing.Point(203, 243);
+            this.m65.Multiline = true;
+            this.m65.Name = "m65";
+            this.m65.Size = new System.Drawing.Size(34, 34);
+            this.m65.TabIndex = 98;
+            // 
+            // m66
+            // 
+            this.m66.Location = new System.Drawing.Point(243, 243);
+            this.m66.Multiline = true;
+            this.m66.Name = "m66";
+            this.m66.Size = new System.Drawing.Size(34, 34);
+            this.m66.TabIndex = 97;
+            // 
+            // m67
+            // 
+            this.m67.Location = new System.Drawing.Point(283, 243);
+            this.m67.Multiline = true;
+            this.m67.Name = "m67";
+            this.m67.Size = new System.Drawing.Size(34, 34);
+            this.m67.TabIndex = 96;
+            // 
+            // m70
+            // 
+            this.m70.Location = new System.Drawing.Point(3, 283);
+            this.m70.Multiline = true;
+            this.m70.Name = "m70";
+            this.m70.Size = new System.Drawing.Size(34, 34);
+            this.m70.TabIndex = 111;
+            // 
+            // m71
+            // 
+            this.m71.Location = new System.Drawing.Point(43, 283);
+            this.m71.Multiline = true;
+            this.m71.Name = "m71";
+            this.m71.Size = new System.Drawing.Size(34, 34);
+            this.m71.TabIndex = 110;
+            // 
+            // m72
+            // 
+            this.m72.Location = new System.Drawing.Point(83, 283);
+            this.m72.Multiline = true;
+            this.m72.Name = "m72";
+            this.m72.Size = new System.Drawing.Size(34, 34);
+            this.m72.TabIndex = 109;
+            // 
+            // m73
+            // 
+            this.m73.Location = new System.Drawing.Point(123, 283);
+            this.m73.Multiline = true;
+            this.m73.Name = "m73";
+            this.m73.Size = new System.Drawing.Size(34, 34);
+            this.m73.TabIndex = 108;
+            // 
+            // m74
+            // 
+            this.m74.Location = new System.Drawing.Point(163, 283);
+            this.m74.Multiline = true;
+            this.m74.Name = "m74";
+            this.m74.Size = new System.Drawing.Size(34, 34);
+            this.m74.TabIndex = 107;
+            // 
+            // m75
+            // 
+            this.m75.Location = new System.Drawing.Point(203, 283);
+            this.m75.Multiline = true;
+            this.m75.Name = "m75";
+            this.m75.Size = new System.Drawing.Size(34, 34);
+            this.m75.TabIndex = 106;
+            // 
+            // m76
+            // 
+            this.m76.Location = new System.Drawing.Point(243, 283);
+            this.m76.Multiline = true;
+            this.m76.Name = "m76";
+            this.m76.Size = new System.Drawing.Size(34, 34);
+            this.m76.TabIndex = 105;
+            // 
+            // m77
+            // 
+            this.m77.Location = new System.Drawing.Point(283, 283);
+            this.m77.Multiline = true;
+            this.m77.Name = "m77";
+            this.m77.Size = new System.Drawing.Size(34, 34);
+            this.m77.TabIndex = 104;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(617, 184);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(13, 286);
+            this.label12.TabIndex = 48;
+            this.label12.Text = "0\r\n\r\n\r\n1\r\n\r\n\r\n2\r\n\r\n\r\n3\r\n\r\n\r\n4\r\n\r\n\r\n5\r\n\r\n\r\n6\r\n\r\n\r\n7";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(655, 150);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(139, 13);
+            this.label13.TabIndex = 49;
+            this.label13.Text = "0    1    2    3    4    5    6    7";
+            // 
             // mainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(614, 595);
+            this.ClientSize = new System.Drawing.Size(1234, 595);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.update_warning);
             this.Controls.Add(this.help_button);
             this.Controls.Add(this.pictureBox1);
@@ -762,6 +1452,8 @@
             this.settings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delay_bar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -828,6 +1520,73 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button help_button;
         private System.Windows.Forms.Label update_warning;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TextBox m00;
+        private System.Windows.Forms.TextBox m50;
+        private System.Windows.Forms.TextBox m51;
+        private System.Windows.Forms.TextBox m52;
+        private System.Windows.Forms.TextBox m53;
+        private System.Windows.Forms.TextBox m54;
+        private System.Windows.Forms.TextBox m55;
+        private System.Windows.Forms.TextBox m56;
+        private System.Windows.Forms.TextBox m57;
+        private System.Windows.Forms.TextBox m40;
+        private System.Windows.Forms.TextBox m41;
+        private System.Windows.Forms.TextBox m42;
+        private System.Windows.Forms.TextBox m43;
+        private System.Windows.Forms.TextBox m44;
+        private System.Windows.Forms.TextBox m45;
+        private System.Windows.Forms.TextBox m46;
+        private System.Windows.Forms.TextBox m47;
+        private System.Windows.Forms.TextBox m30;
+        private System.Windows.Forms.TextBox m31;
+        private System.Windows.Forms.TextBox m32;
+        private System.Windows.Forms.TextBox m33;
+        private System.Windows.Forms.TextBox m34;
+        private System.Windows.Forms.TextBox m35;
+        private System.Windows.Forms.TextBox m36;
+        private System.Windows.Forms.TextBox m37;
+        private System.Windows.Forms.TextBox m20;
+        private System.Windows.Forms.TextBox m21;
+        private System.Windows.Forms.TextBox m22;
+        private System.Windows.Forms.TextBox m23;
+        private System.Windows.Forms.TextBox m24;
+        private System.Windows.Forms.TextBox m25;
+        private System.Windows.Forms.TextBox m26;
+        private System.Windows.Forms.TextBox m27;
+        private System.Windows.Forms.TextBox m10;
+        private System.Windows.Forms.TextBox m11;
+        private System.Windows.Forms.TextBox m12;
+        private System.Windows.Forms.TextBox m13;
+        private System.Windows.Forms.TextBox m14;
+        private System.Windows.Forms.TextBox m15;
+        private System.Windows.Forms.TextBox m16;
+        private System.Windows.Forms.TextBox m17;
+        private System.Windows.Forms.TextBox m07;
+        private System.Windows.Forms.TextBox m06;
+        private System.Windows.Forms.TextBox m05;
+        private System.Windows.Forms.TextBox m04;
+        private System.Windows.Forms.TextBox m03;
+        private System.Windows.Forms.TextBox m02;
+        private System.Windows.Forms.TextBox m01;
+        private System.Windows.Forms.TextBox m70;
+        private System.Windows.Forms.TextBox m71;
+        private System.Windows.Forms.TextBox m72;
+        private System.Windows.Forms.TextBox m73;
+        private System.Windows.Forms.TextBox m74;
+        private System.Windows.Forms.TextBox m75;
+        private System.Windows.Forms.TextBox m76;
+        private System.Windows.Forms.TextBox m77;
+        private System.Windows.Forms.TextBox m60;
+        private System.Windows.Forms.TextBox m61;
+        private System.Windows.Forms.TextBox m62;
+        private System.Windows.Forms.TextBox m63;
+        private System.Windows.Forms.TextBox m64;
+        private System.Windows.Forms.TextBox m65;
+        private System.Windows.Forms.TextBox m66;
+        private System.Windows.Forms.TextBox m67;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
     }
 }
 

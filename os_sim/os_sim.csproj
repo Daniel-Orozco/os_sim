@@ -108,6 +108,7 @@
     </Compile>
     <None Include="os_sim_1_TemporaryKey.pfx" />
     <None Include="os_sim_TemporaryKey.pfx" />
+    <None Include="Properties\DataSources\Process.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

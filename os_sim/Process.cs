@@ -51,6 +51,11 @@ namespace os_sim
                 getID(), arrival_cycle, total_cpu, current_cpu, clock - arrival_cycle, total_io1, current_io1, (status!="In System"?""+finishing_cycle:"-"), (status!="In System"?""+time_in_system:"-"), (status!="In System"?(idle_time<0?"-":(""+idle_time)):"-"),status);
             return data;
         }
+        public string[] getValues(int clock)
+        {
+            string[] data = new string[]{getID(), ""+arrival_cycle, ""+total_cpu, ""+current_cpu, ""+(clock - arrival_cycle), ""+total_io1, ""+current_io1, (status != "In System" ? "" + finishing_cycle : "-"), (status != "In System" ? "" + time_in_system : "-"), (status != "In System" ? (idle_time < 0 ? "-" : ("" + idle_time)) : "-"), status};
+            return data;
+        }
         public string getID()
         { return "P" + (id < 10 ? "0" : "") + id; }
     }

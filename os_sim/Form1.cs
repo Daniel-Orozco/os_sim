@@ -54,18 +54,9 @@ namespace os_sim
         private ToolTip pause_tooltip;
         private ToolTip update_tooltip;
 
-        private ToolTip id_tooltip;
-        private ToolTip arrival_tooltip;
-        private ToolTip totalcpu_tooltip;
-        private ToolTip usedcpu_tooltip;
-        private ToolTip elapsed_tooltip;
-        private ToolTip totalio_tooltip;
-        private ToolTip usedio_tooltip;
-        private ToolTip finishing_tooltip;
-        private ToolTip systemtime_tooltip;
-        private ToolTip idle_tooltip;
-        private ToolTip status_tooltip;
+        private ToolTip pcb_tooltip;
 
+        private TextBox[,] memory_map;
         enum Message { Clean=0, ValidNum, OutOfRange}
         public mainView()
         {
@@ -85,6 +76,9 @@ namespace os_sim
             sim_state = false;
             rand = new Random();
 
+            //im sorry...
+            memory_map = new TextBox[,] { { m00, m01, m02, m03, m04, m05, m06, m07 }, { m10, m11, m12, m13, m14, m15, m16, m17 }, { m20, m21, m22, m23, m24, m25, m26, m27 }, { m30, m31, m32, m33, m34, m35, m36, m37 }, { m40, m41, m42, m43, m44, m45, m46, m47 }, { m50, m51, m52, m53, m54, m55, m56, m57 }, { m60, m61, m62, m63, m64, m65, m66, m67 }, { m70, m71, m72, m73, m74, m75, m76, m77 } };
+
             initialDisplay();
             helpDisplay();
 
@@ -101,6 +95,7 @@ namespace os_sim
             timer.Stop();
 
             cpu_update.Checked = true;
+            
             
             initializeStates();
         }
@@ -266,7 +261,7 @@ namespace os_sim
             t_process.idle_time = (clock_value - t_process.arrival_cycle) - t_process.total_io1 - t_process.total_cpu;
             t_process.status = "Finished";
 
-            updatePCB(t_process, t_process.id - 1);
+            updatePCB(t_process, t_process.getID());
 
             last_finished = t_process.id;
 
@@ -282,7 +277,7 @@ namespace os_sim
             t_process.idle_time = t_process.time_in_system - t_process.total_io1 - t_process.total_cpu;
             t_process.status = "Killed";
 
-            updatePCB(t_process, t_process.id - 1);
+            updatePCB(t_process, t_process.getID());
 
             last_finished = t_process.id;
 
@@ -349,6 +344,11 @@ namespace os_sim
             quantum_display.BackColor = SystemColors.ControlLightLight;
             average_cpu.BackColor = SystemColors.ControlLightLight;
 
+            foreach (TextBox i in memory_map)
+                i.Text = "";
+
+            pcb.Items.Clear();
+
             messageUpdate((int)Message.Clean);
             delay_bar.Value = 1;
             algorithm_list.SelectedIndex = 0;
@@ -363,7 +363,7 @@ namespace os_sim
                 New.addProcess(n_process);
 
                 new_list.AppendText(n_process.getID() + "\r\n");
-                updatePCB(n_process, n_process.id - 1);
+                updatePCB(n_process, n_process.getID());
             }
         }
         public void displayProcesses()
@@ -378,28 +378,28 @@ namespace os_sim
                     {
                         helper = New.Dequeue();
                         if(helper.status == "In System")
-                            updatePCB(helper, helper.id - 1);
+                            updatePCB(helper, helper.getID());
                         New.Enqueue(helper);
                     }
                     for (int c = 0; c < Ready.Count; c++)
                     {
                         helper = Ready.Dequeue();
                         if (helper.status == "In System")
-                            updatePCB(helper, helper.id - 1);
+                            updatePCB(helper, helper.getID());
                         Ready.Enqueue(helper);
                     }
                     for (int c = 0; c < Waiting.Count; c++)
                     {
                         helper = Waiting.Dequeue();
                         if (helper.status == "In System")
-                            updatePCB(helper, helper.id - 1);
+                            updatePCB(helper, helper.getID());
                         Waiting.Enqueue(helper);
                     }
                     for (int c = 0; c < UsingIO1.Count; c++)
                     {
                         helper = UsingIO1.Dequeue();
                         if (helper.status == "In System")
-                            updatePCB(helper, helper.id - 1);
+                            updatePCB(helper, helper.getID());
                         UsingIO1.Enqueue(helper);
                     }
                 }
@@ -410,59 +410,54 @@ namespace os_sim
                 {
                     helper = New.Dequeue();
                     if (helper.status == "In System")
-                        updatePCB(helper, helper.id - 1);
+                        updatePCB(helper, helper.getID());
                     New.Enqueue(helper);
                 }
                 for (int c = 0; c < Ready.Count; c++)
                 {
                     helper = Ready.Dequeue();
                     if (helper.status == "In System")
-                        updatePCB(helper, helper.id - 1);
+                        updatePCB(helper, helper.getID());
                     Ready.Enqueue(helper);
                 }
                 for (int c = 0; c < Running.Count; c++)
                 {
                     helper = Running.Dequeue();
                     if (helper.status == "In System")
-                        updatePCB(helper, helper.id - 1);
+                        updatePCB(helper, helper.getID());
                     Running.Enqueue(helper);
                 }
                 for (int c = 0; c < Waiting.Count; c++)
                 {
                     helper = Waiting.Dequeue();
                     if (helper.status == "In System")
-                        updatePCB(helper, helper.id - 1);
+                        updatePCB(helper, helper.getID());
                     Waiting.Enqueue(helper);
                 }
                 for (int c = 0; c < UsingIO1.Count; c++)
                 {
                     helper = UsingIO1.Dequeue();
                     if (helper.status == "In System")
-                        updatePCB(helper, helper.id - 1);
+                        updatePCB(helper, helper.getID());
                     UsingIO1.Enqueue(helper);
                 }
             }
             
         }
-        public void updatePCB(Process n_process, int process_line)
+        public void updatePCB(Process n_process, string id)
         {
-            string[] lines = pcb_list.Text.Split('\n');
-
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < lines.Length; i++)
+            ListViewItem lvi = pcb.FindItemWithText(id);
+            string[] process = n_process.getValues(clock_value);
+            if (lvi != null)
             {
-                if (i == process_line)
-                {
-                    builder.Append(n_process.getData(clock_value));
-                }
-                else
-                {
-                    builder.Append(lines[i]+"\r\n");
-                }
+                for (int i = 1; i < 11; i++)
+                    lvi.SubItems[i].Text = process[i];
             }
-            pcb_list.Text = builder.ToString();
-
-            
+            else
+            {
+                var n = new ListViewItem(process);
+                pcb.Items.Add(n);
+            }
         }
         private void algorithm_list_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -505,10 +500,6 @@ namespace os_sim
 
         }
 
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
 
         private void stop_Click(object sender, EventArgs e)
         {
@@ -624,6 +615,13 @@ namespace os_sim
         }
         public void helpDisplay()
         {
+            pcb_tooltip = new ToolTip();
+
+            pcb_tooltip.ToolTipTitle = "PCB Properties";
+            pcb_tooltip.ShowAlways = true;
+            pcb_tooltip.SetToolTip(pcb, "ID: The process identifier\r\nArrival: The cycle when the process was created\r\nTotal CPU: The amount of CPU cycles the process requires.\r\nCPU Used: CPU cycles the process has used.\r\n\tIf CPU Update is enabled, this will refresh if the CPU is available.\r\nElapsed: Amount of cycles the process has been in system.\r\n\tIf CPU Update is enabled, this will refresh if the CPU is available\r\nTotal I/O: The amount of I/O cycles the process requires.\r\nI/O Used: I/O cycles the process has used.\r\n\tIf CPU Update is enabled, this will refresh if the CPU is available.\r\nFinishing Cycle: Cycle in which the process left the system.\r\n\tWill be displayed once the process leaves the system.\r\nTime in System: Total amount of cycles the process remained in system.\r\n\tWill be displayed once the process leaves the system.\r\nIdle Time: Amount of cycles the process remained in system without using CPU or I/O.\r\n\tWill be displayed if the process leaves the system successfully.\r\nStatus: Current status of the process.\r\n\tIn System: Process is in system.\r\n\tFinished: Process completed its cycles and left the system.\r\n\tKilled: Process was forcefully ejected from system without finishing its cycles.");
+            pcb_tooltip.AutoPopDelay = 32000;
+            
             quantum_tooltip = new ToolTip();
 
             quantum_tooltip.ToolTipIcon = ToolTipIcon.Info;
@@ -721,83 +719,6 @@ namespace os_sim
             update_tooltip.SetToolTip(cpu_update, "Determines if the PCB is updated with the CPU.\r\nIf checked, PCB will refresh if the Running state is empty.\r\nIf unchecked, PCB will update every tick.");
             update_tooltip.AutoPopDelay = 32000;
 
-            id_tooltip = new ToolTip();
-
-            id_tooltip.ToolTipTitle = "ID";
-            id_tooltip.ShowAlways = true;
-            id_tooltip.SetToolTip(pcb_id, "The process identifier.");
-            id_tooltip.AutoPopDelay = 32000;
-
-            arrival_tooltip = new ToolTip();
-
-            arrival_tooltip.ToolTipTitle = "Arrival";
-            arrival_tooltip.ShowAlways = true;
-            arrival_tooltip.SetToolTip(pcb_arrival, "The cycle when the process was created.");
-            arrival_tooltip.AutoPopDelay = 32000;
-
-            totalcpu_tooltip = new ToolTip();
-
-            totalcpu_tooltip.ToolTipTitle = "Total CPU";
-            totalcpu_tooltip.ShowAlways = true;
-            totalcpu_tooltip.SetToolTip(total_cpu, "The amount of CPU cycles the process requires.");
-            totalcpu_tooltip.AutoPopDelay = 32000;
-
-            usedcpu_tooltip = new ToolTip();
-
-            usedcpu_tooltip.ToolTipTitle = "CPU Used";
-            usedcpu_tooltip.ShowAlways = true;
-            usedcpu_tooltip.SetToolTip(cpu_used, "CPU cycles the process has used.\r\nIf CPU Update is enabled, this will refresh if the CPU is available.");
-            usedcpu_tooltip.AutoPopDelay = 32000;
-
-            elapsed_tooltip = new ToolTip();
-
-            elapsed_tooltip.ToolTipTitle = "Elapsed";
-            elapsed_tooltip.ShowAlways = true;
-            elapsed_tooltip.SetToolTip(pcb_elapsed, "Amount of cycles the process has been in system.\r\nIf CPU Update is enabled, this will refresh if the CPU is available.");
-            elapsed_tooltip.AutoPopDelay = 32000;
-
-            totalio_tooltip = new ToolTip();
-
-            totalio_tooltip.ToolTipTitle = "Total I/O";
-            totalio_tooltip.ShowAlways = true;
-            totalio_tooltip.SetToolTip(total_io, "The amount of I/O cycles the process requires.");
-            totalio_tooltip.AutoPopDelay = 32000;
-
-            usedio_tooltip = new ToolTip();
-
-            usedio_tooltip.ToolTipTitle = "I/O Used";
-            usedio_tooltip.ShowAlways = true;
-            usedio_tooltip.SetToolTip(io_used, "I/O cycles the process has used.\r\nIf CPU Update is enabled, this will refresh if the CPU is available.");
-            usedio_tooltip.AutoPopDelay = 32000;
-
-            finishing_tooltip = new ToolTip();
-
-            finishing_tooltip.ToolTipTitle = "Finishing Cycle";
-            finishing_tooltip.ShowAlways = true;
-            finishing_tooltip.SetToolTip(finishing_cycle, "Cycle in which the process left the system.\r\nWill be displayed once the process leaves the system.");
-            finishing_tooltip.AutoPopDelay = 32000;
-
-            systemtime_tooltip = new ToolTip();
-
-            systemtime_tooltip.ToolTipTitle = "Time in System";
-            systemtime_tooltip.ShowAlways = true;
-            systemtime_tooltip.SetToolTip(time_in_system, "Total amount of cycles the process remained in system.\r\nWill be displayed once the process leaves the system.");
-            systemtime_tooltip.AutoPopDelay = 32000;
-
-            idle_tooltip = new ToolTip();
-
-            idle_tooltip.ToolTipTitle = "Idle Time";
-            idle_tooltip.ShowAlways = true;
-            idle_tooltip.SetToolTip(idle_time, "Amount of cycles the process remained in system without using CPU or I/O.\r\nWill be displayed if the process leaves the system succesfully.\r\n");
-            idle_tooltip.AutoPopDelay = 32000;
-
-            status_tooltip = new ToolTip();
-
-            status_tooltip.ToolTipTitle = "Status";
-            status_tooltip.ShowAlways = true;
-            status_tooltip.SetToolTip(status, "Current status of the process.\r\nIn System: Process is in system.\r\nFinished: Process completed its cycles and left the system.\r\nKilled: Process was forcefully ejected from system without finishing its cycles.");
-            status_tooltip.AutoPopDelay = 32000;
-
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -822,6 +743,11 @@ namespace os_sim
                 update_warning.Text = "Note: CPU Update is checked, PCB will be updated by the CPU if it is idle.";
             else
                 update_warning.Text = "";
+        }
+
+        private void message_display_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

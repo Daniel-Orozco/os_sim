@@ -47,19 +47,23 @@
             this.io1_queue = new System.Windows.Forms.Label();
             this.io1_list = new System.Windows.Forms.TextBox();
             this.settings = new System.Windows.Forms.GroupBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.io_usage = new System.Windows.Forms.TextBox();
+            this.io_chance = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.cpu_update = new System.Windows.Forms.CheckBox();
             this.average_cpu = new System.Windows.Forms.TextBox();
-            this.pause = new System.Windows.Forms.Button();
             this.algorithm_list = new System.Windows.Forms.ComboBox();
-            this.play = new System.Windows.Forms.Button();
-            this.stop = new System.Windows.Forms.Button();
             this.setttings_chance = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cpu_update = new System.Windows.Forms.CheckBox();
+            this.pause = new System.Windows.Forms.Button();
+            this.play = new System.Windows.Forms.Button();
+            this.stop = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.delay_bar = new System.Windows.Forms.TrackBar();
-            this.label6 = new System.Windows.Forms.Label();
             this.settings_waiting = new System.Windows.Forms.TextBox();
             this.settings_ready = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -104,7 +108,6 @@
             this.m57 = new System.Windows.Forms.TextBox();
             this.m40 = new System.Windows.Forms.TextBox();
             this.m41 = new System.Windows.Forms.TextBox();
-            this.m42 = new System.Windows.Forms.TextBox();
             this.m43 = new System.Windows.Forms.TextBox();
             this.m44 = new System.Windows.Forms.TextBox();
             this.m45 = new System.Windows.Forms.TextBox();
@@ -142,6 +145,7 @@
             this.m02 = new System.Windows.Forms.TextBox();
             this.m01 = new System.Windows.Forms.TextBox();
             this.m00 = new System.Windows.Forms.TextBox();
+            this.m42 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -181,6 +185,11 @@
             this.label30 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.TAP = new System.Windows.Forms.ListView();
+            this.ProcessID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Frame = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Location = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Requests = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.RAMTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.DISK = new System.Windows.Forms.ListView();
@@ -194,26 +203,15 @@
             this.label32 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
-            this.ProcessID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Frame = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Location = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Requests = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.RAMTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
             this.label40 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.swap_algorithm = new System.Windows.Forms.ComboBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.frame_chance = new System.Windows.Forms.TextBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delay_bar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -237,7 +235,7 @@
             // quantum
             // 
             this.quantum.AutoSize = true;
-            this.quantum.Location = new System.Drawing.Point(373, 4);
+            this.quantum.Location = new System.Drawing.Point(382, 4);
             this.quantum.Name = "quantum";
             this.quantum.Size = new System.Drawing.Size(50, 13);
             this.quantum.TabIndex = 1;
@@ -330,7 +328,7 @@
             // quantum_display
             // 
             this.quantum_display.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.quantum_display.Location = new System.Drawing.Point(376, 20);
+            this.quantum_display.Location = new System.Drawing.Point(385, 20);
             this.quantum_display.Multiline = true;
             this.quantum_display.Name = "quantum_display";
             this.quantum_display.Size = new System.Drawing.Size(60, 20);
@@ -393,8 +391,8 @@
             // settings
             // 
             this.settings.Controls.Add(this.label34);
-            this.settings.Controls.Add(this.textBox2);
-            this.settings.Controls.Add(this.textBox3);
+            this.settings.Controls.Add(this.io_usage);
+            this.settings.Controls.Add(this.io_chance);
             this.settings.Controls.Add(this.label35);
             this.settings.Controls.Add(this.label10);
             this.settings.Controls.Add(this.average_cpu);
@@ -409,6 +407,42 @@
             this.settings.TabStop = false;
             this.settings.Text = "Processor Settings";
             // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(159, 65);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(57, 13);
+            this.label34.TabIndex = 44;
+            this.label34.Text = "I/O Usage";
+            // 
+            // io_usage
+            // 
+            this.io_usage.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.io_usage.Location = new System.Drawing.Point(222, 62);
+            this.io_usage.Multiline = true;
+            this.io_usage.Name = "io_usage";
+            this.io_usage.Size = new System.Drawing.Size(36, 20);
+            this.io_usage.TabIndex = 43;
+            // 
+            // io_chance
+            // 
+            this.io_chance.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.io_chance.Location = new System.Drawing.Point(222, 40);
+            this.io_chance.Multiline = true;
+            this.io_chance.Name = "io_chance";
+            this.io_chance.Size = new System.Drawing.Size(36, 20);
+            this.io_chance.TabIndex = 41;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(153, 42);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(63, 13);
+            this.label35.TabIndex = 42;
+            this.label35.Text = "I/O Chance";
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -417,6 +451,56 @@
             this.label10.Size = new System.Drawing.Size(72, 13);
             this.label10.TabIndex = 40;
             this.label10.Text = "Average CPU";
+            // 
+            // average_cpu
+            // 
+            this.average_cpu.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.average_cpu.Location = new System.Drawing.Point(93, 63);
+            this.average_cpu.Multiline = true;
+            this.average_cpu.Name = "average_cpu";
+            this.average_cpu.Size = new System.Drawing.Size(36, 20);
+            this.average_cpu.TabIndex = 37;
+            this.average_cpu.TextChanged += new System.EventHandler(this.average_cpu_TextChanged);
+            // 
+            // algorithm_list
+            // 
+            this.algorithm_list.FormattingEnabled = true;
+            this.algorithm_list.Items.AddRange(new object[] {
+            "Round Robin",
+            "FCFS"});
+            this.algorithm_list.Location = new System.Drawing.Point(93, 17);
+            this.algorithm_list.Name = "algorithm_list";
+            this.algorithm_list.Size = new System.Drawing.Size(93, 21);
+            this.algorithm_list.TabIndex = 35;
+            this.algorithm_list.SelectedIndexChanged += new System.EventHandler(this.algorithm_list_SelectedIndexChanged);
+            // 
+            // setttings_chance
+            // 
+            this.setttings_chance.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.setttings_chance.Location = new System.Drawing.Point(93, 41);
+            this.setttings_chance.Multiline = true;
+            this.setttings_chance.Name = "setttings_chance";
+            this.setttings_chance.Size = new System.Drawing.Size(36, 20);
+            this.setttings_chance.TabIndex = 32;
+            this.setttings_chance.TextChanged += new System.EventHandler(this.setttings_chance_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(2, 43);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(85, 13);
+            this.label7.TabIndex = 33;
+            this.label7.Text = "Process Chance";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 21);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(75, 13);
+            this.label6.TabIndex = 32;
+            this.label6.Text = "CPU Algorithm";
             // 
             // cpu_update
             // 
@@ -431,16 +515,6 @@
             this.cpu_update.UseVisualStyleBackColor = false;
             this.cpu_update.CheckedChanged += new System.EventHandler(this.cpu_update_CheckedChanged);
             // 
-            // average_cpu
-            // 
-            this.average_cpu.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.average_cpu.Location = new System.Drawing.Point(93, 63);
-            this.average_cpu.Multiline = true;
-            this.average_cpu.Name = "average_cpu";
-            this.average_cpu.Size = new System.Drawing.Size(36, 20);
-            this.average_cpu.TabIndex = 37;
-            this.average_cpu.TextChanged += new System.EventHandler(this.average_cpu_TextChanged);
-            // 
             // pause
             // 
             this.pause.BackColor = System.Drawing.SystemColors.ButtonFace;
@@ -452,18 +526,6 @@
             this.pause.TabIndex = 36;
             this.pause.UseVisualStyleBackColor = false;
             this.pause.Click += new System.EventHandler(this.pause_Click);
-            // 
-            // algorithm_list
-            // 
-            this.algorithm_list.FormattingEnabled = true;
-            this.algorithm_list.Items.AddRange(new object[] {
-            "Round Robin",
-            "FCFS"});
-            this.algorithm_list.Location = new System.Drawing.Point(93, 17);
-            this.algorithm_list.Name = "algorithm_list";
-            this.algorithm_list.Size = new System.Drawing.Size(93, 21);
-            this.algorithm_list.TabIndex = 35;
-            this.algorithm_list.SelectedIndexChanged += new System.EventHandler(this.algorithm_list_SelectedIndexChanged);
             // 
             // play
             // 
@@ -489,25 +551,6 @@
             this.stop.TabIndex = 34;
             this.stop.UseVisualStyleBackColor = false;
             this.stop.Click += new System.EventHandler(this.stop_Click);
-            // 
-            // setttings_chance
-            // 
-            this.setttings_chance.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.setttings_chance.Location = new System.Drawing.Point(93, 41);
-            this.setttings_chance.Multiline = true;
-            this.setttings_chance.Name = "setttings_chance";
-            this.setttings_chance.Size = new System.Drawing.Size(36, 20);
-            this.setttings_chance.TabIndex = 32;
-            this.setttings_chance.TextChanged += new System.EventHandler(this.setttings_chance_TextChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(2, 43);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(85, 13);
-            this.label7.TabIndex = 33;
-            this.label7.Text = "Process Chance";
             // 
             // label5
             // 
@@ -537,15 +580,6 @@
             this.delay_bar.Size = new System.Drawing.Size(104, 42);
             this.delay_bar.TabIndex = 0;
             this.delay_bar.Scroll += new System.EventHandler(this.delay_bar_Scroll);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 21);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 13);
-            this.label6.TabIndex = 32;
-            this.label6.Text = "CPU Algorithm";
             // 
             // settings_waiting
             // 
@@ -1068,16 +1102,6 @@
             this.m41.Size = new System.Drawing.Size(34, 34);
             this.m41.TabIndex = 86;
             // 
-            // m42
-            // 
-            this.m42.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.m42.Location = new System.Drawing.Point(83, 163);
-            this.m42.Multiline = true;
-            this.m42.Name = "m42";
-            this.m42.ReadOnly = true;
-            this.m42.Size = new System.Drawing.Size(34, 34);
-            this.m42.TabIndex = 85;
-            // 
             // m43
             // 
             this.m43.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -1448,6 +1472,16 @@
             this.m00.Size = new System.Drawing.Size(34, 34);
             this.m00.TabIndex = 48;
             // 
+            // m42
+            // 
+            this.m42.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.m42.Location = new System.Drawing.Point(83, 163);
+            this.m42.Multiline = true;
+            this.m42.Name = "m42";
+            this.m42.ReadOnly = true;
+            this.m42.Size = new System.Drawing.Size(34, 34);
+            this.m42.TabIndex = 85;
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -1793,6 +1827,31 @@
             this.TAP.UseCompatibleStateImageBehavior = false;
             this.TAP.View = System.Windows.Forms.View.Details;
             // 
+            // ProcessID
+            // 
+            this.ProcessID.Text = "Process";
+            this.ProcessID.Width = 54;
+            // 
+            // Frame
+            // 
+            this.Frame.Text = "Frame";
+            this.Frame.Width = 52;
+            // 
+            // Location
+            // 
+            this.Location.Text = "Location";
+            this.Location.Width = 59;
+            // 
+            // Requests
+            // 
+            this.Requests.Text = "Requests";
+            this.Requests.Width = 67;
+            // 
+            // RAMTime
+            // 
+            this.RAMTime.Text = "RAM Time";
+            this.RAMTime.Width = 68;
+            // 
             // label26
             // 
             this.label26.AutoSize = true;
@@ -1918,43 +1977,16 @@
             this.label28.Text = "S\r\nW\r\nA\r\nP\r\nP\r\nI\r\nN\r\nG";
             this.label28.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // ProcessID
-            // 
-            this.ProcessID.Text = "Process";
-            this.ProcessID.Width = 54;
-            // 
-            // Frame
-            // 
-            this.Frame.Text = "Frame";
-            this.Frame.Width = 52;
-            // 
-            // Location
-            // 
-            this.Location.Text = "Location";
-            this.Location.Width = 59;
-            // 
-            // Requests
-            // 
-            this.Requests.Text = "Requests";
-            this.Requests.Width = 67;
-            // 
-            // RAMTime
-            // 
-            this.RAMTime.Text = "RAM Time";
-            this.RAMTime.Width = 68;
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label39);
-            this.groupBox1.Controls.Add(this.textBox6);
-            this.groupBox1.Controls.Add(this.label40);
-            this.groupBox1.Controls.Add(this.textBox7);
-            this.groupBox1.Controls.Add(this.label36);
+            this.groupBox1.Controls.Add(this.comboBox2);
             this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.textBox4);
+            this.groupBox1.Controls.Add(this.label39);
+            this.groupBox1.Controls.Add(this.label40);
+            this.groupBox1.Controls.Add(this.swap_algorithm);
             this.groupBox1.Controls.Add(this.label38);
             this.groupBox1.Controls.Add(this.label37);
-            this.groupBox1.Controls.Add(this.textBox5);
+            this.groupBox1.Controls.Add(this.frame_chance);
             this.groupBox1.Location = new System.Drawing.Point(836, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(277, 89);
@@ -1962,89 +1994,49 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Memory Settings";
             // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(159, 65);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(57, 13);
-            this.label34.TabIndex = 44;
-            this.label34.Text = "I/O Usage";
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textBox2.Location = new System.Drawing.Point(222, 62);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(36, 20);
-            this.textBox2.TabIndex = 43;
-            // 
-            // textBox3
-            // 
-            this.textBox3.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textBox3.Location = new System.Drawing.Point(222, 40);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(36, 20);
-            this.textBox3.TabIndex = 41;
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(153, 42);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(63, 13);
-            this.label35.TabIndex = 42;
-            this.label35.Text = "I/O Chance";
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(15, 65);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(72, 13);
-            this.label36.TabIndex = 50;
-            this.label36.Text = "Average CPU";
-            // 
-            // textBox4
-            // 
-            this.textBox4.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textBox4.Location = new System.Drawing.Point(92, 62);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(36, 20);
-            this.textBox4.TabIndex = 49;
-            // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
+            "4",
+            "8",
+            "16",
+            "32",
+            "64"});
+            this.comboBox1.Location = new System.Drawing.Point(92, 39);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(50, 21);
+            this.comboBox1.TabIndex = 83;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(27, 42);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(59, 13);
+            this.label39.TabIndex = 54;
+            this.label39.Text = "Frame Size";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(32, 65);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(54, 13);
+            this.label40.TabIndex = 52;
+            this.label40.Text = "RAM Size";
+            this.label40.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // swap_algorithm
+            // 
+            this.swap_algorithm.FormattingEnabled = true;
+            this.swap_algorithm.Items.AddRange(new object[] {
             "Least Used",
             "Oldest"});
-            this.comboBox1.Location = new System.Drawing.Point(92, 16);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(93, 21);
-            this.comboBox1.TabIndex = 48;
-            // 
-            // textBox5
-            // 
-            this.textBox5.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textBox5.Location = new System.Drawing.Point(92, 40);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(36, 20);
-            this.textBox5.TabIndex = 45;
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(10, 43);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(76, 13);
-            this.label37.TabIndex = 47;
-            this.label37.Text = "Frame Chance";
-            this.label37.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.swap_algorithm.Location = new System.Drawing.Point(92, 16);
+            this.swap_algorithm.Name = "swap_algorithm";
+            this.swap_algorithm.Size = new System.Drawing.Size(93, 21);
+            this.swap_algorithm.TabIndex = 48;
             // 
             // label38
             // 
@@ -2055,42 +2047,32 @@
             this.label38.TabIndex = 46;
             this.label38.Text = "Swap Algorithm";
             // 
-            // label39
+            // label37
             // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(166, 64);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(59, 13);
-            this.label39.TabIndex = 54;
-            this.label39.Text = "Frame Size";
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(151, 65);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(74, 13);
+            this.label37.TabIndex = 47;
+            this.label37.Text = "Swap Chance";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // textBox6
+            // frame_chance
             // 
-            this.textBox6.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textBox6.Location = new System.Drawing.Point(231, 61);
-            this.textBox6.Multiline = true;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(36, 20);
-            this.textBox6.TabIndex = 53;
+            this.frame_chance.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.frame_chance.Location = new System.Drawing.Point(231, 62);
+            this.frame_chance.Multiline = true;
+            this.frame_chance.Name = "frame_chance";
+            this.frame_chance.Size = new System.Drawing.Size(36, 20);
+            this.frame_chance.TabIndex = 45;
             // 
-            // label40
+            // comboBox2
             // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(171, 42);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(54, 13);
-            this.label40.TabIndex = 52;
-            this.label40.Text = "RAM Size";
-            this.label40.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // textBox7
-            // 
-            this.textBox7.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textBox7.Location = new System.Drawing.Point(231, 39);
-            this.textBox7.Multiline = true;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(36, 20);
-            this.textBox7.TabIndex = 51;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(92, 61);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(50, 21);
+            this.comboBox2.TabIndex = 84;
             // 
             // mainView
             // 
@@ -2359,19 +2341,17 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox io_usage;
+        private System.Windows.Forms.TextBox io_chance;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.ComboBox swap_algorithm;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox frame_chance;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }
 

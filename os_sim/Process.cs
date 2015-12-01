@@ -24,21 +24,33 @@ namespace os_sim
         public int time_in_system;
         public int idle_time;
 
+        public int size;
+        public int frames;
+        public int wait_ratio;
+
         public int quantum;
 
         public string status;
-        public Process(int next_id, int cycle, int avrg, Random rand, int q)
+        public Process(int next_id, int cycle, int avrg, Random rand, int q, int iouse, int iochance, int frame_size)
         {
             id = next_id;
             arrival_cycle = cycle;
 
-            //total_cycles = rand.Next(Convert.ToInt32(avrg*0.75), Convert.ToInt32(avrg*1.25));
-            total_io1 = rand.Next(0, 20);
+            if (rand.Next(0, 101) <= iochance)
+                total_io1 = rand.Next(Convert.ToInt32(iouse * 0.75), Convert.ToInt32(iouse * 1.25));
+            else
+                total_io1 = 0;
             total_cpu = rand.Next(Convert.ToInt32(avrg * 0.75), Convert.ToInt32(avrg * 1.25));
+
+            size = rand.Next(1,256);
+
+            frames = Convert.ToInt32(size / frame_size);
 
             current_cycles = 0;
             current_cpu = 0;
             current_io1 = 0;
+
+
 
             quantum = q;
 

@@ -27,6 +27,14 @@ namespace os_sim
         private int tquantum;
         private int io1_use;
 
+        private int io1_usage;
+        private int io1_chance;
+        private int frame_s;
+        private int ram_s;
+        private int frame_c;
+
+        private Item[] ram_sizes;
+
         private int new_size;
         private int ready_size;
         private int waiting_size;
@@ -85,12 +93,21 @@ namespace os_sim
             last_processid = 0;
             clock_value = 0;
             average_cycles = 10;
+
             chance = 50;
             tquantum = 5;
             io1_use = 0;
             last_finished = 0;
             running_cycle = 0;
-            
+
+            io1_usage = 10;
+            io1_chance = 50;
+            frame_s = 4;
+            ram_s = 256;
+            frame_c = 50;
+
+            ramOptions();
+
             timer.Enabled = true;                           
             timer.Stop();
 
@@ -99,16 +116,26 @@ namespace os_sim
             
             initializeStates();
         }
-
+        public void ramOptions()
+        {
+            int value = frame_s * 4;
+            int amount = (256 / frame_s) - (frame_s == 64 ? 0 : 32 / frame_s);
+            //finish ram options
+            ram_sizes = new Item[amount];
+        }
         public void updateParameters()
         {
-            int[] updates = new int[6];
+            int[] updates = new int[9];
             updates[0] = Utilities.updateParameter(settings_new, new_size, 0, Int32.MaxValue);
             updates[1] = Utilities.updateParameter(settings_ready, ready_size, 0, Int32.MaxValue);
             updates[2] = Utilities.updateParameter(settings_waiting, waiting_size, 0, Int32.MaxValue);
-            updates[3] = Utilities.updateParameter(setttings_chance, chance, 0, 100);
+            updates[3] = Utilities.updateParameter(setttings_chance, chance);
             updates[4] = Utilities.updateParameter(quantum_display, tquantum, 1, Int32.MaxValue);
             updates[5] = Utilities.updateParameter(average_cpu, average_cycles, 1, Int32.MaxValue);
+
+            updates[6] = Utilities.updateParameter(io_chance, io1_chance);
+            updates[7] = Utilities.updateParameter(io_usage, io1_usage, 0, Int32.MaxValue);
+            updates[8] = Utilities.updateParameter(frame_chance, frame_c);
 
             for(int c = 0; c < updates.Length; c++)
                 if (updates[c] == -1)
@@ -117,9 +144,14 @@ namespace os_sim
             new_size = updates[0] == -1 ? new_size : resizeState(New, updates[0]);
             ready_size = updates[1] == -1 ? ready_size : resizeState(Ready, updates[1]);
             waiting_size = updates[2] == -1 ? waiting_size : resizeState(Waiting, updates[2]);
+
             chance = updates[3] == -1 ? chance : updates[3];
             tquantum = updates[4] == -1 ? tquantum : updates[4];
             average_cycles = updates[5] == -1 ? average_cycles : updates[5];
+
+            io1_chance = updates[6] == -1 ? io1_chance : updates[6];
+            io1_usage = updates[7] == -1 ? io1_usage : updates[7];
+            frame_c = updates[8] == -1 ? frame_c : updates[8];
         }
         int resizeState(State st, int n_size)
         {
@@ -327,8 +359,14 @@ namespace os_sim
             clock_display.Text = "0";
             run_cycle.Text = "0";
             io1_cycle.Text = "0";
+
             update_warning.Text = "";
             update_warning.ForeColor = System.Drawing.Color.Blue;
+
+            io_chance.Text = "50";
+            io_usage.Text = "10";
+            frame_chance.Text = "50";
+
 
             settings_new.ReadOnly = false;
             settings_ready.ReadOnly = false;
@@ -337,12 +375,20 @@ namespace os_sim
             quantum_display.ReadOnly = false;
             average_cpu.ReadOnly = false;
 
+            io_chance.ReadOnly = false;
+            io_usage.ReadOnly = false;
+            frame_chance.ReadOnly = false;
+
             settings_new.BackColor = SystemColors.ControlLightLight;
             settings_ready.BackColor = SystemColors.ControlLightLight;
             settings_waiting.BackColor = SystemColors.ControlLightLight;
             setttings_chance.BackColor = SystemColors.ControlLightLight;
             quantum_display.BackColor = SystemColors.ControlLightLight;
             average_cpu.BackColor = SystemColors.ControlLightLight;
+
+            io_chance.BackColor = SystemColors.ControlLightLight;
+            io_usage.BackColor = SystemColors.ControlLightLight;
+            frame_chance.BackColor = SystemColors.ControlLightLight;
 
             foreach (TextBox i in memory_map)
                 i.Text = "";
@@ -352,13 +398,15 @@ namespace os_sim
             messageUpdate((int)Message.Clean);
             delay_bar.Value = 1;
             algorithm_list.SelectedIndex = 0;
+            swap_algorithm.SelectedIndex = 0;
         }
         public void generateProcess()
         {
             Process n_process;
             if(rand.Next(0,100) < chance)
             {
-                n_process = new Process(last_processid + 1, clock_value, average_cycles, rand, tquantum);
+                //public Process(int next_id, int cycle, int avrg, Random rand, int q, int iouse, int iochance, int frame_size)
+                n_process = new Process(last_processid + 1, clock_value, average_cycles, rand, tquantum, io1_usage, io1_chance, frame_s);
                 last_processid++;
                 New.addProcess(n_process);
 
@@ -534,12 +582,20 @@ namespace os_sim
             quantum_display.ReadOnly = true;
             average_cpu.ReadOnly = true;
 
+            io_chance.ReadOnly = true;
+            io_usage.ReadOnly = true;
+            frame_chance.ReadOnly = true;
+
             settings_new.BackColor = SystemColors.Control;
             settings_ready.BackColor = SystemColors.Control;
             settings_waiting.BackColor = SystemColors.Control;
             setttings_chance.BackColor = SystemColors.Control;
             quantum_display.BackColor = SystemColors.Control;
             average_cpu.BackColor = SystemColors.Control;
+
+            io_chance.BackColor = SystemColors.Control;
+            io_usage.BackColor = SystemColors.Control;
+            frame_chance.BackColor = SystemColors.Control;
         }
 
         private void pause_Click(object sender, EventArgs e)
@@ -559,6 +615,10 @@ namespace os_sim
             setttings_chance.BackColor = SystemColors.ControlLightLight;
             quantum_display.BackColor = SystemColors.ControlLightLight;
             average_cpu.BackColor = SystemColors.ControlLightLight;
+
+            io_chance.BackColor = SystemColors.ControlLightLight;
+            io_usage.BackColor = SystemColors.ControlLightLight;
+            frame_chance.BackColor = SystemColors.ControlLightLight;
         }
         private void average_cpu_TextChanged(object sender, EventArgs e)
         {
@@ -760,6 +820,21 @@ namespace os_sim
 
         }
     }
+
+    private class Item
+    {
+        public string Name;
+        public int Value;
+        public Item(string name, int value)
+        {
+            Name = name; Value = value;
+        }
+        public override string ToString()
+        {
+            // Generates the text shown in the combo box
+            return Name;
+        }
+    }
 }
 public class Utilities
 {
@@ -800,7 +875,7 @@ public class Utilities
         t.Text = ""+data;
         return -1;
     }
-    public static bool isValidNumber(TextBox t, int min = 0, int max = 100)
+    public static bool isValidNumber(TextBox t, int min, int max)
     {
         int value = -1;
         string boxText = t.Text;

@@ -174,15 +174,46 @@
             this.TimeinSystem = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.IdleTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Stat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.listView2 = new System.Windows.Forms.ListView();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
             this.MemSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FrameNum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.WaitRatio = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.TAP = new System.Windows.Forms.ListView();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.DISK = new System.Windows.Forms.ListView();
+            this.PID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.PageIndex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.r1 = new System.Windows.Forms.Label();
+            this.r2 = new System.Windows.Forms.Label();
+            this.r4 = new System.Windows.Forms.Label();
+            this.r3 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.ProcessID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Frame = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Location = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Requests = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.RAMTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
             this.settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delay_bar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -191,12 +222,13 @@
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // clock
             // 
             this.clock.AutoSize = true;
-            this.clock.Location = new System.Drawing.Point(132, 13);
+            this.clock.Location = new System.Drawing.Point(307, 4);
             this.clock.Name = "clock";
             this.clock.Size = new System.Drawing.Size(34, 13);
             this.clock.TabIndex = 0;
@@ -205,7 +237,7 @@
             // quantum
             // 
             this.quantum.AutoSize = true;
-            this.quantum.Location = new System.Drawing.Point(132, 59);
+            this.quantum.Location = new System.Drawing.Point(373, 4);
             this.quantum.Name = "quantum";
             this.quantum.Size = new System.Drawing.Size(50, 13);
             this.quantum.TabIndex = 1;
@@ -288,7 +320,7 @@
             // clock_display
             // 
             this.clock_display.BackColor = System.Drawing.SystemColors.Control;
-            this.clock_display.Location = new System.Drawing.Point(135, 29);
+            this.clock_display.Location = new System.Drawing.Point(310, 20);
             this.clock_display.Multiline = true;
             this.clock_display.Name = "clock_display";
             this.clock_display.ReadOnly = true;
@@ -298,7 +330,7 @@
             // quantum_display
             // 
             this.quantum_display.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.quantum_display.Location = new System.Drawing.Point(135, 75);
+            this.quantum_display.Location = new System.Drawing.Point(376, 20);
             this.quantum_display.Multiline = true;
             this.quantum_display.Name = "quantum_display";
             this.quantum_display.Size = new System.Drawing.Size(60, 20);
@@ -318,7 +350,7 @@
             // waiting_list
             // 
             this.waiting_list.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.waiting_list.Location = new System.Drawing.Point(376, 147);
+            this.waiting_list.Location = new System.Drawing.Point(120, 32);
             this.waiting_list.Multiline = true;
             this.waiting_list.Name = "waiting_list";
             this.waiting_list.ReadOnly = true;
@@ -360,22 +392,19 @@
             // 
             // settings
             // 
+            this.settings.Controls.Add(this.label34);
+            this.settings.Controls.Add(this.textBox2);
+            this.settings.Controls.Add(this.textBox3);
+            this.settings.Controls.Add(this.label35);
             this.settings.Controls.Add(this.label10);
-            this.settings.Controls.Add(this.cpu_update);
             this.settings.Controls.Add(this.average_cpu);
-            this.settings.Controls.Add(this.pause);
             this.settings.Controls.Add(this.algorithm_list);
-            this.settings.Controls.Add(this.play);
-            this.settings.Controls.Add(this.stop);
             this.settings.Controls.Add(this.setttings_chance);
             this.settings.Controls.Add(this.label7);
-            this.settings.Controls.Add(this.label5);
-            this.settings.Controls.Add(this.label4);
-            this.settings.Controls.Add(this.delay_bar);
             this.settings.Controls.Add(this.label6);
-            this.settings.Location = new System.Drawing.Point(201, 12);
+            this.settings.Location = new System.Drawing.Point(486, 12);
             this.settings.Name = "settings";
-            this.settings.Size = new System.Drawing.Size(393, 89);
+            this.settings.Size = new System.Drawing.Size(265, 89);
             this.settings.TabIndex = 25;
             this.settings.TabStop = false;
             this.settings.Text = "Processor Settings";
@@ -383,7 +412,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(101, 65);
+            this.label10.Location = new System.Drawing.Point(15, 66);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(72, 13);
             this.label10.TabIndex = 40;
@@ -392,19 +421,20 @@
             // cpu_update
             // 
             this.cpu_update.AutoSize = true;
+            this.cpu_update.BackColor = System.Drawing.Color.Transparent;
             this.cpu_update.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cpu_update.Location = new System.Drawing.Point(12, 50);
+            this.cpu_update.Location = new System.Drawing.Point(769, 71);
             this.cpu_update.Name = "cpu_update";
-            this.cpu_update.Size = new System.Drawing.Size(86, 17);
+            this.cpu_update.Size = new System.Drawing.Size(61, 30);
             this.cpu_update.TabIndex = 39;
-            this.cpu_update.Text = "CPU Update";
-            this.cpu_update.UseVisualStyleBackColor = true;
+            this.cpu_update.Text = "CPU\r\nUpdate\r\n";
+            this.cpu_update.UseVisualStyleBackColor = false;
             this.cpu_update.CheckedChanged += new System.EventHandler(this.cpu_update_CheckedChanged);
             // 
             // average_cpu
             // 
             this.average_cpu.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.average_cpu.Location = new System.Drawing.Point(178, 62);
+            this.average_cpu.Location = new System.Drawing.Point(93, 63);
             this.average_cpu.Multiline = true;
             this.average_cpu.Name = "average_cpu";
             this.average_cpu.Size = new System.Drawing.Size(36, 20);
@@ -416,7 +446,7 @@
             this.pause.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.pause.BackgroundImage = global::os_sim.Properties.Resources.storm_pause;
             this.pause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pause.Location = new System.Drawing.Point(72, 19);
+            this.pause.Location = new System.Drawing.Point(455, 45);
             this.pause.Name = "pause";
             this.pause.Size = new System.Drawing.Size(25, 25);
             this.pause.TabIndex = 36;
@@ -429,7 +459,7 @@
             this.algorithm_list.Items.AddRange(new object[] {
             "Round Robin",
             "FCFS"});
-            this.algorithm_list.Location = new System.Drawing.Point(178, 16);
+            this.algorithm_list.Location = new System.Drawing.Point(93, 17);
             this.algorithm_list.Name = "algorithm_list";
             this.algorithm_list.Size = new System.Drawing.Size(93, 21);
             this.algorithm_list.TabIndex = 35;
@@ -440,7 +470,7 @@
             this.play.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.play.BackgroundImage = global::os_sim.Properties.Resources.storm_play;
             this.play.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.play.Location = new System.Drawing.Point(42, 19);
+            this.play.Location = new System.Drawing.Point(455, 14);
             this.play.Name = "play";
             this.play.Size = new System.Drawing.Size(25, 25);
             this.play.TabIndex = 35;
@@ -453,7 +483,7 @@
             this.stop.BackgroundImage = global::os_sim.Properties.Resources.storm_stop;
             this.stop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.stop.ForeColor = System.Drawing.SystemColors.Control;
-            this.stop.Location = new System.Drawing.Point(12, 19);
+            this.stop.Location = new System.Drawing.Point(455, 76);
             this.stop.Name = "stop";
             this.stop.Size = new System.Drawing.Size(25, 25);
             this.stop.TabIndex = 34;
@@ -463,7 +493,7 @@
             // setttings_chance
             // 
             this.setttings_chance.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.setttings_chance.Location = new System.Drawing.Point(178, 40);
+            this.setttings_chance.Location = new System.Drawing.Point(93, 41);
             this.setttings_chance.Multiline = true;
             this.setttings_chance.Name = "setttings_chance";
             this.setttings_chance.Size = new System.Drawing.Size(36, 20);
@@ -473,16 +503,16 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(128, 42);
+            this.label7.Location = new System.Drawing.Point(2, 43);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 13);
+            this.label7.Size = new System.Drawing.Size(85, 13);
             this.label7.TabIndex = 33;
-            this.label7.Text = "Chance";
+            this.label7.Text = "Process Chance";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(306, 9);
+            this.label5.Location = new System.Drawing.Point(307, 55);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(34, 13);
             this.label5.TabIndex = 32;
@@ -491,7 +521,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(271, 65);
+            this.label4.Location = new System.Drawing.Point(344, 88);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(101, 13);
             this.label4.TabIndex = 32;
@@ -501,7 +531,7 @@
             // 
             this.delay_bar.BackColor = System.Drawing.SystemColors.Control;
             this.delay_bar.LargeChange = 1;
-            this.delay_bar.Location = new System.Drawing.Point(272, 25);
+            this.delay_bar.Location = new System.Drawing.Point(345, 48);
             this.delay_bar.Maximum = 2;
             this.delay_bar.Name = "delay_bar";
             this.delay_bar.Size = new System.Drawing.Size(104, 42);
@@ -511,11 +541,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(122, 21);
+            this.label6.Location = new System.Drawing.Point(12, 21);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 13);
+            this.label6.Size = new System.Drawing.Size(75, 13);
             this.label6.TabIndex = 32;
-            this.label6.Text = "Algorithm";
+            this.label6.Text = "CPU Algorithm";
             // 
             // settings_waiting
             // 
@@ -577,11 +607,11 @@
             // message_display
             // 
             this.message_display.BackColor = System.Drawing.SystemColors.Control;
-            this.message_display.Location = new System.Drawing.Point(637, 51);
+            this.message_display.Location = new System.Drawing.Point(118, 29);
             this.message_display.Multiline = true;
             this.message_display.Name = "message_display";
             this.message_display.ReadOnly = true;
-            this.message_display.Size = new System.Drawing.Size(537, 20);
+            this.message_display.Size = new System.Drawing.Size(182, 72);
             this.message_display.TabIndex = 34;
             this.message_display.TextChanged += new System.EventHandler(this.message_display_TextChanged);
             // 
@@ -630,7 +660,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(1091, 577);
+            this.label11.Location = new System.Drawing.Point(118, 12);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(131, 13);
             this.label11.TabIndex = 40;
@@ -641,7 +671,7 @@
             // 
             this.pictureBox1.Image = global::os_sim.Properties.Resources.storm_logo;
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(26, 16);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 16);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 85);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -672,10 +702,11 @@
             this.help_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.help_button.Cursor = System.Windows.Forms.Cursors.Help;
             this.help_button.Image = global::os_sim.Properties.Resources.storm_help;
-            this.help_button.Location = new System.Drawing.Point(612, 51);
+            this.help_button.Location = new System.Drawing.Point(255, 6);
             this.help_button.Name = "help_button";
-            this.help_button.Size = new System.Drawing.Size(19, 20);
+            this.help_button.Size = new System.Drawing.Size(45, 20);
             this.help_button.TabIndex = 45;
+            this.help_button.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.help_button.UseVisualStyleBackColor = true;
             this.help_button.Click += new System.EventHandler(this.help_button_Click);
             // 
@@ -724,7 +755,6 @@
             this.tableLayoutPanel1.Controls.Add(this.m57, 7, 5);
             this.tableLayoutPanel1.Controls.Add(this.m40, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.m41, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.m42, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.m43, 3, 4);
             this.tableLayoutPanel1.Controls.Add(this.m44, 4, 4);
             this.tableLayoutPanel1.Controls.Add(this.m45, 5, 4);
@@ -762,8 +792,9 @@
             this.tableLayoutPanel1.Controls.Add(this.m02, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.m01, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.m00, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.m42, 2, 4);
             this.tableLayoutPanel1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(879, 254);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(793, 254);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 8;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
@@ -1420,16 +1451,16 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(859, 268);
+            this.label12.Location = new System.Drawing.Point(773, 268);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(13, 286);
+            this.label12.Size = new System.Drawing.Size(13, 13);
             this.label12.TabIndex = 48;
-            this.label12.Text = "0\r\n\r\n\r\n1\r\n\r\n\r\n2\r\n\r\n\r\n3\r\n\r\n\r\n4\r\n\r\n\r\n5\r\n\r\n\r\n6\r\n\r\n\r\n7";
+            this.label12.Text = "0";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(892, 234);
+            this.label13.Location = new System.Drawing.Point(806, 234);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(13, 13);
             this.label13.TabIndex = 49;
@@ -1438,7 +1469,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(931, 234);
+            this.label14.Location = new System.Drawing.Point(845, 234);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(13, 13);
             this.label14.TabIndex = 50;
@@ -1447,7 +1478,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(1012, 234);
+            this.label15.Location = new System.Drawing.Point(926, 234);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(13, 13);
             this.label15.TabIndex = 52;
@@ -1456,7 +1487,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(972, 234);
+            this.label16.Location = new System.Drawing.Point(886, 234);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(13, 13);
             this.label16.TabIndex = 51;
@@ -1465,7 +1496,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(1173, 234);
+            this.label17.Location = new System.Drawing.Point(1087, 234);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(13, 13);
             this.label17.TabIndex = 56;
@@ -1474,7 +1505,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(1131, 234);
+            this.label18.Location = new System.Drawing.Point(1045, 234);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(13, 13);
             this.label18.TabIndex = 55;
@@ -1483,7 +1514,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(1091, 234);
+            this.label19.Location = new System.Drawing.Point(1005, 234);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(13, 13);
             this.label19.TabIndex = 54;
@@ -1492,7 +1523,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(1051, 234);
+            this.label20.Location = new System.Drawing.Point(965, 234);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(13, 13);
             this.label20.TabIndex = 53;
@@ -1530,7 +1561,7 @@
             // disk_list
             // 
             this.disk_list.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.disk_list.Location = new System.Drawing.Point(376, 238);
+            this.disk_list.Location = new System.Drawing.Point(121, 25);
             this.disk_list.Multiline = true;
             this.disk_list.Name = "disk_list";
             this.disk_list.ReadOnly = true;
@@ -1597,6 +1628,7 @@
             this.panel2.Controls.Add(this.label24);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.waiting_queue);
+            this.panel2.Controls.Add(this.disk_list);
             this.panel2.Location = new System.Drawing.Point(256, 122);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(230, 86);
@@ -1611,6 +1643,7 @@
             this.panel3.Controls.Add(this.io1_cycle);
             this.panel3.Controls.Add(this.io1_display);
             this.panel3.Controls.Add(this.label22);
+            this.panel3.Controls.Add(this.waiting_list);
             this.panel3.Location = new System.Drawing.Point(256, 206);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(230, 89);
@@ -1639,7 +1672,7 @@
             listViewGroup1});
             this.pcb.Location = new System.Drawing.Point(32, 307);
             this.pcb.Name = "pcb";
-            this.pcb.Size = new System.Drawing.Size(614, 267);
+            this.pcb.Size = new System.Drawing.Size(719, 267);
             this.pcb.TabIndex = 68;
             this.pcb.UseCompatibleStateImageBehavior = false;
             this.pcb.View = System.Windows.Forms.View.Details;
@@ -1697,17 +1730,32 @@
             // Stat
             // 
             this.Stat.Text = "Status";
-            this.Stat.Width = 43;
+            this.Stat.Width = 58;
+            // 
+            // MemSize
+            // 
+            this.MemSize.Text = "Size";
+            this.MemSize.Width = 36;
+            // 
+            // FrameNum
+            // 
+            this.FrameNum.Text = "Frames";
+            this.FrameNum.Width = 48;
+            // 
+            // WaitRatio
+            // 
+            this.WaitRatio.Text = "Wait %";
+            this.WaitRatio.Width = 45;
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.panel4.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.panel4.Controls.Add(this.label30);
             this.panel4.Controls.Add(this.label31);
             this.panel4.Controls.Add(this.finished_queue);
             this.panel4.Location = new System.Drawing.Point(486, 122);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(108, 173);
+            this.panel4.Size = new System.Drawing.Size(107, 173);
             this.panel4.TabIndex = 67;
             // 
             // label30
@@ -1730,58 +1778,347 @@
             this.label31.TabIndex = 13;
             this.label31.Text = "Waiting";
             // 
-            // listView2
+            // TAP
             // 
-            this.listView2.Location = new System.Drawing.Point(622, 122);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(577, 102);
-            this.listView2.TabIndex = 70;
-            this.listView2.UseCompatibleStateImageBehavior = false;
-            this.listView2.View = System.Windows.Forms.View.Details;
+            this.TAP.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ProcessID,
+            this.Frame,
+            this.Location,
+            this.Requests,
+            this.RAMTime});
+            this.TAP.Location = new System.Drawing.Point(793, 122);
+            this.TAP.Name = "TAP";
+            this.TAP.Size = new System.Drawing.Size(320, 102);
+            this.TAP.TabIndex = 70;
+            this.TAP.UseCompatibleStateImageBehavior = false;
+            this.TAP.View = System.Windows.Forms.View.Details;
             // 
             // label26
             // 
             this.label26.AutoSize = true;
             this.label26.BackColor = System.Drawing.SystemColors.Control;
-            this.label26.Location = new System.Drawing.Point(1208, 260);
+            this.label26.Location = new System.Drawing.Point(1119, 254);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(16, 130);
             this.label26.TabIndex = 71;
             this.label26.Text = "M\r\nE\r\nM\r\nO\r\nR\r\nY\r\n\r\nM\r\nA\r\nP";
+            this.label26.Click += new System.EventHandler(this.label26_Click);
             // 
             // label27
             // 
             this.label27.AutoSize = true;
             this.label27.BackColor = System.Drawing.SystemColors.Control;
-            this.label27.Location = new System.Drawing.Point(1208, 128);
+            this.label27.Location = new System.Drawing.Point(1119, 122);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(14, 39);
             this.label27.TabIndex = 72;
             this.label27.Text = "T\r\nA\r\nP";
+            this.label27.Click += new System.EventHandler(this.label27_Click);
             // 
-            // MemSize
+            // DISK
             // 
-            this.MemSize.Text = "Size";
+            this.DISK.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.PID,
+            this.PageIndex});
+            this.DISK.Location = new System.Drawing.Point(624, 122);
+            this.DISK.Name = "DISK";
+            this.DISK.Size = new System.Drawing.Size(127, 173);
+            this.DISK.TabIndex = 73;
+            this.DISK.UseCompatibleStateImageBehavior = false;
+            this.DISK.View = System.Windows.Forms.View.Details;
             // 
-            // FrameNum
+            // PID
             // 
-            this.FrameNum.Text = "Frames";
+            this.PID.Text = "Process";
+            this.PID.Width = 54;
             // 
-            // WaitRatio
+            // PageIndex
             // 
-            this.WaitRatio.Text = "Wait %";
+            this.PageIndex.Text = "Page";
+            this.PageIndex.Width = 52;
+            // 
+            // r1
+            // 
+            this.r1.AutoSize = true;
+            this.r1.Location = new System.Drawing.Point(773, 307);
+            this.r1.Name = "r1";
+            this.r1.Size = new System.Drawing.Size(13, 13);
+            this.r1.TabIndex = 74;
+            this.r1.Text = "0";
+            this.r1.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // r2
+            // 
+            this.r2.AutoSize = true;
+            this.r2.Location = new System.Drawing.Point(773, 346);
+            this.r2.Name = "r2";
+            this.r2.Size = new System.Drawing.Size(13, 13);
+            this.r2.TabIndex = 75;
+            this.r2.Text = "0";
+            this.r2.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // r4
+            // 
+            this.r4.AutoSize = true;
+            this.r4.Location = new System.Drawing.Point(774, 428);
+            this.r4.Name = "r4";
+            this.r4.Size = new System.Drawing.Size(13, 13);
+            this.r4.TabIndex = 77;
+            this.r4.Text = "0";
+            this.r4.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // r3
+            // 
+            this.r3.AutoSize = true;
+            this.r3.Location = new System.Drawing.Point(774, 389);
+            this.r3.Name = "r3";
+            this.r3.Size = new System.Drawing.Size(13, 13);
+            this.r3.TabIndex = 76;
+            this.r3.Text = "0";
+            this.r3.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(775, 548);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(13, 13);
+            this.label29.TabIndex = 80;
+            this.label29.Text = "0";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(774, 505);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(13, 13);
+            this.label32.TabIndex = 79;
+            this.label32.Text = "0";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(774, 466);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(13, 13);
+            this.label33.TabIndex = 78;
+            this.label33.Text = "0";
+            this.label33.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.BackColor = System.Drawing.SystemColors.Control;
+            this.label28.Location = new System.Drawing.Point(603, 160);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(18, 104);
+            this.label28.TabIndex = 81;
+            this.label28.Text = "S\r\nW\r\nA\r\nP\r\nP\r\nI\r\nN\r\nG";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // ProcessID
+            // 
+            this.ProcessID.Text = "Process";
+            this.ProcessID.Width = 54;
+            // 
+            // Frame
+            // 
+            this.Frame.Text = "Frame";
+            this.Frame.Width = 52;
+            // 
+            // Location
+            // 
+            this.Location.Text = "Location";
+            this.Location.Width = 59;
+            // 
+            // Requests
+            // 
+            this.Requests.Text = "Requests";
+            this.Requests.Width = 67;
+            // 
+            // RAMTime
+            // 
+            this.RAMTime.Text = "RAM Time";
+            this.RAMTime.Width = 68;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label39);
+            this.groupBox1.Controls.Add(this.textBox6);
+            this.groupBox1.Controls.Add(this.label40);
+            this.groupBox1.Controls.Add(this.textBox7);
+            this.groupBox1.Controls.Add(this.label36);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.textBox4);
+            this.groupBox1.Controls.Add(this.label38);
+            this.groupBox1.Controls.Add(this.label37);
+            this.groupBox1.Controls.Add(this.textBox5);
+            this.groupBox1.Location = new System.Drawing.Point(836, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(277, 89);
+            this.groupBox1.TabIndex = 82;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Memory Settings";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(159, 65);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(57, 13);
+            this.label34.TabIndex = 44;
+            this.label34.Text = "I/O Usage";
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.textBox2.Location = new System.Drawing.Point(222, 62);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(36, 20);
+            this.textBox2.TabIndex = 43;
+            // 
+            // textBox3
+            // 
+            this.textBox3.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.textBox3.Location = new System.Drawing.Point(222, 40);
+            this.textBox3.Multiline = true;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(36, 20);
+            this.textBox3.TabIndex = 41;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(153, 42);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(63, 13);
+            this.label35.TabIndex = 42;
+            this.label35.Text = "I/O Chance";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(15, 65);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(72, 13);
+            this.label36.TabIndex = 50;
+            this.label36.Text = "Average CPU";
+            // 
+            // textBox4
+            // 
+            this.textBox4.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.textBox4.Location = new System.Drawing.Point(92, 62);
+            this.textBox4.Multiline = true;
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(36, 20);
+            this.textBox4.TabIndex = 49;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Least Used",
+            "Oldest"});
+            this.comboBox1.Location = new System.Drawing.Point(92, 16);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(93, 21);
+            this.comboBox1.TabIndex = 48;
+            // 
+            // textBox5
+            // 
+            this.textBox5.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.textBox5.Location = new System.Drawing.Point(92, 40);
+            this.textBox5.Multiline = true;
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(36, 20);
+            this.textBox5.TabIndex = 45;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(10, 43);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(76, 13);
+            this.label37.TabIndex = 47;
+            this.label37.Text = "Frame Chance";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(6, 21);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(80, 13);
+            this.label38.TabIndex = 46;
+            this.label38.Text = "Swap Algorithm";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(166, 64);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(59, 13);
+            this.label39.TabIndex = 54;
+            this.label39.Text = "Frame Size";
+            // 
+            // textBox6
+            // 
+            this.textBox6.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.textBox6.Location = new System.Drawing.Point(231, 61);
+            this.textBox6.Multiline = true;
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(36, 20);
+            this.textBox6.TabIndex = 53;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(171, 42);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(54, 13);
+            this.label40.TabIndex = 52;
+            this.label40.Text = "RAM Size";
+            this.label40.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // textBox7
+            // 
+            this.textBox7.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.textBox7.Location = new System.Drawing.Point(231, 39);
+            this.textBox7.Multiline = true;
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(36, 20);
+            this.textBox7.TabIndex = 51;
             // 
             // mainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1234, 595);
+            this.ClientSize = new System.Drawing.Size(1144, 595);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.cpu_update);
+            this.Controls.Add(this.label28);
+            this.Controls.Add(this.label29);
+            this.Controls.Add(this.pause);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label32);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label33);
+            this.Controls.Add(this.delay_bar);
+            this.Controls.Add(this.play);
+            this.Controls.Add(this.stop);
+            this.Controls.Add(this.r4);
+            this.Controls.Add(this.r3);
+            this.Controls.Add(this.r2);
+            this.Controls.Add(this.r1);
+            this.Controls.Add(this.DISK);
             this.Controls.Add(this.label27);
             this.Controls.Add(this.label26);
-            this.Controls.Add(this.listView2);
+            this.Controls.Add(this.TAP);
             this.Controls.Add(this.pcb);
             this.Controls.Add(this.io2_list);
-            this.Controls.Add(this.disk_list);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label19);
@@ -1806,7 +2143,6 @@
             this.Controls.Add(this.settings_new);
             this.Controls.Add(this.settings);
             this.Controls.Add(this.io1_list);
-            this.Controls.Add(this.waiting_list);
             this.Controls.Add(this.finished_list);
             this.Controls.Add(this.quantum_display);
             this.Controls.Add(this.clock_display);
@@ -1843,6 +2179,8 @@
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1997,12 +2335,43 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ListView TAP;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.ColumnHeader MemSize;
         private System.Windows.Forms.ColumnHeader FrameNum;
         private System.Windows.Forms.ColumnHeader WaitRatio;
+        private System.Windows.Forms.ListView DISK;
+        private System.Windows.Forms.ColumnHeader PID;
+        private System.Windows.Forms.ColumnHeader PageIndex;
+        private System.Windows.Forms.Label r1;
+        private System.Windows.Forms.Label r2;
+        private System.Windows.Forms.Label r4;
+        private System.Windows.Forms.Label r3;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.ColumnHeader ProcessID;
+        private System.Windows.Forms.ColumnHeader Frame;
+        private System.Windows.Forms.ColumnHeader Location;
+        private System.Windows.Forms.ColumnHeader Requests;
+        private System.Windows.Forms.ColumnHeader RAMTime;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.TextBox textBox5;
     }
 }
 

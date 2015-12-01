@@ -180,6 +180,9 @@
             this.listView2 = new System.Windows.Forms.ListView();
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
+            this.MemSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.FrameNum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.WaitRatio = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delay_bar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -501,7 +504,7 @@
             this.delay_bar.Location = new System.Drawing.Point(272, 25);
             this.delay_bar.Maximum = 2;
             this.delay_bar.Name = "delay_bar";
-            this.delay_bar.Size = new System.Drawing.Size(104, 45);
+            this.delay_bar.Size = new System.Drawing.Size(104, 42);
             this.delay_bar.TabIndex = 0;
             this.delay_bar.Scroll += new System.EventHandler(this.delay_bar_Scroll);
             // 
@@ -1626,14 +1629,17 @@
             this.FinishingCycle,
             this.TimeinSystem,
             this.IdleTime,
-            this.Stat});
+            this.Stat,
+            this.MemSize,
+            this.FrameNum,
+            this.WaitRatio});
             listViewGroup1.Header = "Active";
             listViewGroup1.Name = "listViewGroup1";
             this.pcb.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
             listViewGroup1});
             this.pcb.Location = new System.Drawing.Point(32, 307);
             this.pcb.Name = "pcb";
-            this.pcb.Size = new System.Drawing.Size(562, 267);
+            this.pcb.Size = new System.Drawing.Size(614, 267);
             this.pcb.TabIndex = 68;
             this.pcb.UseCompatibleStateImageBehavior = false;
             this.pcb.View = System.Windows.Forms.View.Details;
@@ -1646,17 +1652,17 @@
             // Arrival
             // 
             this.Arrival.Text = "Arrival";
-            this.Arrival.Width = 50;
+            this.Arrival.Width = 41;
             // 
             // TotalCPU
             // 
             this.TotalCPU.Text = "Total CPU";
-            this.TotalCPU.Width = 65;
+            this.TotalCPU.Width = 62;
             // 
             // CPUUsed
             // 
             this.CPUUsed.Text = "CPU Used";
-            this.CPUUsed.Width = 64;
+            this.CPUUsed.Width = 63;
             // 
             // Elapsed
             // 
@@ -1675,20 +1681,23 @@
             // 
             // FinishingCycle
             // 
-            this.FinishingCycle.Text = "Finishing Cycle";
-            this.FinishingCycle.Width = 82;
+            this.FinishingCycle.Text = "Last Cycle";
+            this.FinishingCycle.Width = 61;
             // 
             // TimeinSystem
             // 
-            this.TimeinSystem.Text = "Time in System";
+            this.TimeinSystem.Text = "SysTime";
+            this.TimeinSystem.Width = 53;
             // 
             // IdleTime
             // 
-            this.IdleTime.Text = "Idle Time";
+            this.IdleTime.Text = "Idle";
+            this.IdleTime.Width = 33;
             // 
             // Stat
             // 
             this.Stat.Text = "Status";
+            this.Stat.Width = 43;
             // 
             // panel4
             // 
@@ -1749,6 +1758,18 @@
             this.label27.Size = new System.Drawing.Size(14, 39);
             this.label27.TabIndex = 72;
             this.label27.Text = "T\r\nA\r\nP";
+            // 
+            // MemSize
+            // 
+            this.MemSize.Text = "Size";
+            // 
+            // FrameNum
+            // 
+            this.FrameNum.Text = "Frames";
+            // 
+            // WaitRatio
+            // 
+            this.WaitRatio.Text = "Wait %";
             // 
             // mainView
             // 
@@ -1979,6 +2000,9 @@
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.ColumnHeader MemSize;
+        private System.Windows.Forms.ColumnHeader FrameNum;
+        private System.Windows.Forms.ColumnHeader WaitRatio;
     }
 }
 

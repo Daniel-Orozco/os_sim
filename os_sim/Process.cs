@@ -26,7 +26,7 @@ namespace os_sim
 
         public int size;
         public int frames;
-        public int wait_ratio;
+        public float wait_ratio;
 
         public int quantum;
 
@@ -44,28 +44,21 @@ namespace os_sim
 
             size = rand.Next(1,256);
 
-            frames = Convert.ToInt32(size / frame_size);
+            frames = Convert.ToInt32((size / frame_size)+(size%frame_size==0?0:1));
 
             current_cycles = 0;
             current_cpu = 0;
             current_io1 = 0;
 
-
+            wait_ratio = 0;
 
             quantum = q;
 
             status = "In System";
         }
-
-        public string getData(int clock)
-        {
-            string data = String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t{9}\t{10}\r\n",
-                getID(), arrival_cycle, total_cpu, current_cpu, clock - arrival_cycle, total_io1, current_io1, (status!="In System"?""+finishing_cycle:"-"), (status!="In System"?""+time_in_system:"-"), (status!="In System"?(idle_time<0?"-":(""+idle_time)):"-"),status);
-            return data;
-        }
         public string[] getValues(int clock)
         {
-            string[] data = new string[]{getID(), ""+arrival_cycle, ""+total_cpu, ""+current_cpu, ""+(clock - arrival_cycle), ""+total_io1, ""+current_io1, (status != "In System" ? "" + finishing_cycle : "-"), (status != "In System" ? "" + time_in_system : "-"), (status != "In System" ? (idle_time < 0 ? "-" : ("" + idle_time)) : "-"), status};
+            string[] data = new string[]{getID(), ""+arrival_cycle, ""+total_cpu, ""+current_cpu, ""+(clock - arrival_cycle), ""+total_io1, ""+current_io1, (status != "In System" ? "" + finishing_cycle : "-"), "" + time_in_system, (status != "In System" ? (idle_time < 0 ? "-" : ("" + idle_time)) : "-"), status, ""+size, ""+frames, ""+wait_ratio};
             return data;
         }
         public string getID()

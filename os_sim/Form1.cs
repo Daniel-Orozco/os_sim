@@ -33,7 +33,7 @@ namespace os_sim
         private int ram_s;
         private int frame_c;
 
-        private Item[] ram_sizes;
+        private Stack<Item> ram_sizes;
 
         private int new_size;
         private int ready_size;
@@ -106,22 +106,31 @@ namespace os_sim
             ram_s = 256;
             frame_c = 50;
 
-            ramOptions();
+            frame_size.SelectedIndex = 0;
 
             timer.Enabled = true;                           
             timer.Stop();
-
-            cpu_update.Checked = true;
             
             
             initializeStates();
         }
         public void ramOptions()
         {
-            int value = frame_s * 4;
-            int amount = (256 / frame_s) - (frame_s == 64 ? 0 : 32 / frame_s);
-            //finish ram options
-            ram_sizes = new Item[amount];
+            Stack<int> options = new Stack<int>();
+            int remaining = 256;
+
+            while (remaining >= frame_s*4)
+            {
+                options.Push(remaining);
+                remaining -= frame_s;
+            }
+
+            options.Reverse();
+
+            while(options.Count > 0)
+            {
+                ram_size.Items.Add((new Item(options.Pop())).Value);
+            }
         }
         public void updateParameters()
         {
@@ -160,10 +169,8 @@ namespace os_sim
         }
         void timer_Tick(object sender, EventArgs e)
         {
-            clock_value += 1;
+            clock_value++;
             clock_display.Text = ""+clock_value;
-
-            //updateParameters();
 
             if(Running.Count == 0)
             {
@@ -179,6 +186,7 @@ namespace os_sim
                         Process t_process;
                         t_process = New.Dequeue();
                         terminateProcess(t_process);
+
                         var lines = new_list.Lines;
                         var pline = lines[0];
                         var newLines = lines.Skip(1);
@@ -233,12 +241,16 @@ namespace os_sim
                     io1_cycle.Text = "" + io1_use;
                 }
             }
+
             displayProcesses();
             
         }
         public void updateReady()
         {
             Process t_process = New.Dequeue();
+
+            t_process.time_in_system = clock_value - t_process.arrival_cycle;
+            t_process.wait_ratio = (int)(100 * (t_process.current_io1 + t_process.current_cpu) / t_process.time_in_system);
 
             Ready.addProcess(t_process);
             ready_list.Text += t_process.getID() + "\r\n";
@@ -307,6 +319,8 @@ namespace os_sim
             t_process.finishing_cycle = clock_value;
             t_process.time_in_system = t_process.finishing_cycle - t_process.arrival_cycle;
             t_process.idle_time = t_process.time_in_system - t_process.total_io1 - t_process.total_cpu;
+            t_process.wait_ratio = (int)(100*(t_process.current_io1 + t_process.current_cpu) / t_process.time_in_system);
+
             t_process.status = "Killed";
 
             updatePCB(t_process, t_process.getID());
@@ -366,7 +380,7 @@ namespace os_sim
             io_chance.Text = "50";
             io_usage.Text = "10";
             frame_chance.Text = "50";
-
+            settings_disk.Text = "10";
 
             settings_new.ReadOnly = false;
             settings_ready.ReadOnly = false;
@@ -389,9 +403,13 @@ namespace os_sim
             io_chance.BackColor = SystemColors.ControlLightLight;
             io_usage.BackColor = SystemColors.ControlLightLight;
             frame_chance.BackColor = SystemColors.ControlLightLight;
+            settings_disk.BackColor = SystemColors.ControlLightLight;
 
-            foreach (TextBox i in memory_map)
-                i.Text = "";
+            foreach (TextBox t in memory_map)
+            {
+                t.BackColor = SystemColors.Control;
+                t.Text = "";
+            }
 
             pcb.Items.Clear();
 
@@ -399,6 +417,8 @@ namespace os_sim
             delay_bar.Value = 1;
             algorithm_list.SelectedIndex = 0;
             swap_algorithm.SelectedIndex = 0;
+            frame_size.SelectedIndex = 0;
+            ram_size.SelectedIndex = 0;
         }
         public void generateProcess()
         {
@@ -418,42 +438,6 @@ namespace os_sim
         {
             Queue<Process> store = new Queue<Process>();
             Process helper;
-            if(cpu_update.Checked == true)
-            {
-                if(Running.Count == 0)
-                {
-                    for (int c = 0; c < New.Count; c++)
-                    {
-                        helper = New.Dequeue();
-                        if(helper.status == "In System")
-                            updatePCB(helper, helper.getID());
-                        New.Enqueue(helper);
-                    }
-                    for (int c = 0; c < Ready.Count; c++)
-                    {
-                        helper = Ready.Dequeue();
-                        if (helper.status == "In System")
-                            updatePCB(helper, helper.getID());
-                        Ready.Enqueue(helper);
-                    }
-                    for (int c = 0; c < Waiting.Count; c++)
-                    {
-                        helper = Waiting.Dequeue();
-                        if (helper.status == "In System")
-                            updatePCB(helper, helper.getID());
-                        Waiting.Enqueue(helper);
-                    }
-                    for (int c = 0; c < UsingIO1.Count; c++)
-                    {
-                        helper = UsingIO1.Dequeue();
-                        if (helper.status == "In System")
-                            updatePCB(helper, helper.getID());
-                        UsingIO1.Enqueue(helper);
-                    }
-                }
-            }
-            else
-            {
                 for (int c = 0; c < New.Count; c++)
                 {
                     helper = New.Dequeue();
@@ -489,12 +473,12 @@ namespace os_sim
                         updatePCB(helper, helper.getID());
                     UsingIO1.Enqueue(helper);
                 }
-            }
             
         }
         public void updatePCB(Process n_process, string id)
         {
             ListViewItem lvi = pcb.FindItemWithText(id);
+
             string[] process = n_process.getValues(clock_value);
             if (lvi != null)
             {
@@ -596,6 +580,7 @@ namespace os_sim
             io_chance.BackColor = SystemColors.Control;
             io_usage.BackColor = SystemColors.Control;
             frame_chance.BackColor = SystemColors.Control;
+            settings_disk.BackColor = SystemColors.Control;
         }
 
         private void pause_Click(object sender, EventArgs e)
@@ -619,6 +604,7 @@ namespace os_sim
             io_chance.BackColor = SystemColors.ControlLightLight;
             io_usage.BackColor = SystemColors.ControlLightLight;
             frame_chance.BackColor = SystemColors.ControlLightLight;
+            settings_disk.BackColor = SystemColors.ControlLightLight;
         }
         private void average_cpu_TextChanged(object sender, EventArgs e)
         {
@@ -771,14 +757,6 @@ namespace os_sim
             pause_tooltip.SetToolTip(pause, "Pauses the current simulation, stopping the clock and managers but saving their current states.\r\nParameters may be changed while the simulation is in Pause.");
             pause_tooltip.AutoPopDelay = 32000;
 
-            update_tooltip = new ToolTip();
-
-            update_tooltip.ToolTipIcon = ToolTipIcon.Info;
-            update_tooltip.ToolTipTitle = "CPU Update";
-            update_tooltip.ShowAlways = true;
-            update_tooltip.SetToolTip(cpu_update, "Determines if the PCB is updated with the CPU.\r\nIf checked, PCB will refresh if the Running state is empty.\r\nIf unchecked, PCB will update every tick.");
-            update_tooltip.AutoPopDelay = 32000;
-
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -797,14 +775,6 @@ namespace os_sim
             help1.Show();
         }
 
-        private void cpu_update_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cpu_update.Checked)
-                update_warning.Text = "Note: CPU Update is checked, PCB will be updated by the CPU if it is idle.";
-            else
-                update_warning.Text = "";
-        }
-
         private void message_display_TextChanged(object sender, EventArgs e)
         {
 
@@ -819,15 +789,33 @@ namespace os_sim
         {
 
         }
+
+        private void frame_size_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            frame_s = Convert.ToInt32(frame_size.Text);
+            ram_size.Items.Clear();
+            ramOptions();
+            ram_size.SelectedIndex = 0;
+        }
+        private void ram_size_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ram_s = Convert.ToInt32(ram_size.SelectedValue);
+            int num_frames = 0;
+            foreach (TextBox t in memory_map)
+            {
+                t.BackColor = SystemColors.ControlLightLight;
+                num_frames++;
+            }
+        }
     }
 
-    private class Item
+    public class Item
     {
         public string Name;
         public int Value;
-        public Item(string name, int value)
+        public Item(int value)
         {
-            Name = name; Value = value;
+            Value = value;
         }
         public override string ToString()
         {

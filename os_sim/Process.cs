@@ -25,8 +25,9 @@ namespace os_sim
         public int idle_time;
 
         public int size;
-        public int frames;
         public float wait_ratio;
+
+        public Frame[] pages;
 
         public int quantum;
 
@@ -44,7 +45,10 @@ namespace os_sim
 
             size = rand.Next(1,256);
 
-            frames = Convert.ToInt32((size / frame_size)+(size%frame_size==0?0:1));
+            pages = new Frame[Convert.ToInt32((size / frame_size) + (size % frame_size == 0 ? 0 : 1))];
+
+            for(int i = 0; i < pages.Length; i++)
+                pages[i] = new Frame(id, i, frame_size);
 
             current_cycles = 0;
             current_cpu = 0;
@@ -58,7 +62,7 @@ namespace os_sim
         }
         public string[] getValues(int clock)
         {
-            string[] data = new string[]{getID(), ""+arrival_cycle, ""+total_cpu, ""+current_cpu, ""+(clock - arrival_cycle), ""+total_io1, ""+current_io1, (status != "In System" ? "" + finishing_cycle : "-"), "" + time_in_system, (status != "In System" ? (idle_time < 0 ? "-" : ("" + idle_time)) : "-"), status, ""+size, ""+frames, ""+wait_ratio};
+            string[] data = new string[]{getID(), ""+arrival_cycle, ""+total_cpu, ""+current_cpu, ""+(clock - arrival_cycle), ""+total_io1, ""+current_io1, (status != "In System" ? "" + finishing_cycle : "-"), "" + time_in_system, (status != "In System" ? (idle_time < 0 ? "-" : ("" + idle_time)) : "-"), status, ""+size, ""+pages.Length, ""+wait_ratio};
             return data;
         }
         public string getID()

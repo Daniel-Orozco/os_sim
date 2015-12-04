@@ -13,14 +13,16 @@ namespace os_sim
         public int frame_id;
         public int requests;
         public int ramtime;
+        public int size;
 
-        public Frame(int p_id, int f_id)
+        public Frame(int p_id, int f_id, int s)
         {
             process_id = p_id;
             location = "Disk";
             frame_id = f_id;
             requests = 0;
             ramtime = 0;
+            size = s;
         }
     }
 }

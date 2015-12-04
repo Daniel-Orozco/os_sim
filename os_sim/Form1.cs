@@ -427,6 +427,7 @@ namespace os_sim
             {
                 //public Process(int next_id, int cycle, int avrg, Random rand, int q, int iouse, int iochance, int frame_size)
                 n_process = new Process(last_processid + 1, clock_value, average_cycles, rand, tquantum, io1_usage, io1_chance, frame_s);
+
                 last_processid++;
                 New.addProcess(n_process);
 
@@ -799,12 +800,28 @@ namespace os_sim
         }
         private void ram_size_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ram_s = Convert.ToInt32(ram_size.SelectedValue);
-            int num_frames = 0;
-            foreach (TextBox t in memory_map)
+            ram_s = Convert.ToInt32(ram_size.Text);
+            displayMap();
+        }
+        public void displayMap()
+        {
+            int current_frame = 0;
+            foreach(TextBox t in memory_map)
             {
-                t.BackColor = SystemColors.ControlLightLight;
-                num_frames++;
+                if(current_frame < ((int)(ram_s/(frame_s*4))))
+                {
+                    t.Text = "OS";
+                }
+                if (current_frame < ((int)ram_s / frame_s))
+                {
+                    t.Text = "";
+                    t.BackColor = SystemColors.ControlLightLight;
+                }
+                else
+                    t.BackColor = SystemColors.Control;
+                if (current_frame > ((int)ram_s / frame_s))
+                    t.Text = "N";
+                current_frame++;
             }
         }
     }

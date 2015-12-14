@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Active", System.Windows.Forms.HorizontalAlignment.Left);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainView));
             this.clock = new System.Windows.Forms.Label();
             this.quantum = new System.Windows.Forms.Label();
@@ -564,7 +563,7 @@
             this.delay_bar.Location = new System.Drawing.Point(345, 48);
             this.delay_bar.Maximum = 2;
             this.delay_bar.Name = "delay_bar";
-            this.delay_bar.Size = new System.Drawing.Size(104, 42);
+            this.delay_bar.Size = new System.Drawing.Size(104, 45);
             this.delay_bar.TabIndex = 0;
             this.delay_bar.Scroll += new System.EventHandler(this.delay_bar_Scroll);
             // 
@@ -1689,10 +1688,6 @@
             this.MemSize,
             this.FrameNum,
             this.WaitRatio});
-            listViewGroup1.Header = "Active";
-            listViewGroup1.Name = "listViewGroup1";
-            this.pcb.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1});
             this.pcb.Location = new System.Drawing.Point(32, 307);
             this.pcb.Name = "pcb";
             this.pcb.Size = new System.Drawing.Size(719, 267);

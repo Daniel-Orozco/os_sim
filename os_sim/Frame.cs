@@ -24,5 +24,17 @@ namespace os_sim
             ramtime = 0;
             size = s;
         }
+
+        public string[] getData()
+        {
+            string[] values = new string[] {""+process_id, ""+frame_id, location, ""+requests, ""+ramtime};
+            return values;
+        }
+        public int Process_id { get; set; }
+        public string Location { get; set; }
+        public int Frame_id { get; set; }
+        public int Requests { get; set; }
+        public int Ramtime { get; set; }
+        public int Size { get; set; }
     }
 }

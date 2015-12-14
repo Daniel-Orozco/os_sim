@@ -60,7 +60,6 @@ namespace os_sim
         private ToolTip stop_tooltip;
         private ToolTip play_tooltip;
         private ToolTip pause_tooltip;
-        private ToolTip update_tooltip;
 
         private ToolTip pcb_tooltip;
 
@@ -252,6 +251,8 @@ namespace os_sim
             t_process.time_in_system = clock_value - t_process.arrival_cycle;
             t_process.wait_ratio = (int)(100 * (t_process.current_io1 + t_process.current_cpu) / t_process.time_in_system);
 
+            updateTAP(t_process, t_process.getID());
+
             Ready.addProcess(t_process);
             ready_list.Text += t_process.getID() + "\r\n";
 
@@ -260,6 +261,41 @@ namespace os_sim
 
             var newLines = lines.Skip(1);
             new_list.Lines = newLines.ToArray();
+        }
+        public void updateTAP(Process n_process, string id)
+        {
+            ListViewItem lvi = TAP.FindItemWithText(id);
+            string[] frames = n_process.getFrames();
+
+            if (lvi != null)
+            {
+                for (int j = 0; j < TAP.Items.Count; j++ )
+                    if(TAP.Items[j].SubItems[0].Text == id)
+                        for (int i = 1; i < 5; i++)
+                            lvi.SubItems[i].Text = frames[i];
+            }
+            else
+            {
+                Queue<ListViewItem> n = new Queue<ListViewItem>();
+                foreach (string s in frames)
+                    n.Enqueue(new ListViewItem(getFrameElements(s)));
+                foreach (ListViewItem i in n)
+                    TAP.Items.Add(i);
+            }
+        }
+        public string[] getFrameElements(string s)
+        {
+            string[] elements = new string[5];
+            int l = 0;
+
+            for(int i = 0; i < elements.Length; i++)
+            {
+                l = s.IndexOf(";");
+                elements[i] = s.Substring(0, l);
+                s = s.Substring(l+1);
+            }
+
+            return elements;
         }
         public void updateRunning()
         {
@@ -483,7 +519,7 @@ namespace os_sim
             string[] process = n_process.getValues(clock_value);
             if (lvi != null)
             {
-                for (int i = 1; i < 11; i++)
+                for (int i = 1; i < lvi.SubItems.Count; i++)
                     lvi.SubItems[i].Text = process[i];
             }
             else
@@ -811,16 +847,23 @@ namespace os_sim
                 if(current_frame < ((int)(ram_s/(frame_s*4))))
                 {
                     t.Text = "OS";
+                    t.BackColor = SystemColors.ActiveCaption;
                 }
-                if (current_frame < ((int)ram_s / frame_s))
+                else if (current_frame < ((int)ram_s / frame_s))
                 {
                     t.Text = "";
                     t.BackColor = SystemColors.ControlLightLight;
                 }
                 else
+                {
+                    t.Text = "";
                     t.BackColor = SystemColors.Control;
+                }
                 if (current_frame > ((int)ram_s / frame_s))
-                    t.Text = "N";
+                {
+                    t.BackColor = SystemColors.Control;
+                    t.Text = "";
+                }
                 current_frame++;
             }
         }

@@ -60,6 +60,13 @@ namespace os_sim
 
             status = "In System";
         }
+        public string[] getFrames()
+        {
+            string[] frames = new string[pages.Length];
+            for (int i = 0; i < frames.Length; i++)
+                frames[i] = "a"+id+";b"+pages[i].Frame_id+";c"+pages[i].Location+";d"+pages[i].Requests+";e"+pages[i].Ramtime+";f";
+            return frames;
+        }
         public string[] getValues(int clock)
         {
             string[] data = new string[]{getID(), ""+arrival_cycle, ""+total_cpu, ""+current_cpu, ""+(clock - arrival_cycle), ""+total_io1, ""+current_io1, (status != "In System" ? "" + finishing_cycle : "-"), "" + time_in_system, (status != "In System" ? (idle_time < 0 ? "-" : ("" + idle_time)) : "-"), status, ""+size, ""+pages.Length, ""+wait_ratio};

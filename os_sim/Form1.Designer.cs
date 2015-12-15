@@ -144,7 +144,7 @@
             this.m01 = new System.Windows.Forms.TextBox();
             this.m00 = new System.Windows.Forms.TextBox();
             this.m42 = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
+            this.r0 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -157,8 +157,6 @@
             this.settings_disk = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.disk_list = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
             this.io2_list = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -197,9 +195,9 @@
             this.r2 = new System.Windows.Forms.Label();
             this.r4 = new System.Windows.Forms.Label();
             this.r3 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
+            this.r7 = new System.Windows.Forms.Label();
+            this.r6 = new System.Windows.Forms.Label();
+            this.r5 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ram_size = new System.Windows.Forms.ComboBox();
@@ -1468,14 +1466,14 @@
             this.m42.Size = new System.Drawing.Size(34, 34);
             this.m42.TabIndex = 85;
             // 
-            // label12
+            // r0
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(773, 268);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(13, 13);
-            this.label12.TabIndex = 48;
-            this.label12.Text = "0";
+            this.r0.AutoSize = true;
+            this.r0.Location = new System.Drawing.Point(763, 268);
+            this.r0.Name = "r0";
+            this.r0.Size = new System.Drawing.Size(13, 13);
+            this.r0.TabIndex = 48;
+            this.r0.Text = "0";
             // 
             // label13
             // 
@@ -1589,26 +1587,6 @@
             this.disk_list.Size = new System.Drawing.Size(106, 53);
             this.disk_list.TabIndex = 57;
             // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.BackColor = System.Drawing.Color.Transparent;
-            this.label23.Location = new System.Drawing.Point(86, 4);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(13, 13);
-            this.label23.TabIndex = 64;
-            this.label23.Text = "0";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.BackColor = System.Drawing.Color.Transparent;
-            this.label24.Location = new System.Drawing.Point(55, 4);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(36, 13);
-            this.label24.TabIndex = 63;
-            this.label24.Text = "Cycle:";
-            // 
             // io2_list
             // 
             this.io2_list.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -1643,10 +1621,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.panel2.Controls.Add(this.label23);
             this.panel2.Controls.Add(this.label25);
             this.panel2.Controls.Add(this.settings_disk);
-            this.panel2.Controls.Add(this.label24);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.waiting_queue);
             this.panel2.Controls.Add(this.disk_list);
@@ -1658,13 +1634,13 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.LightCyan;
+            this.panel3.Controls.Add(this.settings_waiting);
             this.panel3.Controls.Add(this.io1_queue);
             this.panel3.Controls.Add(this.label21);
             this.panel3.Controls.Add(this.io1_cycle);
             this.panel3.Controls.Add(this.io1_display);
             this.panel3.Controls.Add(this.label22);
             this.panel3.Controls.Add(this.waiting_list);
-            this.panel3.Controls.Add(this.settings_waiting);
             this.panel3.Location = new System.Drawing.Point(256, 206);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(230, 89);
@@ -1885,7 +1861,7 @@
             // r1
             // 
             this.r1.AutoSize = true;
-            this.r1.Location = new System.Drawing.Point(773, 307);
+            this.r1.Location = new System.Drawing.Point(763, 307);
             this.r1.Name = "r1";
             this.r1.Size = new System.Drawing.Size(13, 13);
             this.r1.TabIndex = 74;
@@ -1895,7 +1871,7 @@
             // r2
             // 
             this.r2.AutoSize = true;
-            this.r2.Location = new System.Drawing.Point(773, 346);
+            this.r2.Location = new System.Drawing.Point(763, 346);
             this.r2.Name = "r2";
             this.r2.Size = new System.Drawing.Size(13, 13);
             this.r2.TabIndex = 75;
@@ -1905,7 +1881,7 @@
             // r4
             // 
             this.r4.AutoSize = true;
-            this.r4.Location = new System.Drawing.Point(774, 428);
+            this.r4.Location = new System.Drawing.Point(764, 428);
             this.r4.Name = "r4";
             this.r4.Size = new System.Drawing.Size(13, 13);
             this.r4.TabIndex = 77;
@@ -1915,42 +1891,42 @@
             // r3
             // 
             this.r3.AutoSize = true;
-            this.r3.Location = new System.Drawing.Point(774, 389);
+            this.r3.Location = new System.Drawing.Point(764, 389);
             this.r3.Name = "r3";
             this.r3.Size = new System.Drawing.Size(13, 13);
             this.r3.TabIndex = 76;
             this.r3.Text = "0";
             this.r3.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // label29
+            // r7
             // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(775, 548);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(13, 13);
-            this.label29.TabIndex = 80;
-            this.label29.Text = "0";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.r7.AutoSize = true;
+            this.r7.Location = new System.Drawing.Point(765, 548);
+            this.r7.Name = "r7";
+            this.r7.Size = new System.Drawing.Size(13, 13);
+            this.r7.TabIndex = 80;
+            this.r7.Text = "0";
+            this.r7.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // label32
+            // r6
             // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(774, 505);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(13, 13);
-            this.label32.TabIndex = 79;
-            this.label32.Text = "0";
-            this.label32.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.r6.AutoSize = true;
+            this.r6.Location = new System.Drawing.Point(764, 505);
+            this.r6.Name = "r6";
+            this.r6.Size = new System.Drawing.Size(13, 13);
+            this.r6.TabIndex = 79;
+            this.r6.Text = "0";
+            this.r6.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // label33
+            // r5
             // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(774, 466);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(13, 13);
-            this.label33.TabIndex = 78;
-            this.label33.Text = "0";
-            this.label33.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.r5.AutoSize = true;
+            this.r5.Location = new System.Drawing.Point(764, 466);
+            this.r5.Name = "r5";
+            this.r5.Size = new System.Drawing.Size(13, 13);
+            this.r5.TabIndex = 78;
+            this.r5.Text = "0";
+            this.r5.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label28
             // 
@@ -2073,12 +2049,12 @@
             this.ClientSize = new System.Drawing.Size(1144, 595);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label28);
-            this.Controls.Add(this.label29);
+            this.Controls.Add(this.r7);
             this.Controls.Add(this.pause);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label32);
+            this.Controls.Add(this.r6);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label33);
+            this.Controls.Add(this.r5);
             this.Controls.Add(this.delay_bar);
             this.Controls.Add(this.play);
             this.Controls.Add(this.stop);
@@ -2100,7 +2076,7 @@
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
+            this.Controls.Add(this.r0);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.update_warning);
             this.Controls.Add(this.help_button);
@@ -2271,7 +2247,7 @@
         private System.Windows.Forms.TextBox m65;
         private System.Windows.Forms.TextBox m66;
         private System.Windows.Forms.TextBox m67;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label r0;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
@@ -2284,8 +2260,6 @@
         private System.Windows.Forms.TextBox settings_disk;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox disk_list;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TextBox io2_list;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Panel panel1;
@@ -2319,9 +2293,9 @@
         private System.Windows.Forms.Label r2;
         private System.Windows.Forms.Label r4;
         private System.Windows.Forms.Label r3;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label r7;
+        private System.Windows.Forms.Label r6;
+        private System.Windows.Forms.Label r5;
         private System.Windows.Forms.ColumnHeader ProcessID;
         private System.Windows.Forms.ColumnHeader Frame;
         private System.Windows.Forms.ColumnHeader Location;

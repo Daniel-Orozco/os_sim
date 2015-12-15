@@ -38,6 +38,7 @@ namespace os_sim
         private int new_size;
         private int ready_size;
         private int waiting_size;
+        private int wdisk_size;
 
         private int last_finished;
         private int running_cycle;
@@ -46,6 +47,8 @@ namespace os_sim
         private State Ready;
         private State Running;
         private State Waiting;
+        private State WaitingDisk;
+        private State UsingDisk;
         private State UsingIO1;
         private State Finished;
 
@@ -105,6 +108,7 @@ namespace os_sim
             ram_s = 256;
             frame_c = 50;
 
+            frame_size.SelectedIndex = 1;
             frame_size.SelectedIndex = 0;
 
             timer.Enabled = true;                           
@@ -133,7 +137,7 @@ namespace os_sim
         }
         public void updateParameters()
         {
-            int[] updates = new int[9];
+            int[] updates = new int[10];
             updates[0] = Utilities.updateParameter(settings_new, new_size, 0, Int32.MaxValue);
             updates[1] = Utilities.updateParameter(settings_ready, ready_size, 0, Int32.MaxValue);
             updates[2] = Utilities.updateParameter(settings_waiting, waiting_size, 0, Int32.MaxValue);
@@ -144,6 +148,8 @@ namespace os_sim
             updates[6] = Utilities.updateParameter(io_chance, io1_chance);
             updates[7] = Utilities.updateParameter(io_usage, io1_usage, 0, Int32.MaxValue);
             updates[8] = Utilities.updateParameter(frame_chance, frame_c);
+
+            updates[9] = Utilities.updateParameter(settings_disk, waiting_size, 0, Int32.MaxValue);
 
             for(int c = 0; c < updates.Length; c++)
                 if (updates[c] == -1)
@@ -160,6 +166,8 @@ namespace os_sim
             io1_chance = updates[6] == -1 ? io1_chance : updates[6];
             io1_usage = updates[7] == -1 ? io1_usage : updates[7];
             frame_c = updates[8] == -1 ? frame_c : updates[8];
+
+            wdisk_size = updates[9] == -1 ? wdisk_size : resizeState(WaitingDisk, updates[9]);
         }
         int resizeState(State st, int n_size)
         {
@@ -220,6 +228,26 @@ namespace os_sim
                 }
                 else
                 {
+                    if(rand.Next(0, 100) < frame_c)
+                    {
+                        //do something to swap...
+                        if (UsingDisk.Count == 0 && Ready.Count < ready_size - 1)
+                            updateDisk();
+                        else
+                        {
+                            Process t_process;
+                            t_process = New.Dequeue();
+                            terminateProcess(t_process);
+
+                            var lines = new_list.Lines;
+                            var pline = lines[0];
+                            var newLines = lines.Skip(1);
+                            new_list.Lines = newLines.ToArray();
+                        }
+                    }
+                    if (Running.Count > 0)
+                        for (int i = 0; i < 0; i++)
+                            break;
                     current.quantum--;
                     current.current_cpu++;
                     running_cycle++;
@@ -244,6 +272,33 @@ namespace os_sim
             displayProcesses();
             
         }
+        public void updateWDisk()
+        {
+            Process t_process = Running.Dequeue();
+
+            WaitingDisk.addProcess(t_process);
+            disk_list.Text += t_process.getID() + "\r\n";
+
+            running_list.Text = "";
+        }
+        public void updateDisk()
+        {
+            Process t_process = WaitingDisk.Dequeue();
+
+            UsingDisk.addProcess(t_process);
+            io2_list.Text += t_process.getID() + "\r\n";
+
+            var lines = disk_list.Lines;
+            var newLines = lines.Skip(1);
+            disk_list.Lines = newLines.ToArray();
+        }
+        public void emptyDisk()
+        {
+            Process t_process = UsingDisk.Dequeue();
+
+            Ready.addProcess(t_process);
+            ready_list.Text += t_process.getID() + "\r\n";
+        }
         public void updateReady()
         {
             Process t_process = New.Dequeue();
@@ -264,21 +319,26 @@ namespace os_sim
         }
         public void updateTAP(Process n_process, string id)
         {
-            ListViewItem lvi = TAP.FindItemWithText(id);
+            var lvi = TAP.FindItemWithText(id);
             string[] frames = n_process.getFrames();
 
             if (lvi != null)
             {
-                for (int j = 0; j < TAP.Items.Count; j++ )
-                    if(TAP.Items[j].SubItems[0].Text == id)
-                        for (int i = 1; i < 5; i++)
-                            lvi.SubItems[i].Text = frames[i];
+                for (int j = 0; j < TAP.Items.Count; j++)
+                    if (TAP.Items[j].SubItems[1].Text == id)
+                        if (n_process.status != "In System")
+                            TAP.Items[j].Remove();
+                        else
+                            TAP.Items[j] = new ListViewItem(getFrameElements(frames[j]));
             }
             else
             {
                 Queue<ListViewItem> n = new Queue<ListViewItem>();
                 foreach (string s in frames)
+                {
                     n.Enqueue(new ListViewItem(getFrameElements(s)));
+                    addToDisk(getFrameElements(s));
+                }
                 foreach (ListViewItem i in n)
                     TAP.Items.Add(i);
             }
@@ -296,6 +356,11 @@ namespace os_sim
             }
 
             return elements;
+        }
+        public void addToDisk(string[] s)
+        {
+            string[] n = new string[]{s[0],s[1]};
+            DISK.Items.Add(new ListViewItem(n));
         }
         public void updateRunning()
         {
@@ -342,6 +407,7 @@ namespace os_sim
             t_process.status = "Finished";
 
             updatePCB(t_process, t_process.getID());
+            updateTAP(t_process, t_process.getID());
 
             last_finished = t_process.id;
 
@@ -360,6 +426,7 @@ namespace os_sim
             t_process.status = "Killed";
 
             updatePCB(t_process, t_process.getID());
+            updateTAP(t_process, t_process.getID());
 
             last_finished = t_process.id;
 
@@ -396,6 +463,8 @@ namespace os_sim
             Waiting = new State(waiting_size);
             UsingIO1 = new State(1);
             Finished = new State();
+            UsingDisk = new State(1);
+            WaitingDisk = new State();
 
         }
         public void initialDisplay()
@@ -702,7 +771,7 @@ namespace os_sim
 
             pcb_tooltip.ToolTipTitle = "PCB Properties";
             pcb_tooltip.ShowAlways = true;
-            pcb_tooltip.SetToolTip(pcb, "ID: The process identifier\r\nArrival: The cycle when the process was created\r\nTotal CPU: The amount of CPU cycles the process requires.\r\nCPU Used: CPU cycles the process has used.\r\n\tIf CPU Update is enabled, this will refresh if the CPU is available.\r\nElapsed: Amount of cycles the process has been in system.\r\n\tIf CPU Update is enabled, this will refresh if the CPU is available\r\nTotal I/O: The amount of I/O cycles the process requires.\r\nI/O Used: I/O cycles the process has used.\r\n\tIf CPU Update is enabled, this will refresh if the CPU is available.\r\nFinishing Cycle: Cycle in which the process left the system.\r\n\tWill be displayed once the process leaves the system.\r\nTime in System: Total amount of cycles the process remained in system.\r\n\tWill be displayed once the process leaves the system.\r\nIdle Time: Amount of cycles the process remained in system without using CPU or I/O.\r\n\tWill be displayed if the process leaves the system successfully.\r\nStatus: Current status of the process.\r\n\tIn System: Process is in system.\r\n\tFinished: Process completed its cycles and left the system.\r\n\tKilled: Process was forcefully ejected from system without finishing its cycles.");
+            pcb_tooltip.SetToolTip(pcb, "ID: The process identifier\r\nArrival: The cycle when the process was created\r\nTotal CPU: The amount of CPU cycles the process requires.\r\nCPU Used: CPU cycles the process has used.\r\nElapsed: Amount of cycles the process has been in system.\r\nTotal I/O: The amount of I/O cycles the process requires.\r\nI/O Used: I/O cycles the process has used.\r\nFinishing Cycle: Cycle in which the process left the system.\r\nTime in System: Total amount of cycles the process remained in system.\r\n\tWill be displayed once the process leaves the system.\r\nIdle Time: Amount of cycles the process remained in system without using CPU or I/O.\r\n\tWill be displayed if the process leaves the system successfully.\r\nStatus: Current status of the process.\r\n\tIn System: Process is in system.\r\n\tFinished: Process completed its cycles and left the system.\r\n\tKilled: Process was forcefully ejected from system without finishing its cycles.\r\nSize: Number of KB the process requires.\r\nFrames: Number of frames the process has.\r\nWait %: Percentage of cycles the process has without being used.");
             pcb_tooltip.AutoPopDelay = 32000;
             
             quantum_tooltip = new ToolTip();
@@ -832,12 +901,25 @@ namespace os_sim
             frame_s = Convert.ToInt32(frame_size.Text);
             ram_size.Items.Clear();
             ramOptions();
+            updateMemoryLabels();
             ram_size.SelectedIndex = 0;
+        }
+        private void updateMemoryLabels()
+        {
+            r0.Text = "" + (frame_s < ram_s ? "" + frame_s : "");
+            r1.Text = "" + (frame_s * 8 < ram_s ? "" + frame_s * 8 : "");
+            r2.Text = "" + (frame_s * 8 * 2 < ram_s ? "" + frame_s * 8 * 2 : "");
+            r3.Text = "" + (frame_s * 8 * 3 < ram_s ? "" + frame_s * 8 * 3 : "");
+            r4.Text = "" + (frame_s * 8 * 4 < ram_s ? "" + frame_s * 8 * 4 : "");
+            r5.Text = "" + (frame_s * 8 * 5 < ram_s ? "" + frame_s * 8 * 5 : "");
+            r6.Text = "" + (frame_s * 8 * 6 < ram_s ? "" + frame_s * 8 * 6 : "");
+            r7.Text = "" + (frame_s * 8 * 7 < ram_s ? "" + frame_s * 8 * 7 : "");
         }
         private void ram_size_SelectedIndexChanged(object sender, EventArgs e)
         {
             ram_s = Convert.ToInt32(ram_size.Text);
             displayMap();
+            updateMemoryLabels();
         }
         public void displayMap()
         {
@@ -913,6 +995,12 @@ public class Utilities
             {
                 ListBox listBox = (ListBox)control;
                 listBox.ClearSelected();
+            }
+
+            if (control is ListView)
+            {
+                ListView listView = (ListView)control;
+                listView.Items.Clear();
             }
         }
     }

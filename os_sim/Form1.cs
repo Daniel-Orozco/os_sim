@@ -228,7 +228,7 @@ namespace os_sim
                 }
                 else
                 {
-                    if(rand.Next(0, 100) < frame_c)
+                    /**if(rand.Next(0, 100) < frame_c)
                     {
                         //do something to swap...
                         if (UsingDisk.Count == 0 && Ready.Count < ready_size - 1)
@@ -247,7 +247,7 @@ namespace os_sim
                     }
                     if (Running.Count > 0)
                         for (int i = 0; i < 0; i++)
-                            break;
+                            break;*/
                     current.quantum--;
                     current.current_cpu++;
                     running_cycle++;
